@@ -8,17 +8,35 @@
 
 /* Begin PBXBuildFile section */
 		257C9B5D2BE4013100FA9768 /* DrinkathonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257C9B5C2BE4013100FA9768 /* DrinkathonApp.swift */; };
-		257C9B5F2BE4013100FA9768 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257C9B5E2BE4013100FA9768 /* ContentView.swift */; };
+		257C9B5F2BE4013100FA9768 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257C9B5E2BE4013100FA9768 /* LoginView.swift */; };
 		257C9B612BE4013200FA9768 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 257C9B602BE4013200FA9768 /* Assets.xcassets */; };
 		257C9B642BE4013200FA9768 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 257C9B632BE4013200FA9768 /* Preview Assets.xcassets */; };
+		257C9B742BE40EAE00FA9768 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257C9B732BE40EAE00FA9768 /* RegistrationView.swift */; };
+		257C9B772BE4140100FA9768 /* TextFieldModifer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257C9B762BE4140100FA9768 /* TextFieldModifer.swift */; };
+		257C9B7A2BE4166400FA9768 /* DrinkTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257C9B792BE4166400FA9768 /* DrinkTabView.swift */; };
+		257C9B7D2BE41C9600FA9768 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257C9B7C2BE41C9600FA9768 /* HomeView.swift */; };
+		257C9B802BE41D1600FA9768 /* AddFriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257C9B7F2BE41D1600FA9768 /* AddFriendsView.swift */; };
+		257C9B832BE41D3800FA9768 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257C9B822BE41D3800FA9768 /* ProfileView.swift */; };
+		257C9B852BE41ED900FA9768 /* ChallengeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257C9B842BE41ED900FA9768 /* ChallengeCell.swift */; };
+		257C9B872BE4211800FA9768 /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257C9B862BE4211800FA9768 /* Challenge.swift */; };
+		257C9B8A2BE4322F00FA9768 /* CircleProfilePictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257C9B892BE4322F00FA9768 /* CircleProfilePictureView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		257C9B592BE4013100FA9768 /* Drinkathon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drinkathon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		257C9B5C2BE4013100FA9768 /* DrinkathonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkathonApp.swift; sourceTree = "<group>"; };
-		257C9B5E2BE4013100FA9768 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		257C9B5E2BE4013100FA9768 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		257C9B602BE4013200FA9768 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		257C9B632BE4013200FA9768 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		257C9B732BE40EAE00FA9768 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
+		257C9B762BE4140100FA9768 /* TextFieldModifer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldModifer.swift; sourceTree = "<group>"; };
+		257C9B792BE4166400FA9768 /* DrinkTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkTabView.swift; sourceTree = "<group>"; };
+		257C9B7C2BE41C9600FA9768 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		257C9B7F2BE41D1600FA9768 /* AddFriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendsView.swift; sourceTree = "<group>"; };
+		257C9B822BE41D3800FA9768 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		257C9B842BE41ED900FA9768 /* ChallengeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeCell.swift; sourceTree = "<group>"; };
+		257C9B862BE4211800FA9768 /* Challenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
+		257C9B892BE4322F00FA9768 /* CircleProfilePictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProfilePictureView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,9 +69,14 @@
 		257C9B5B2BE4013100FA9768 /* Drinkathon */ = {
 			isa = PBXGroup;
 			children = (
-				257C9B5C2BE4013100FA9768 /* DrinkathonApp.swift */,
-				257C9B5E2BE4013100FA9768 /* ContentView.swift */,
 				257C9B602BE4013200FA9768 /* Assets.xcassets */,
+				257C9B6A2BE4014100FA9768 /* App */,
+				257C9B6B2BE4014900FA9768 /* Core */,
+				257C9B5C2BE4013100FA9768 /* DrinkathonApp.swift */,
+				257C9B6F2BE4017E00FA9768 /* Extensions */,
+				257C9B702BE4018900FA9768 /* Model */,
+				257C9B712BE4019700FA9768 /* Services */,
+				257C9B722BE4019F00FA9768 /* Utils */,
 				257C9B622BE4013200FA9768 /* Preview Content */,
 			);
 			path = Drinkathon;
@@ -65,6 +88,130 @@
 				257C9B632BE4013200FA9768 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		257C9B6A2BE4014100FA9768 /* App */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		257C9B6B2BE4014900FA9768 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				257C9B882BE4321000FA9768 /* Components */,
+				257C9B812BE41D2100FA9768 /* Profile */,
+				257C9B7E2BE41D0300FA9768 /* AddFriends */,
+				257C9B782BE415FB00FA9768 /* TabBar */,
+				257C9B7B2BE41B1C00FA9768 /* HomeView */,
+				257C9B6C2BE4015200FA9768 /* Authentication */,
+				257C9B6E2BE4017100FA9768 /* Root */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		257C9B6C2BE4015200FA9768 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				257C9B6D2BE4016400FA9768 /* Views */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		257C9B6D2BE4016400FA9768 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				257C9B5E2BE4013100FA9768 /* LoginView.swift */,
+				257C9B732BE40EAE00FA9768 /* RegistrationView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		257C9B6E2BE4017100FA9768 /* Root */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Root;
+			sourceTree = "<group>";
+		};
+		257C9B6F2BE4017E00FA9768 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		257C9B702BE4018900FA9768 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				257C9B862BE4211800FA9768 /* Challenge.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		257C9B712BE4019700FA9768 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		257C9B722BE4019F00FA9768 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				257C9B752BE413EA00FA9768 /* ViewModifiers */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		257C9B752BE413EA00FA9768 /* ViewModifiers */ = {
+			isa = PBXGroup;
+			children = (
+				257C9B762BE4140100FA9768 /* TextFieldModifer.swift */,
+			);
+			path = ViewModifiers;
+			sourceTree = "<group>";
+		};
+		257C9B782BE415FB00FA9768 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				257C9B792BE4166400FA9768 /* DrinkTabView.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		257C9B7B2BE41B1C00FA9768 /* HomeView */ = {
+			isa = PBXGroup;
+			children = (
+				257C9B7C2BE41C9600FA9768 /* HomeView.swift */,
+				257C9B842BE41ED900FA9768 /* ChallengeCell.swift */,
+			);
+			path = HomeView;
+			sourceTree = "<group>";
+		};
+		257C9B7E2BE41D0300FA9768 /* AddFriends */ = {
+			isa = PBXGroup;
+			children = (
+				257C9B7F2BE41D1600FA9768 /* AddFriendsView.swift */,
+			);
+			path = AddFriends;
+			sourceTree = "<group>";
+		};
+		257C9B812BE41D2100FA9768 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				257C9B822BE41D3800FA9768 /* ProfileView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		257C9B882BE4321000FA9768 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				257C9B892BE4322F00FA9768 /* CircleProfilePictureView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +284,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				257C9B5F2BE4013100FA9768 /* ContentView.swift in Sources */,
+				257C9B832BE41D3800FA9768 /* ProfileView.swift in Sources */,
+				257C9B7A2BE4166400FA9768 /* DrinkTabView.swift in Sources */,
+				257C9B772BE4140100FA9768 /* TextFieldModifer.swift in Sources */,
+				257C9B802BE41D1600FA9768 /* AddFriendsView.swift in Sources */,
+				257C9B852BE41ED900FA9768 /* ChallengeCell.swift in Sources */,
+				257C9B8A2BE4322F00FA9768 /* CircleProfilePictureView.swift in Sources */,
+				257C9B742BE40EAE00FA9768 /* RegistrationView.swift in Sources */,
+				257C9B7D2BE41C9600FA9768 /* HomeView.swift in Sources */,
+				257C9B5F2BE4013100FA9768 /* LoginView.swift in Sources */,
 				257C9B5D2BE4013100FA9768 /* DrinkathonApp.swift in Sources */,
+				257C9B872BE4211800FA9768 /* Challenge.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
