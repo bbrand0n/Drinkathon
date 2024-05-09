@@ -15,13 +15,10 @@ public struct Challenge: Identifiable, Codable {
     let timeSent: Timestamp
     let timeToEnd: Date
     
-    
     public var id: String {
         return challengeId ?? NSUUID().uuidString
     }
     
-//    var players: [String]
-//    var scores: [Int]
     var player1: Player
     var player2: Player
 

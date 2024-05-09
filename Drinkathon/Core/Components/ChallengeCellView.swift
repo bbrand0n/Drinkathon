@@ -10,14 +10,17 @@ import Charts
 
 struct ChallengeCellView: View {
     let challenge: Challenge
+    @State private var duration = "---"
+    private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
-//    var players: [Player]
-    
-    init(challenge: Challenge) {
-        self.challenge = challenge
-//        self.players.append(challenge.player1)
-//        self.players.append(challenge.player2)
-    }
+    // Time formatter
+    static var durationFormatter: DateComponentsFormatter = {
+            let formatter = DateComponentsFormatter()
+            formatter.allowedUnits = [.hour, .minute, .second]
+            formatter.unitsStyle = .abbreviated
+            formatter.zeroFormattingBehavior = .dropLeading
+            return formatter
+        }()
     
     var body: some View {
         VStack {
@@ -45,7 +48,7 @@ struct ChallengeCellView: View {
                                     .clipShape(RoundedRectangle(cornerRadius: 16))
                                     .cornerRadius(8)
                                     .annotation(position: .trailing) {
-                                        Text("None")
+                                        Text("0")
                                             .foregroundColor(Color.black)
                                             .font(.caption)
                                     }
@@ -85,7 +88,7 @@ struct ChallengeCellView: View {
                                     .font(.footnote)
                                     .fontWeight(.semibold)
                                 
-                                Text("2h 5m 3s")
+                                Text(duration)
                                     .font(.footnote)
                                     .fontWeight(.medium)
                                     .foregroundColor(Color.red)
@@ -95,6 +98,14 @@ struct ChallengeCellView: View {
                                 Text("4-1")
                                     .font(.caption2)
                                     .fontWeight(.medium)
+                            }
+                            .onReceive(timer) { _ in
+                                var delta = challenge.timeToEnd.timeIntervalSinceNow
+                                if delta <= 0 {
+                                    delta = 0
+                                    timer.upstream.connect().cancel()
+                                }
+                                duration = ChallengeCellView.durationFormatter.string(from: delta) ?? "---"
                             }
                         }
                     }

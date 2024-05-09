@@ -26,7 +26,7 @@ class DeveloperPreview {
         playas.append(Player(id: "iwbcw", username: user1.username, score: 5, user: user1))
         playas.append(Player(id: "eivun", username: user2.username, score: 0, user: user2))
         
-        challenge = Challenge(ownerId: user1.id, title: "Title", timeSent: Timestamp(), timeToEnd: Date.now, player1: playas[0], player2: playas[1])
+        challenge = Challenge(ownerId: user1.id, title: "Title", timeSent: Timestamp(), timeToEnd: Date.now.advanced(by: 30984), player1: playas[0], player2: playas[1])
         
     }
 }
