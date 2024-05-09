@@ -20,7 +20,7 @@ struct DrinkTabView: View {
                 .onAppear { selectedTab = 0 }
                 .tag(0)
             
-            AddFriendsView()
+            ExploreView()
                 .tabItem {
                     Image(systemName: selectedTab == 1 ? "person.2.fill" : "person.2")
                         .environment(\.symbolVariants, selectedTab == 1 ? .fill : .none)
@@ -28,7 +28,7 @@ struct DrinkTabView: View {
                 .onAppear { selectedTab = 1 }
                 .tag(1)
             
-            ProfileView()
+            CurrentUserProfileView()
                 .tabItem {
                     Image(systemName: selectedTab == 2 ? "person.fill" : "person")
                         .environment(\.symbolVariants, selectedTab == 2 ? .fill : .none)
@@ -36,7 +36,9 @@ struct DrinkTabView: View {
                 .onAppear { selectedTab = 2 }
                 .tag(2)
         }
+        .padding(.top)
         .tint(.black)
+        
         
     }
 }

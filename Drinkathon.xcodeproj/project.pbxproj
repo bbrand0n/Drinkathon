@@ -7,6 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		251BEFFA2BECFA5100E17FE3 /* ChallengeFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251BEFF92BECFA5100E17FE3 /* ChallengeFeedView.swift */; };
+		251BEFFC2BECFD4E00E17FE3 /* ChallengeFeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251BEFFB2BECFD4E00E17FE3 /* ChallengeFeedViewModel.swift */; };
+		253182A72BEBBECF00553D99 /* ChallengeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253182A62BEBBECF00553D99 /* ChallengeService.swift */; };
+		253182A92BEBC05300553D99 /* CreateChallengeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253182A82BEBC05300553D99 /* CreateChallengeViewModel.swift */; };
+		253182AB2BEBC5DA00553D99 /* TimerPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253182AA2BEBC5DA00553D99 /* TimerPickerView.swift */; };
+		25635FE32BEBEC340049ECC3 /* SearchUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25635FE22BEBEC340049ECC3 /* SearchUsers.swift */; };
+		25635FE72BEBFB050049ECC3 /* AddPlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25635FE62BEBFB050049ECC3 /* AddPlayerCell.swift */; };
+		25635FE92BEC054C0049ECC3 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25635FE82BEC054C0049ECC3 /* HomeViewModel.swift */; };
+		25635FEB2BEC07640049ECC3 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25635FEA2BEC07640049ECC3 /* Player.swift */; };
+		257BC3322BEACB1000C22F61 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257BC3312BEACB1000C22F61 /* User.swift */; };
+		257BC3342BEACDA400C22F61 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257BC3332BEACDA400C22F61 /* UserService.swift */; };
+		257BC3392BEAD33B00C22F61 /* PlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257BC3382BEAD33B00C22F61 /* PlayerCell.swift */; };
+		257BC33C2BEAD4C600C22F61 /* ExploreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257BC33B2BEAD4C600C22F61 /* ExploreView.swift */; };
 		257C9B5D2BE4013100FA9768 /* DrinkathonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257C9B5C2BE4013100FA9768 /* DrinkathonApp.swift */; };
 		257C9B5F2BE4013100FA9768 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257C9B5E2BE4013100FA9768 /* LoginView.swift */; };
 		257C9B612BE4013200FA9768 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 257C9B602BE4013200FA9768 /* Assets.xcassets */; };
@@ -15,14 +28,46 @@
 		257C9B772BE4140100FA9768 /* TextFieldModifer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257C9B762BE4140100FA9768 /* TextFieldModifer.swift */; };
 		257C9B7A2BE4166400FA9768 /* DrinkTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257C9B792BE4166400FA9768 /* DrinkTabView.swift */; };
 		257C9B7D2BE41C9600FA9768 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257C9B7C2BE41C9600FA9768 /* HomeView.swift */; };
-		257C9B802BE41D1600FA9768 /* AddFriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257C9B7F2BE41D1600FA9768 /* AddFriendsView.swift */; };
+		257C9B802BE41D1600FA9768 /* CreateChallengeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257C9B7F2BE41D1600FA9768 /* CreateChallengeView.swift */; };
 		257C9B832BE41D3800FA9768 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257C9B822BE41D3800FA9768 /* ProfileView.swift */; };
-		257C9B852BE41ED900FA9768 /* ChallengeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257C9B842BE41ED900FA9768 /* ChallengeCell.swift */; };
+		257C9B852BE41ED900FA9768 /* ChallengeCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257C9B842BE41ED900FA9768 /* ChallengeCellView.swift */; };
 		257C9B872BE4211800FA9768 /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257C9B862BE4211800FA9768 /* Challenge.swift */; };
 		257C9B8A2BE4322F00FA9768 /* CircleProfilePictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257C9B892BE4322F00FA9768 /* CircleProfilePictureView.swift */; };
+		257C9B8C2BEAB8DF00FA9768 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 257C9B8B2BEAB8DF00FA9768 /* GoogleService-Info.plist */; };
+		257C9B8F2BEAB9AF00FA9768 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 257C9B8E2BEAB9AF00FA9768 /* FirebaseAuth */; };
+		257C9B912BEAB9AF00FA9768 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 257C9B902BEAB9AF00FA9768 /* FirebaseFirestore */; };
+		257C9B932BEAB9AF00FA9768 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 257C9B922BEAB9AF00FA9768 /* FirebaseFirestoreSwift */; };
+		257C9B952BEAB9AF00FA9768 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 257C9B942BEAB9AF00FA9768 /* FirebaseStorage */; };
+		257C9B992BEABC5100FA9768 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257C9B982BEABC5100FA9768 /* RegistrationViewModel.swift */; };
+		257C9B9B2BEABD0500FA9768 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257C9B9A2BEABD0500FA9768 /* AuthService.swift */; };
+		257C9B9F2BEAC06400FA9768 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257C9B9E2BEAC06400FA9768 /* ContentViewModel.swift */; };
+		257C9BA12BEAC14A00FA9768 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257C9BA02BEAC14A00FA9768 /* ContentView.swift */; };
+		257C9BA32BEAC53E00FA9768 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257C9BA22BEAC53E00FA9768 /* LoginViewModel.swift */; };
+		25F2BD622BEAD63C002E6253 /* ExploreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F2BD612BEAD63C002E6253 /* ExploreViewModel.swift */; };
+		25F2BD642BEAD768002E6253 /* PreviewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F2BD632BEAD768002E6253 /* PreviewProvider.swift */; };
+		25F2BD682BEADC72002E6253 /* CurrentUserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F2BD672BEADC72002E6253 /* CurrentUserProfileView.swift */; };
+		25F2BD6B2BEADCD7002E6253 /* CurrentUserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F2BD6A2BEADCD7002E6253 /* CurrentUserProfileViewModel.swift */; };
+		25F2BD6E2BEADF4E002E6253 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F2BD6D2BEADF4E002E6253 /* ProfileHeaderView.swift */; };
+		25F2BD712BEAE421002E6253 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F2BD702BEAE421002E6253 /* EditProfileView.swift */; };
+		25F2BD732BEAEBA7002E6253 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F2BD722BEAEBA7002E6253 /* EditProfileViewModel.swift */; };
+		25F2BD752BEAECB5002E6253 /* ImageUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F2BD742BEAECB5002E6253 /* ImageUploader.swift */; };
+		25F2BD782BEBB261002E6253 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 25F2BD772BEBB261002E6253 /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		251BEFF92BECFA5100E17FE3 /* ChallengeFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeFeedView.swift; sourceTree = "<group>"; };
+		251BEFFB2BECFD4E00E17FE3 /* ChallengeFeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeFeedViewModel.swift; sourceTree = "<group>"; };
+		253182A62BEBBECF00553D99 /* ChallengeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeService.swift; sourceTree = "<group>"; };
+		253182A82BEBC05300553D99 /* CreateChallengeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateChallengeViewModel.swift; sourceTree = "<group>"; };
+		253182AA2BEBC5DA00553D99 /* TimerPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerPickerView.swift; sourceTree = "<group>"; };
+		25635FE22BEBEC340049ECC3 /* SearchUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUsers.swift; sourceTree = "<group>"; };
+		25635FE62BEBFB050049ECC3 /* AddPlayerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayerCell.swift; sourceTree = "<group>"; };
+		25635FE82BEC054C0049ECC3 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		25635FEA2BEC07640049ECC3 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		257BC3312BEACB1000C22F61 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		257BC3332BEACDA400C22F61 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		257BC3382BEAD33B00C22F61 /* PlayerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerCell.swift; sourceTree = "<group>"; };
+		257BC33B2BEAD4C600C22F61 /* ExploreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreView.swift; sourceTree = "<group>"; };
 		257C9B592BE4013100FA9768 /* Drinkathon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drinkathon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		257C9B5C2BE4013100FA9768 /* DrinkathonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkathonApp.swift; sourceTree = "<group>"; };
 		257C9B5E2BE4013100FA9768 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -32,11 +77,25 @@
 		257C9B762BE4140100FA9768 /* TextFieldModifer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldModifer.swift; sourceTree = "<group>"; };
 		257C9B792BE4166400FA9768 /* DrinkTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkTabView.swift; sourceTree = "<group>"; };
 		257C9B7C2BE41C9600FA9768 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		257C9B7F2BE41D1600FA9768 /* AddFriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendsView.swift; sourceTree = "<group>"; };
+		257C9B7F2BE41D1600FA9768 /* CreateChallengeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateChallengeView.swift; sourceTree = "<group>"; };
 		257C9B822BE41D3800FA9768 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		257C9B842BE41ED900FA9768 /* ChallengeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeCell.swift; sourceTree = "<group>"; };
+		257C9B842BE41ED900FA9768 /* ChallengeCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeCellView.swift; sourceTree = "<group>"; };
 		257C9B862BE4211800FA9768 /* Challenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
 		257C9B892BE4322F00FA9768 /* CircleProfilePictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProfilePictureView.swift; sourceTree = "<group>"; };
+		257C9B8B2BEAB8DF00FA9768 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		257C9B982BEABC5100FA9768 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
+		257C9B9A2BEABD0500FA9768 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		257C9B9E2BEAC06400FA9768 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		257C9BA02BEAC14A00FA9768 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		257C9BA22BEAC53E00FA9768 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		25F2BD612BEAD63C002E6253 /* ExploreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewModel.swift; sourceTree = "<group>"; };
+		25F2BD632BEAD768002E6253 /* PreviewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewProvider.swift; sourceTree = "<group>"; };
+		25F2BD672BEADC72002E6253 /* CurrentUserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserProfileView.swift; sourceTree = "<group>"; };
+		25F2BD6A2BEADCD7002E6253 /* CurrentUserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserProfileViewModel.swift; sourceTree = "<group>"; };
+		25F2BD6D2BEADF4E002E6253 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		25F2BD702BEAE421002E6253 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
+		25F2BD722BEAEBA7002E6253 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
+		25F2BD742BEAECB5002E6253 /* ImageUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,12 +103,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				257C9B8F2BEAB9AF00FA9768 /* FirebaseAuth in Frameworks */,
+				257C9B952BEAB9AF00FA9768 /* FirebaseStorage in Frameworks */,
+				257C9B912BEAB9AF00FA9768 /* FirebaseFirestore in Frameworks */,
+				257C9B932BEAB9AF00FA9768 /* FirebaseFirestoreSwift in Frameworks */,
+				25F2BD782BEBB261002E6253 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		257BC33A2BEAD4AD00C22F61 /* Explore */ = {
+			isa = PBXGroup;
+			children = (
+				25F2BD602BEAD62E002E6253 /* ViewModel */,
+				257BC33B2BEAD4C600C22F61 /* ExploreView.swift */,
+			);
+			path = Explore;
+			sourceTree = "<group>";
+		};
 		257C9B502BE4013100FA9768 = {
 			isa = PBXGroup;
 			children = (
@@ -69,10 +142,10 @@
 		257C9B5B2BE4013100FA9768 /* Drinkathon */ = {
 			isa = PBXGroup;
 			children = (
+				257C9B8B2BEAB8DF00FA9768 /* GoogleService-Info.plist */,
 				257C9B602BE4013200FA9768 /* Assets.xcassets */,
 				257C9B6A2BE4014100FA9768 /* App */,
 				257C9B6B2BE4014900FA9768 /* Core */,
-				257C9B5C2BE4013100FA9768 /* DrinkathonApp.swift */,
 				257C9B6F2BE4017E00FA9768 /* Extensions */,
 				257C9B702BE4018900FA9768 /* Model */,
 				257C9B712BE4019700FA9768 /* Services */,
@@ -93,6 +166,7 @@
 		257C9B6A2BE4014100FA9768 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				257C9B5C2BE4013100FA9768 /* DrinkathonApp.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -100,9 +174,10 @@
 		257C9B6B2BE4014900FA9768 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				257BC33A2BEAD4AD00C22F61 /* Explore */,
 				257C9B882BE4321000FA9768 /* Components */,
 				257C9B812BE41D2100FA9768 /* Profile */,
-				257C9B7E2BE41D0300FA9768 /* AddFriends */,
+				257C9B7E2BE41D0300FA9768 /* ChallengeCreation */,
 				257C9B782BE415FB00FA9768 /* TabBar */,
 				257C9B7B2BE41B1C00FA9768 /* HomeView */,
 				257C9B6C2BE4015200FA9768 /* Authentication */,
@@ -114,6 +189,8 @@
 		257C9B6C2BE4015200FA9768 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
+				257C9B972BEABC3F00FA9768 /* Service */,
+				257C9B962BEABC2500FA9768 /* ViewModel */,
 				257C9B6D2BE4016400FA9768 /* Views */,
 			);
 			path = Authentication;
@@ -131,6 +208,9 @@
 		257C9B6E2BE4017100FA9768 /* Root */ = {
 			isa = PBXGroup;
 			children = (
+				257C9B9D2BEAC04900FA9768 /* ViewModel */,
+				257C9B9C2BEAC04200FA9768 /* View */,
+				257C9BA02BEAC14A00FA9768 /* ContentView.swift */,
 			);
 			path = Root;
 			sourceTree = "<group>";
@@ -138,6 +218,7 @@
 		257C9B6F2BE4017E00FA9768 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				25F2BD632BEAD768002E6253 /* PreviewProvider.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -146,6 +227,8 @@
 			isa = PBXGroup;
 			children = (
 				257C9B862BE4211800FA9768 /* Challenge.swift */,
+				257BC3312BEACB1000C22F61 /* User.swift */,
+				25635FEA2BEC07640049ECC3 /* Player.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -153,6 +236,9 @@
 		257C9B712BE4019700FA9768 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				257BC3332BEACDA400C22F61 /* UserService.swift */,
+				25F2BD742BEAECB5002E6253 /* ImageUploader.swift */,
+				253182A62BEBBECF00553D99 /* ChallengeService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -185,23 +271,28 @@
 			isa = PBXGroup;
 			children = (
 				257C9B7C2BE41C9600FA9768 /* HomeView.swift */,
-				257C9B842BE41ED900FA9768 /* ChallengeCell.swift */,
+				25635FE82BEC054C0049ECC3 /* HomeViewModel.swift */,
+				251BEFF92BECFA5100E17FE3 /* ChallengeFeedView.swift */,
+				251BEFFB2BECFD4E00E17FE3 /* ChallengeFeedViewModel.swift */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
 		};
-		257C9B7E2BE41D0300FA9768 /* AddFriends */ = {
+		257C9B7E2BE41D0300FA9768 /* ChallengeCreation */ = {
 			isa = PBXGroup;
 			children = (
-				257C9B7F2BE41D1600FA9768 /* AddFriendsView.swift */,
+				257C9B7F2BE41D1600FA9768 /* CreateChallengeView.swift */,
+				253182A82BEBC05300553D99 /* CreateChallengeViewModel.swift */,
 			);
-			path = AddFriends;
+			path = ChallengeCreation;
 			sourceTree = "<group>";
 		};
 		257C9B812BE41D2100FA9768 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				257C9B822BE41D3800FA9768 /* ProfileView.swift */,
+				25F2BD6F2BEAE1B7002E6253 /* OtherUserProfile */,
+				25F2BD6C2BEADF3D002E6253 /* Components */,
+				25F2BD652BEADC4F002E6253 /* CurrentUserProfile */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -209,9 +300,97 @@
 		257C9B882BE4321000FA9768 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				257C9B842BE41ED900FA9768 /* ChallengeCellView.swift */,
 				257C9B892BE4322F00FA9768 /* CircleProfilePictureView.swift */,
+				257BC3382BEAD33B00C22F61 /* PlayerCell.swift */,
+				25635FE22BEBEC340049ECC3 /* SearchUsers.swift */,
+				25635FE62BEBFB050049ECC3 /* AddPlayerCell.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		257C9B962BEABC2500FA9768 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				257C9B982BEABC5100FA9768 /* RegistrationViewModel.swift */,
+				257C9BA22BEAC53E00FA9768 /* LoginViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		257C9B972BEABC3F00FA9768 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				257C9B9A2BEABD0500FA9768 /* AuthService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		257C9B9C2BEAC04200FA9768 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		257C9B9D2BEAC04900FA9768 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				257C9B9E2BEAC06400FA9768 /* ContentViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		25F2BD602BEAD62E002E6253 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				25F2BD612BEAD63C002E6253 /* ExploreViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		25F2BD652BEADC4F002E6253 /* CurrentUserProfile */ = {
+			isa = PBXGroup;
+			children = (
+				25F2BD692BEADC96002E6253 /* ViewModel */,
+				25F2BD662BEADC5F002E6253 /* View */,
+			);
+			path = CurrentUserProfile;
+			sourceTree = "<group>";
+		};
+		25F2BD662BEADC5F002E6253 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				25F2BD672BEADC72002E6253 /* CurrentUserProfileView.swift */,
+				25F2BD702BEAE421002E6253 /* EditProfileView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		25F2BD692BEADC96002E6253 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				25F2BD6A2BEADCD7002E6253 /* CurrentUserProfileViewModel.swift */,
+				25F2BD722BEAEBA7002E6253 /* EditProfileViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		25F2BD6C2BEADF3D002E6253 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				25F2BD6D2BEADF4E002E6253 /* ProfileHeaderView.swift */,
+				253182AA2BEBC5DA00553D99 /* TimerPickerView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		25F2BD6F2BEAE1B7002E6253 /* OtherUserProfile */ = {
+			isa = PBXGroup;
+			children = (
+				257C9B822BE41D3800FA9768 /* ProfileView.swift */,
+			);
+			path = OtherUserProfile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -230,6 +409,13 @@
 			dependencies = (
 			);
 			name = Drinkathon;
+			packageProductDependencies = (
+				257C9B8E2BEAB9AF00FA9768 /* FirebaseAuth */,
+				257C9B902BEAB9AF00FA9768 /* FirebaseFirestore */,
+				257C9B922BEAB9AF00FA9768 /* FirebaseFirestoreSwift */,
+				257C9B942BEAB9AF00FA9768 /* FirebaseStorage */,
+				25F2BD772BEBB261002E6253 /* Kingfisher */,
+			);
 			productName = Drinkathon;
 			productReference = 257C9B592BE4013100FA9768 /* Drinkathon.app */;
 			productType = "com.apple.product-type.application";
@@ -258,6 +444,10 @@
 				Base,
 			);
 			mainGroup = 257C9B502BE4013100FA9768;
+			packageReferences = (
+				257C9B8D2BEAB9AF00FA9768 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				25F2BD762BEBB261002E6253 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = 257C9B5A2BE4013100FA9768 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -274,6 +464,7 @@
 			files = (
 				257C9B642BE4013200FA9768 /* Preview Assets.xcassets in Resources */,
 				257C9B612BE4013200FA9768 /* Assets.xcassets in Resources */,
+				257C9B8C2BEAB8DF00FA9768 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,16 +475,42 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25F2BD642BEAD768002E6253 /* PreviewProvider.swift in Sources */,
 				257C9B832BE41D3800FA9768 /* ProfileView.swift in Sources */,
+				257C9B992BEABC5100FA9768 /* RegistrationViewModel.swift in Sources */,
+				257BC3342BEACDA400C22F61 /* UserService.swift in Sources */,
+				253182A92BEBC05300553D99 /* CreateChallengeViewModel.swift in Sources */,
+				25F2BD682BEADC72002E6253 /* CurrentUserProfileView.swift in Sources */,
+				253182AB2BEBC5DA00553D99 /* TimerPickerView.swift in Sources */,
+				257BC3392BEAD33B00C22F61 /* PlayerCell.swift in Sources */,
 				257C9B7A2BE4166400FA9768 /* DrinkTabView.swift in Sources */,
 				257C9B772BE4140100FA9768 /* TextFieldModifer.swift in Sources */,
-				257C9B802BE41D1600FA9768 /* AddFriendsView.swift in Sources */,
-				257C9B852BE41ED900FA9768 /* ChallengeCell.swift in Sources */,
+				257BC33C2BEAD4C600C22F61 /* ExploreView.swift in Sources */,
+				25F2BD622BEAD63C002E6253 /* ExploreViewModel.swift in Sources */,
+				251BEFFA2BECFA5100E17FE3 /* ChallengeFeedView.swift in Sources */,
+				253182A72BEBBECF00553D99 /* ChallengeService.swift in Sources */,
+				257C9BA32BEAC53E00FA9768 /* LoginViewModel.swift in Sources */,
+				257C9B802BE41D1600FA9768 /* CreateChallengeView.swift in Sources */,
+				257C9B852BE41ED900FA9768 /* ChallengeCellView.swift in Sources */,
+				257BC3322BEACB1000C22F61 /* User.swift in Sources */,
+				25635FE92BEC054C0049ECC3 /* HomeViewModel.swift in Sources */,
+				25635FEB2BEC07640049ECC3 /* Player.swift in Sources */,
+				257C9B9B2BEABD0500FA9768 /* AuthService.swift in Sources */,
+				25F2BD6B2BEADCD7002E6253 /* CurrentUserProfileViewModel.swift in Sources */,
 				257C9B8A2BE4322F00FA9768 /* CircleProfilePictureView.swift in Sources */,
+				25635FE32BEBEC340049ECC3 /* SearchUsers.swift in Sources */,
 				257C9B742BE40EAE00FA9768 /* RegistrationView.swift in Sources */,
+				25F2BD6E2BEADF4E002E6253 /* ProfileHeaderView.swift in Sources */,
 				257C9B7D2BE41C9600FA9768 /* HomeView.swift in Sources */,
+				257C9B9F2BEAC06400FA9768 /* ContentViewModel.swift in Sources */,
+				25635FE72BEBFB050049ECC3 /* AddPlayerCell.swift in Sources */,
+				25F2BD752BEAECB5002E6253 /* ImageUploader.swift in Sources */,
+				257C9BA12BEAC14A00FA9768 /* ContentView.swift in Sources */,
 				257C9B5F2BE4013100FA9768 /* LoginView.swift in Sources */,
 				257C9B5D2BE4013100FA9768 /* DrinkathonApp.swift in Sources */,
+				251BEFFC2BECFD4E00E17FE3 /* ChallengeFeedViewModel.swift in Sources */,
+				25F2BD732BEAEBA7002E6253 /* EditProfileViewModel.swift in Sources */,
+				25F2BD712BEAE421002E6253 /* EditProfileView.swift in Sources */,
 				257C9B872BE4211800FA9768 /* Challenge.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -441,7 +658,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "new-age.Drinkathon";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.new-age.Drinkathon";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -470,7 +687,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "new-age.Drinkathon";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.new-age.Drinkathon";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -500,6 +717,53 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		257C9B8D2BEAB9AF00FA9768 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.25.0;
+			};
+		};
+		25F2BD762BEBB261002E6253 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.11.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		257C9B8E2BEAB9AF00FA9768 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 257C9B8D2BEAB9AF00FA9768 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		257C9B902BEAB9AF00FA9768 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 257C9B8D2BEAB9AF00FA9768 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		257C9B922BEAB9AF00FA9768 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 257C9B8D2BEAB9AF00FA9768 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
+		257C9B942BEAB9AF00FA9768 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 257C9B8D2BEAB9AF00FA9768 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		25F2BD772BEBB261002E6253 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 25F2BD762BEBB261002E6253 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 257C9B512BE4013100FA9768 /* Project object */;
 }

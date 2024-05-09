@@ -8,10 +8,7 @@
 import SwiftUI
 
 struct RegistrationView: View {
-    @State private var email = ""
-    @State private var password = ""
-    @State private var fullname = ""
-    @State private var username = ""
+    @StateObject var viewModel = RegistrationViewModel()
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
@@ -25,25 +22,29 @@ struct RegistrationView: View {
                 .padding()
             
             VStack {
-                TextField("Email", text: $email)
+                TextField("Email", text: $viewModel.email)
                     .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                    .autocorrectionDisabled()
                     .modifier(TextFieldModifer())
                 
-                SecureField("Username", text: $username)
+                TextField("Username", text: $viewModel.username)
                     .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                    .autocorrectionDisabled()
                     .modifier(TextFieldModifer())
                 
-                TextField("Full name", text: $fullname)
+                TextField("Full name", text: $viewModel.fullname)
                     .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                    .autocorrectionDisabled()
                     .modifier(TextFieldModifer())
                 
-                SecureField("Password", text: $password)
+                SecureField("Password", text: $viewModel.password)
                     .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
                     .modifier(TextFieldModifer())
             }
             .padding(.bottom, 30)
             
             Button {
+                Task { try await viewModel.createUser() }
             } label: {
                 Text("Sign up")
                     .font(.subheadline)
