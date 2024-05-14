@@ -9,9 +9,10 @@ import SwiftUI
 
 struct AddPlayerCell: View {
     @EnvironmentObject var parentViewModel: CreateChallengeViewModel
+    @State var userSelected = false
     let user: User
     
-    @State var userSelected = false
+    
     
     var body: some View {
         HStack {
@@ -45,7 +46,7 @@ struct AddPlayerCell: View {
                 }
                 userSelected.toggle()
             } label: {
-                if userSelected
+                if parentViewModel.selectedUsers.contains(user)
                 {
                     Image(systemName: "checkmark.circle.fill")
                         .resizable()

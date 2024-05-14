@@ -16,6 +16,7 @@ struct User: Identifiable, Codable, Hashable {
     var bio: String?
     
     var challenges: [String]?
+    var history: [String]?
 }
 
 

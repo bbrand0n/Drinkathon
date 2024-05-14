@@ -12,8 +12,13 @@ struct CreateChallengeView: View {
     @Binding var done: Bool
     @State private var showSearchUsers = false
     @State private var title = ""
-    @State private var selectedHoursAmount = 10
-    @State private var selectedMinutesAnount = 0
+    @State private var selectedHoursAmount = 1
+    @State private var selectedMinutesAnount = 30
+    
+    var submitDisabled: Bool {
+        title.isEmpty ||
+        (viewModel.selectedUsers.count != 1)
+    }
     
     let hoursRange = 0...23
     let minutesRange = 0...59
@@ -136,21 +141,25 @@ struct CreateChallengeView: View {
                     .fontWeight(.semibold)
                     .foregroundColor(.black)
                     .frame(width: 320, height: 44)
-                    .background(Color.primaryBlue)
+                    .background(submitDisabled ? Color.gray : Color.primaryBlue)
                     .cornerRadius(8)
                     .padding(.top, 8)
             }
+            .disabled(submitDisabled)
         }
+        
         .font(.footnote)
         .padding()
         .background(.lighterBlue)
-        .clipShape(RoundedRectangle(cornerRadius: 10))
-        .padding()
+        .clipShape(RoundedRectangle(cornerRadius: 20))
+        .overlay(RoundedRectangle(cornerRadius: 20).stroke(.midnightBlue, lineWidth: 1))
+        .padding(30)
         
         // Search users sheet
         .sheet(isPresented: $showSearchUsers, content: {
             SearchUsers().environmentObject(viewModel)
         })
+        
     }
 }
 

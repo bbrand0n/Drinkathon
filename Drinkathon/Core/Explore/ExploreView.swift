@@ -26,7 +26,7 @@ struct ExploreView: View {
                     }
                 }
             }
-            .padding(.top, 100)
+            .padding(.top, 5)
             .navigationDestination(for: User.self, destination: { user in
                 ProfileView(user: user, doneCreateChallenge: self.$doneCreateChallenge, tab: self.$tab)
             })

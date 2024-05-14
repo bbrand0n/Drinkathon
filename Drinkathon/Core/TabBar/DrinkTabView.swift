@@ -21,7 +21,7 @@ struct DrinkTabView: View {
                 ExploreView(tab: self.$selectedTab, doneCreateChallenge: self.$doneCreateChallenge)
                     .tag(1)
                 
-                CreateChallengeView(done: self.$doneCreateChallenge)
+                CreateChallengeTabView(done: self.$doneCreateChallenge)
                     .tag(2)
                 
                 NotificationsView()
@@ -32,8 +32,8 @@ struct DrinkTabView: View {
             }
             .ignoresSafeArea(edges: .bottom)
             .background(.lighterBlue)
-            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-            .animation(.easeInOut(duration: 0.2), value: selectedTab)
+//            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+//            .animation(.smooth(duration: 0.2), value: selectedTab)
             
             ZStack {
                 HStack {

@@ -15,12 +15,29 @@ struct ChallengeCellView: View {
     
     // Time formatter
     static var durationFormatter: DateComponentsFormatter = {
-            let formatter = DateComponentsFormatter()
-            formatter.allowedUnits = [.hour, .minute, .second]
-            formatter.unitsStyle = .abbreviated
-            formatter.zeroFormattingBehavior = .dropLeading
-            return formatter
-        }()
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.hour, .minute, .second]
+        formatter.unitsStyle = .abbreviated
+        formatter.zeroFormattingBehavior = .dropLeading
+        return formatter
+    }()
+    
+    //    var displayString: String {
+    //        if challenge.status != .finished {
+    //            return duration
+    //        } else {
+    //            if challenge.winner == "tie" {
+    //                return "TIE!"
+    //            }
+    //            else if challenge.winner != "none" {
+    //                Task {
+    //                    if let winner = challenge.winner {
+    //                        let username = try await UserService.fetchUser(withUid: winner)
+    //                        return username?.username
+    //                }
+    //            }
+    //        }
+    //    }
     
     var body: some View {
         VStack {
@@ -60,7 +77,7 @@ struct ChallengeCellView: View {
                                             .font(.caption)
                                     }
                                     
-                                // Regular score > 0
+                                    // Regular score > 0
                                 } else {
                                     BarMark(x: .value("Amount", item.score),
                                             y: .value("Name", item.username),
@@ -99,10 +116,14 @@ struct ChallengeCellView: View {
                             
                             // Time left
                             HStack(alignment: .bottom, spacing: 5) {
-                                Text("Time left: ")
-                                    .font(.footnote)
-                                    .fontWeight(.semibold)
-                                    .foregroundColor(.white)
+                                
+                                if challenge.status != .finished {
+                                    Text("Time left: ")
+                                        .font(.footnote)
+                                        .fontWeight(.semibold)
+                                        .foregroundColor(.white)
+                                }
+                                
                                 
                                 Text(duration)
                                     .font(.footnote)
@@ -121,6 +142,25 @@ struct ChallengeCellView: View {
                                 if delta <= 0 {
                                     delta = 0
                                     timer.upstream.connect().cancel()
+                                    
+                                    Task {
+                                        try await ChallengeService.cleanChallenges()
+                                        
+                                        if challenge.status != .finished {
+                                            delta = 0
+                                        } else {
+                                            if challenge.winner == "tie" {
+                                                duration = "TIE!"
+                                            }
+                                            else if challenge.winner != "none" {
+                                                if let winner = challenge.winner {
+                                                    let username = try await UserService.fetchUser(withUid: winner)
+                                                    duration = "Winner: \(username?.username ?? "")"
+                                                }
+                                            }
+                                        }
+                                    }
+                                    
                                 }
                                 duration = ChallengeCellView.durationFormatter.string(from: delta) ?? "---"
                             }

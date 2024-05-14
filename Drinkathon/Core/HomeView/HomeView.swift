@@ -28,7 +28,7 @@ struct HomeView: View {
                         }
                     }
                 }
-                .padding(.top, 50)
+                .padding(.top)
                 
 //                .sheet(isPresented: $showCreateChallenge, content: {
 //                    CreateChallengeView()
@@ -83,7 +83,8 @@ struct HomeView: View {
                         .background(Color(.green))
                         .cornerRadius(8)
                 }
-                .padding(.bottom, 120)
+//                .padding(.bottom, 120)
+                .padding(.bottom, 50)
 
             }
             .containerRelativeFrame([.horizontal, .vertical])

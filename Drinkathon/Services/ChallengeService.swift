@@ -43,6 +43,66 @@ struct ChallengeService {
     }
     
     @MainActor
+    static func cleanChallenges() async throws {
+        let date = Timestamp()
+        
+        Firestore
+            .firestore()
+            .collection("challenges")
+            .whereField("status", isEqualTo: "active")
+            .whereField("timeToEnd", isLessThanOrEqualTo: date)
+            .getDocuments(completion: { querySnapshot, error in
+                if let err = error {
+                    print(err.localizedDescription)
+                    return
+                }
+
+                guard let docs = querySnapshot?.documents else { return }
+
+                for doc in docs {
+                    let ref = doc.reference
+                    var winner: String = "none"
+                    
+                    Task {
+                        let challenge = try doc.data(as: Challenge.self)
+                        if challenge.player1.score > challenge.player2.score {
+                            winner = challenge.player1.id
+                        }
+                        else if challenge.player1.score < challenge.player2.score{
+                            winner = challenge.player2.id
+                        }
+                        else {
+                            winner = "tie"
+                        }
+                        print("winner: \(winner)")
+                        
+                        // Update winner and status
+                        ref.updateData(["winner": winner])
+                        ref.updateData(["status": "finished"])
+                        
+                        // Update players profiles
+                        Firestore.firestore().collection("users")
+                            .document(challenge.player1.id)
+                            .updateData([
+                                "challenges": FieldValue.arrayRemove([challenge.id]),
+                                "history": FieldValue.arrayUnion([challenge.id])
+                            ])
+                        Firestore.firestore().collection("users")
+                            .document(challenge.player2.id)
+                            .updateData([
+                                "challenges": FieldValue.arrayRemove([challenge.id]),
+                                "history": FieldValue.arrayUnion([challenge.id])
+                            ])
+                    }
+                    
+                    
+                }
+            })
+        
+//        print("active: \(snapshot.count)")
+    }
+    
+    @MainActor
     static func fetchUserChallenges(uid: String) async throws -> [Challenge] {
         guard let ids = try? await fetchUserChallengeIDs(uid: uid) else { return [] }
         let snapshot = try await Firestore
@@ -57,12 +117,14 @@ struct ChallengeService {
     @MainActor
     static func logNewDrink(uid: String, challengeIds: [String]) async throws {
         guard Auth.auth().currentUser != nil else { return }
+        let date = Timestamp()
         
         // If we are player 1
         let snapshot1 = try await Firestore
             .firestore()
             .collection("challenges")
             .whereField(FieldPath.documentID(), in: challengeIds)
+            .whereField("status", isEqualTo: "active")
             .whereFilter(Filter.orFilter([
                 Filter.whereField("player1.id", isEqualTo: uid)
             ]))
@@ -80,8 +142,9 @@ struct ChallengeService {
             .firestore()
             .collection("challenges")
             .whereField(FieldPath.documentID(), in: challengeIds)
+            .whereField("status", isEqualTo: "active")
             .whereFilter(Filter.orFilter([
-                Filter.whereField("player2.id", isEqualTo: uid),
+                Filter.whereField("player2.id", isEqualTo: uid)
             ]))
             .getDocuments().documents
         

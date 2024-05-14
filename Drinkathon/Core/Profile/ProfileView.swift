@@ -12,6 +12,7 @@ struct ProfileView: View {
     @State private var showCreateChallenge = false
     @Binding var doneCreateChallenge: Bool
     @Binding var tab: Int
+    @Environment(\.dismiss) var dismiss
 
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -37,6 +38,7 @@ struct ProfileView: View {
             })
             .padding(.horizontal)
         }
+        .padding(.top, 20)
         .background(.darkerBlue)
     }
 }

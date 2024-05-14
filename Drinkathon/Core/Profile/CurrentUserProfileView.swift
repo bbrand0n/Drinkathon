@@ -12,7 +12,7 @@ struct CurrentUserProfileView: View {
     @State private var showEditProfile = false
     
     var body: some View {
-        NavigationStack {
+//        NavigationStack {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 20) {
                         
@@ -61,11 +61,11 @@ struct CurrentUserProfileView: View {
             }
             .background(.darkerBlue)
         }
-    }
+        
+//    }
 }
 
 #Preview {
     let profileView = CurrentUserProfileView(currentUser: DeveloperPreview.shared.user1)
-//    profileView.viewModel.currentUser = DeveloperPreview.shared.user1
     return profileView
 }

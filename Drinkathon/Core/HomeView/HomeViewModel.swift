@@ -31,7 +31,14 @@ class HomeViewModel: ObservableObject {
     @MainActor
     func fetchChallenges() async throws {
         // Update current user
-        guard let uid = currentUser?.id else { return }
+        guard let uid = currentUser?.id else { 
+            print("ERROR: No user ID in fetch challenges")
+            return
+        }
+        
+        Task { try await ChallengeService.cleanChallenges() }
+        
+        
         
         Firestore.firestore().collection("users").document(uid)
             .addSnapshotListener { docSnapshot, error in
@@ -58,11 +65,15 @@ class HomeViewModel: ObservableObject {
                 
                 // Get updated data
                 self.challenges = documents.compactMap({ try? $0.data(as: Challenge.self) })
-                Task { try await self.fetchUserDataForChallenges() }
+                
+                // Populate user data if it is new
+                querySnapshot?.documentChanges.forEach { diff in
+                    if (diff.type == .added) {
+                        Task { try await self.fetchUserDataForChallenges() }
+                    }
+                        
+                }
             }
-        
-        // Populate user data
-        try await fetchUserDataForChallenges()
     }
     
     @MainActor
@@ -84,8 +95,6 @@ class HomeViewModel: ObservableObject {
         guard let id = currentUser?.id else { return }
         guard let challenges = currentUser?.challenges else { return }
         try await ChallengeService.logNewDrink(uid: id, challengeIds: challenges)
-        
-        print("DEBUG: Fetch challenges called")
     }
     
 }
