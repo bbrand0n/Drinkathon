@@ -46,7 +46,6 @@ class CreateChallengeViewModel: ObservableObject {
         selectedUsers.forEach{ user in
             Task{ try await UserService.addUserChallenge(uid: user.id, cid: challengeId) }
         }
-        
     }
     
     @MainActor

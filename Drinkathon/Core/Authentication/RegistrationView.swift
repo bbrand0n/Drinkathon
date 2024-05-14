@@ -22,22 +22,29 @@ struct RegistrationView: View {
                 .padding()
             
             VStack {
-                TextField("Email", text: $viewModel.email)
+                TextField("", text: $viewModel.email,
+                          prompt: Text("Email").foregroundColor(.gray))
+                    .foregroundStyle(.white)
                     .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
                     .autocorrectionDisabled()
                     .modifier(TextFieldModifer())
                 
-                TextField("Username", text: $viewModel.username)
+                TextField("", text: $viewModel.username,
+                          prompt: Text("UserName").foregroundColor(.gray))
+                    .foregroundStyle(.white)
                     .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
                     .autocorrectionDisabled()
                     .modifier(TextFieldModifer())
                 
-                TextField("Full name", text: $viewModel.fullname)
+                TextField("", text: $viewModel.fullname,
+                          prompt: Text("Full name").foregroundColor(.gray))
+                    .foregroundStyle(.white)
                     .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
                     .autocorrectionDisabled()
                     .modifier(TextFieldModifer())
                 
-                SecureField("Password", text: $viewModel.password)
+                SecureField("", text: $viewModel.password,
+                            prompt: Text("Password").foregroundColor(.gray))
                     .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
                     .modifier(TextFieldModifer())
             }

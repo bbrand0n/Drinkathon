@@ -21,13 +21,16 @@ struct ProfileHeaderView: View {
                     Text(user?.fullname ?? "Empty")
                         .font(.title2)
                         .fontWeight(.semibold)
+                        .foregroundStyle(Color.white)
                     
                     Text(user?.username ?? "Empty")
                         .font(.subheadline)
+                        .foregroundStyle(Color.white)
                 }
                 if let bio = user?.bio {
                     Text(bio)
                         .font(.footnote)
+                        .foregroundStyle(Color.white)
                 }
             }
             
@@ -35,6 +38,7 @@ struct ProfileHeaderView: View {
             
             CircleProfilePictureView(user: user, size: .large)
         }
+        .background(.darkerBlue)
     }
 }
 

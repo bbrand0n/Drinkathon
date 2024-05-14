@@ -18,26 +18,32 @@ struct CreateChallengeView: View {
     let hoursRange = 0...23
     let minutesRange = 0...59
     
-    
     var body: some View {
         NavigationStack {
-            ZStack {
-                Color(.systemGroupedBackground)
-                    .edgesIgnoringSafeArea([.bottom, .horizontal])
-                
+            VStack {
                 VStack {
                     
+                    Image("drink2")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 150, height: 170)
+                    
                     Divider()
-                        .padding(.top, 10)
-                        .padding(.bottom, 8)
+                        .overlay(.gray)
+                        .padding(.top, 5)
+                        .padding(.bottom, 5)
                     
                     // Title
                     HStack {
                         VStack(alignment: .leading) {
                             Text("Title")
-                                .fontWeight(.semibold)
+                                .fontWeight(.bold)
+                                .foregroundStyle(.white)
                             
-                            TextField("Title for your challenge", text: $title)
+                            TextField("", text: $title,
+                                      prompt: Text("Title for your challenge").foregroundStyle(.gray))
+                            .foregroundStyle(.white)
+                            .autocorrectionDisabled()
                         }
                         .font(.footnote)
                         
@@ -45,19 +51,31 @@ struct CreateChallengeView: View {
                     }
                     
                     Divider()
+                        .overlay(.gray)
+                        .padding(.top, 5)
+                        .padding(.bottom, 5)
                     
                     // Competitors field
                     VStack(alignment: .leading) {
                         Text("Competitors")
-                            .fontWeight(.semibold)
+                            .fontWeight(.bold)
+                            .foregroundStyle(.white)
                         
                         HStack {
-                            // Selected users
-                            ForEach(viewModel.selectedUsers) { user in
-                                CircleProfilePictureView(user: user, size: .xSmall)
+                            if viewModel.selectedUsers.isEmpty {
+                                
+                                // No user selected yet
+                                Text("None")
+                                    .foregroundStyle(.gray)
+                                
+                            } else {
+                                
+                                // Selected users
+                                ForEach(viewModel.selectedUsers) { user in
+                                    CircleProfilePictureView(user: user, size: .xSmall)
+                                }
+                                
                             }
-                            
-//                            CircleProfilePictureView(user: DeveloperPreview.shared.user, size: .xSmall)
                             
                             Spacer()
                             
@@ -67,7 +85,7 @@ struct CreateChallengeView: View {
                             } label: {
                                 Image(systemName: "plus.circle")
                                     .resizable()
-                                    .frame(width: 32, height: 32)
+                                    .frame(width: 28, height: 28)
                                     .foregroundColor(Color(.blue))
                                     .padding(.trailing, 3)
                             }
@@ -76,11 +94,15 @@ struct CreateChallengeView: View {
                     .font(.footnote)
                     
                     Divider()
+                        .overlay(.gray)
+                        .padding(.top, 5)
+                        .padding(.bottom, 5)
                     
                     // Duration field
                     VStack(alignment: .leading) {
                         Text("Duration")
-                            .fontWeight(.semibold)
+                            .fontWeight(.bold)
+                            .foregroundStyle(.white)
                         
                         HStack {
                             TimerPickerView(title: "hours", range: hoursRange, binding: $selectedHoursAmount)
@@ -95,6 +117,9 @@ struct CreateChallengeView: View {
                     .font(.footnote)
                     
                     Divider()
+                        .overlay(.gray)
+                        .padding(.top, 5)
+                        .padding(.bottom, 5)
                     
                     // Challenge button
                     Button {
@@ -123,14 +148,11 @@ struct CreateChallengeView: View {
                 }
                 .font(.footnote)
                 .padding()
-                .background(.white)
-                .cornerRadius(10)
-                .overlay {
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color(.systemGray4), lineWidth: 1)
-                }
+                .background(.lighterBlue)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
                 .padding()
             }
+            
             
             // Search users sheet
             .sheet(isPresented: $showSearchUsers, content: {
@@ -139,6 +161,9 @@ struct CreateChallengeView: View {
             
             // Navigation stuff
             .navigationTitle("New Challenge")
+            .toolbarColorScheme(.dark, for: .navigationBar)
+            .toolbarBackground(Color.lighterBlue, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {

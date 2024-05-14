@@ -17,7 +17,7 @@ extension PreviewProvider {
 class DeveloperPreview {
     static let shared = DeveloperPreview()
     
-    let user1 = User(id: NSUUID().uuidString, fullname: "Brandon Gibbons", email: "brandon@gmail.com", username: "bgibbons", challenges: [])
+    let user1 = User(id: NSUUID().uuidString, fullname: "Brandon Gibbons", email: "brandon@gmail.com", username: "bgibbons", bio: "Bestest enginr evr", challenges: [])
     let user2 = User(id: NSUUID().uuidString, fullname: "Draolen Tripe", email: "sonvsdf@gmail.com", username: "dtripe", challenges: [])
     var playas = [Player]()
     var challenge: Challenge

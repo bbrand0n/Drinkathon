@@ -21,8 +21,10 @@ struct AddPlayerCell: View {
                 Text(user.username)
                     .font(.subheadline)
                     .fontWeight(.semibold)
+                    .foregroundStyle(Color.white)
                 
                 Text(user.fullname)
+                    .foregroundStyle(Color.white)
             }
             .font(.footnote)
             
@@ -48,7 +50,7 @@ struct AddPlayerCell: View {
                     Image(systemName: "checkmark.circle.fill")
                         .resizable()
                         .frame(width: 28, height: 28)
-                        .foregroundColor(Color(.black))
+                        .foregroundColor(Color(.cyan))
                     
                 } else {
                     Image(systemName: "plus.circle")
@@ -58,7 +60,11 @@ struct AddPlayerCell: View {
                 }
             }
         }
-        .padding(.horizontal)
+        .padding()
+        .background(.lighterBlue)
+        .clipShape(RoundedRectangle(cornerRadius: 10))
+        .padding(.top)
+        .padding(.horizontal, 10)
     }
 }
 

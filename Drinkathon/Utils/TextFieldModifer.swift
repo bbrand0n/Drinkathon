@@ -12,7 +12,7 @@ struct TextFieldModifer: ViewModifier {
         content
             .font(.subheadline)
             .padding(12)
-            .background(Color(.systemGray6))
+            .background(Color(.lighterBlue))
             .cornerRadius(10)
             .padding(.horizontal, 24)
     }

@@ -30,15 +30,29 @@ class HomeViewModel: ObservableObject {
     
     @MainActor
     func fetchChallenges() async throws {
-        // Get challenges
-        guard let challenges = currentUser?.challenges else { return }
-        self.challenges = try await ChallengeService.fetchUserChallenges(challengeIds: challenges)
+        // Update current user
+        guard let uid = currentUser?.id else { return }
+        
+        Firestore.firestore().collection("users").document(uid)
+            .addSnapshotListener { docSnapshot, error in
+                guard let document = docSnapshot else {
+                    print("Error fetching user \(error!)")
+                    return
+                }
+
+                Task { try self.currentUser = document.data(as: User.self) }
+                
+            }
+        
+        // Get challenge IDs to query
+        guard let challengeIds = currentUser?.challenges else { return }
+        if challengeIds.isEmpty { return }
         
         // Add snapshot to our challenges
-        Firestore.firestore().collection("challenges").whereField(FieldPath.documentID(), in: challenges)
+        Firestore.firestore().collection("challenges").whereField(FieldPath.documentID(), in: challengeIds)
             .addSnapshotListener { querySnapshot, error in
                 guard let documents = querySnapshot?.documents else {
-                    print("Error fetching documents \(error!)")
+                    print("Error fetching challenges \(error!)")
                     return
                 }
                 

@@ -21,7 +21,6 @@ struct ExploreView: View {
                             
                             Divider()
                         }
-                        .padding(.vertical, 4)
                     }
                 }
             }
@@ -29,7 +28,12 @@ struct ExploreView: View {
                 ProfileView(user: user)
             })
             .navigationTitle("Find Friends")
+            .toolbarColorScheme(.dark, for: .navigationBar)
+            .toolbarBackground(Color.lighterBlue, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
+            .navigationBarTitleDisplayMode(.inline)
             .searchable(text: $searchText, prompt: "Search")
+            .background(.darkerBlue)
         }
     }
 }

@@ -31,11 +31,24 @@ struct ChallengeService {
     }
     
     @MainActor
-    static func fetchUserChallenges(challengeIds: [String]) async throws -> [Challenge] {
+    static func fetchUserChallengeIDs(uid: String) async throws -> [String] {
+        let snapshot = try await Firestore
+            .firestore()
+            .collection("users")
+            .document(uid)
+            .getDocument()
+
+        guard let challengeIds = snapshot.get("challenges") as? [String] else { return [] }
+        return challengeIds
+    }
+    
+    @MainActor
+    static func fetchUserChallenges(uid: String) async throws -> [Challenge] {
+        guard let ids = try? await fetchUserChallengeIDs(uid: uid) else { return [] }
         let snapshot = try await Firestore
             .firestore()
             .collection("challenges")
-            .whereField(FieldPath.documentID(), in: challengeIds)
+            .whereField(FieldPath.documentID(), in: ids)
             .getDocuments()
 
         return snapshot.documents.compactMap({ try? $0.data(as: Challenge.self) })
@@ -43,7 +56,7 @@ struct ChallengeService {
     
     @MainActor
     static func logNewDrink(uid: String, challengeIds: [String]) async throws {
-        guard let currentUser = Auth.auth().currentUser else { return }
+        guard Auth.auth().currentUser != nil else { return }
         
         // If we are player 1
         let snapshot1 = try await Firestore

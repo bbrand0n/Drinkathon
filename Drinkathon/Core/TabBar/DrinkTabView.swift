@@ -10,8 +10,13 @@ import SwiftUI
 struct DrinkTabView: View {
     @State private var selectedTab = 0
     
+    init() {
+        UITabBar.appearance().backgroundColor = .lighterBlue
+    }
+    
     var body: some View {
         TabView(selection: $selectedTab) {
+            
             HomeView()
                 .tabItem {
                     Image(systemName: selectedTab == 0 ? "house.fill" : "house")
@@ -19,6 +24,7 @@ struct DrinkTabView: View {
                 }
                 .onAppear { selectedTab = 0 }
                 .tag(0)
+                
             
             ExploreView()
                 .tabItem {
@@ -36,10 +42,8 @@ struct DrinkTabView: View {
                 .onAppear { selectedTab = 2 }
                 .tag(2)
         }
-        .padding(.top)
-        .tint(.black)
-        
-        
+        .tint(.teal)
+        .ignoresSafeArea(edges: .top)
     }
 }
 

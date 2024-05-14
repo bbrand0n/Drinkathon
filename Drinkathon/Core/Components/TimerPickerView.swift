@@ -13,11 +13,11 @@ struct TimerPickerView: View {
     //
     // This allows us to avoid having to use custom
     private let pickerViewTitlePadding: CGFloat = 2.0
-
+    
     let title: String
     let range: ClosedRange<Int>
     let binding: Binding<Int>
-
+    
     var body: some View {
         HStack(spacing: -pickerViewTitlePadding) {
             Picker(title, selection: binding) {
@@ -26,18 +26,18 @@ struct TimerPickerView: View {
                         // Forces the text in the Picker to be
                         // right-aligned
                         Text("\(timeIncrement)")
-                            .foregroundColor(.black)
+                            .foregroundStyle(.white)
                             .multilineTextAlignment(.trailing)
                     }
-                    
                 }
             }
             .pickerStyle(InlinePickerStyle())
             .labelsHidden()
             .frame(width: 75, height: 100)
-
+            
             Text(title)
                 .fontWeight(.bold)
+                .foregroundStyle(.white)
         }
     }
 }

@@ -34,9 +34,8 @@ struct ProfileView: View {
                     CreateChallengeView()
             })
             .padding(.horizontal)
-            
         }
-        
+        .background(.darkerBlue)
     }
 }
 

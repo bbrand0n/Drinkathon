@@ -23,11 +23,15 @@ struct LoginView: View {
                     .padding()
                 
                 VStack {
-                    TextField("Enter your email", text: $viewModel.email)
+                    TextField("", text: $viewModel.email,
+                              prompt: Text("Enter your email").foregroundColor(.gray))
+                        .foregroundColor(.white)
                         .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
                         .modifier(TextFieldModifer())
+                        
 
-                    SecureField("Enter your password", text: $viewModel.password)
+                    SecureField("", text: $viewModel.password,
+                                prompt: Text("Enter your password").foregroundColor(.gray))
                         .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
                         .modifier(TextFieldModifer())
                 }

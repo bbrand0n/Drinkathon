@@ -31,6 +31,7 @@ struct ChallengeCellView: View {
                     Text(challenge.title)
                         .font(.title3)
                         .fontWeight(.medium)
+                        .foregroundStyle(Color.white)
                     
                     GroupBox {
                         VStack(alignment: .leading, spacing: 2) {
@@ -47,9 +48,15 @@ struct ChallengeCellView: View {
                                     .foregroundStyle(.red)
                                     .clipShape(RoundedRectangle(cornerRadius: 16))
                                     .cornerRadius(8)
+                                    .annotation(position: .top, alignment: .leading) {
+                                        Text(item.username)
+                                            .foregroundColor(Color.white)
+                                            .font(.caption)
+                                            .padding(.bottom, 2)
+                                    }
                                     .annotation(position: .trailing) {
                                         Text("0")
-                                            .foregroundColor(Color.black)
+                                            .foregroundColor(Color.white)
                                             .font(.caption)
                                     }
                                     
@@ -62,15 +69,22 @@ struct ChallengeCellView: View {
                                     .foregroundStyle(.blue)
                                     .clipShape(RoundedRectangle(cornerRadius: 16))
                                     .cornerRadius(8)
+                                    .annotation(position: .top, alignment: .leading) {
+                                        Text(item.username)
+                                            .foregroundColor(Color.white)
+                                            .font(.caption)
+                                            .padding(.bottom, 2)
+                                    }
                                     .annotation(position: .trailing) {
                                         Text(item.score.formatted())
-                                            .foregroundColor(Color.black)
+                                            .foregroundColor(Color.white)
                                             .font(.caption)
                                     }
                                 }
                             }
                             .padding(.bottom)
                             .chartXAxis(.hidden)
+                            .chartYAxis(.hidden)
                             .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
                             .chartYAxis {
                                 AxisMarks(preset: .automatic, position: .leading) { _ in
@@ -80,6 +94,7 @@ struct ChallengeCellView: View {
                             }
                             
                             Divider()
+                                .overlay(.gray)
                                 .padding(.bottom, 5)
                             
                             // Time left
@@ -87,6 +102,7 @@ struct ChallengeCellView: View {
                                 Text("Time left: ")
                                     .font(.footnote)
                                     .fontWeight(.semibold)
+                                    .foregroundColor(.white)
                                 
                                 Text(duration)
                                     .font(.footnote)
@@ -98,6 +114,7 @@ struct ChallengeCellView: View {
                                 Text("4-1")
                                     .font(.caption2)
                                     .fontWeight(.medium)
+                                    .foregroundStyle(Color.gray)
                             }
                             .onReceive(timer) { _ in
                                 var delta = challenge.timeToEnd.timeIntervalSinceNow
@@ -109,15 +126,17 @@ struct ChallengeCellView: View {
                             }
                         }
                     }
+                    .backgroundStyle(Color.lighterBlue)
                     .padding(.top, 5)
                     .cornerRadius(15)
                 }
             }
             .padding(.horizontal)
             Divider()
+                .overlay(.gray)
                 .padding()
-            
         }
+        
     }
 }
 

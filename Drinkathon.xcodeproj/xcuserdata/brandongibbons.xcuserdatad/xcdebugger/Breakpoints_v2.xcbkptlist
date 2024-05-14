@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "5FF3B6B6-2839-47E2-840A-3840ACF3DEDC"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6938BE24-C405-4C9B-8ED3-D9965D008340"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Drinkathon/Services/ChallengeService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "fetchUserChallenges(uid:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "6938BE24-C405-4C9B-8ED3-D9965D008340 - e9e77b66f158fbc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for static Drinkathon.ChallengeService.fetchUserChallenges(uid: Swift.String) async throws -&gt; Swift.Array&lt;Drinkathon.Challenge&gt;"
+                  moduleName = "Drinkathon"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/brandongibbons/Desktop/Drinkathon/Drinkathon/Services/ChallengeService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "54"
+                  endingLineNumber = "54">
+               </Location>
+               <Location
+                  uuid = "6938BE24-C405-4C9B-8ED3-D9965D008340 - 62cd658ff5704634"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.FIRQueryDocumentSnapshot) -&gt; Swift.Optional&lt;Drinkathon.Challenge&gt; in static Drinkathon.ChallengeService.fetchUserChallenges(uid: Swift.String) async throws -&gt; Swift.Array&lt;Drinkathon.Challenge&gt;"
+                  moduleName = "Drinkathon"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/brandongibbons/Desktop/Drinkathon/Drinkathon/Services/ChallengeService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "54"
+                  endingLineNumber = "54">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FF19463A-6B70-497A-B360-56C8C3B2250B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Drinkathon/Services/ChallengeService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "fetchUserChallengeIDs(uid:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

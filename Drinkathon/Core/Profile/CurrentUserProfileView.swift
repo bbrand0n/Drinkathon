@@ -33,7 +33,7 @@ struct CurrentUserProfileView: View {
                         .fontWeight(.semibold)
                         .foregroundColor(.black)
                         .frame(width: 320, height: 44)
-                        .background(.white)
+                        .background(Color(.systemGray4))
                         .cornerRadius(8)
                         .overlay {
                             RoundedRectangle(cornerRadius: 8)
@@ -61,6 +61,7 @@ struct CurrentUserProfileView: View {
             .padding(.horizontal)
             .padding(.top)
         }
+        .background(.darkerBlue)
     }
 }
 

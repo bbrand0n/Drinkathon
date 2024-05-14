@@ -18,8 +18,10 @@ struct PlayerCell: View {
                 Text(user.username)
                     .font(.subheadline)
                     .fontWeight(.semibold)
+                    .foregroundStyle(Color.white)
                 
                 Text(user.fullname)
+                    .foregroundStyle(Color.white)
             }
             .font(.footnote)
             
@@ -33,21 +35,18 @@ struct PlayerCell: View {
                 Image(systemName: "person.badge.plus")
                     .resizable()
                     .frame(width: 28, height: 28)
-                    .foregroundColor(Color(.black))
+                    .foregroundColor(Color(.blue))
             }
-            .padding(.leading, 5)
         }
-        .padding(.horizontal)
+        .padding()
+        .background(.lighterBlue)
+        .clipShape(RoundedRectangle(cornerRadius: 10))
+        .padding(.top)
+        .padding(.horizontal, 10)
     }
 }
 
 #Preview {
-    let user = User(
-        id: NSUUID().uuidString,
-        fullname: "Brandon Gibbons",
-        email: "brandon@gmail.com",
-        username: "bgibbons",
-        challenges: [])
-    let playerCell = PlayerCell(user: user)
+    let playerCell = PlayerCell(user: DeveloperPreview.shared.user1)
     return playerCell
 }
