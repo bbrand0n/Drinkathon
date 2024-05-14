@@ -10,7 +10,9 @@ import SwiftUI
 struct ProfileView: View {
     let user: User
     @State private var showCreateChallenge = false
-    
+    @Binding var doneCreateChallenge: Bool
+    @Binding var tab: Int
+
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 20) {
@@ -31,7 +33,7 @@ struct ProfileView: View {
                 }
             }
             .sheet(isPresented: $showCreateChallenge, content: {
-                    CreateChallengeView()
+                CreateChallengeView(done: self.$doneCreateChallenge)
             })
             .padding(.horizontal)
         }
@@ -40,6 +42,7 @@ struct ProfileView: View {
 }
 
 #Preview {
-    let profileView = ProfileView(user: DeveloperPreview.shared.user1)
+    let tabView = DrinkTabView()
+    let profileView = ProfileView(user: DeveloperPreview.shared.user1, doneCreateChallenge: tabView.$doneCreateChallenge, tab: tabView.$selectedTab)
     return profileView
 }

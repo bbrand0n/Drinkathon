@@ -17,7 +17,6 @@ struct HomeView: View {
     
     var body: some View {
         NavigationStack {
-            
             VStack {
                 Divider()
                 
@@ -29,10 +28,11 @@ struct HomeView: View {
                         }
                     }
                 }
+                .padding(.top, 50)
                 
-                .sheet(isPresented: $showCreateChallenge, content: {
-                    CreateChallengeView()
-                })
+//                .sheet(isPresented: $showCreateChallenge, content: {
+//                    CreateChallengeView()
+//                })
                 .refreshable {
                     print("DEBUG: Refresh called")
                     Task{ try await viewModel.fetchChallenges() }
@@ -48,22 +48,22 @@ struct HomeView: View {
                 .toolbarBackground(Color.lighterBlue, for: .navigationBar)
                 .toolbarBackground(.visible, for: .navigationBar)
                 .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button {
-                            showCreateChallenge.toggle()
-                        } label: {
-                            Image(systemName: "plus")
-                                .resizable()
-                                .frame(width: 25, height: 25)
-                                .foregroundColor(Color(.blue))
-                        }
-                        .font(.subheadline)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.black)
-                    }
-                }
+//                .toolbar {
+//                    
+//                    ToolbarItem(placement: .navigationBarTrailing) {
+//                        Button {
+//                            showCreateChallenge.toggle()
+//                        } label: {
+//                            Image(systemName: "plus")
+//                                .resizable()
+//                                .frame(width: 25, height: 25)
+//                                .foregroundColor(Color(.blue))
+//                        }
+//                        .font(.subheadline)
+//                        .fontWeight(.semibold)
+//                        .foregroundColor(.black)
+//                    }
+//                }
                 
                 
                 Divider()
@@ -83,11 +83,12 @@ struct HomeView: View {
                         .background(Color(.green))
                         .cornerRadius(8)
                 }
-                .padding(.bottom, 20)
+                .padding(.bottom, 120)
 
             }
             .containerRelativeFrame([.horizontal, .vertical])
             .background(.darkerBlue)
+//            .padding(.bottom)
         }
     }
 }

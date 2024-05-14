@@ -43,6 +43,11 @@
 		257C9B9F2BEAC06400FA9768 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257C9B9E2BEAC06400FA9768 /* ContentViewModel.swift */; };
 		257C9BA12BEAC14A00FA9768 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257C9BA02BEAC14A00FA9768 /* ContentView.swift */; };
 		257C9BA32BEAC53E00FA9768 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257C9BA22BEAC53E00FA9768 /* LoginViewModel.swift */; };
+		25D234BC2BF38C3F00E77E87 /* TabbedItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D234BB2BF38C3F00E77E87 /* TabbedItems.swift */; };
+		25D234BF2BF38E0300E77E87 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D234BE2BF38E0300E77E87 /* NotificationsView.swift */; };
+		25D234C12BF38E5A00E77E87 /* TabViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D234C02BF38E5A00E77E87 /* TabViewExtension.swift */; };
+		25D234C32BF3988C00E77E87 /* DrinkTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D234C22BF3988C00E77E87 /* DrinkTabViewModel.swift */; };
+		25D234C52BF39A9400E77E87 /* CreateChallengePopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D234C42BF39A9400E77E87 /* CreateChallengePopupView.swift */; };
 		25F2BD622BEAD63C002E6253 /* ExploreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F2BD612BEAD63C002E6253 /* ExploreViewModel.swift */; };
 		25F2BD642BEAD768002E6253 /* PreviewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F2BD632BEAD768002E6253 /* PreviewProvider.swift */; };
 		25F2BD682BEADC72002E6253 /* CurrentUserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F2BD672BEADC72002E6253 /* CurrentUserProfileView.swift */; };
@@ -88,6 +93,11 @@
 		257C9B9E2BEAC06400FA9768 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		257C9BA02BEAC14A00FA9768 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		257C9BA22BEAC53E00FA9768 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		25D234BB2BF38C3F00E77E87 /* TabbedItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbedItems.swift; sourceTree = "<group>"; };
+		25D234BE2BF38E0300E77E87 /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
+		25D234C02BF38E5A00E77E87 /* TabViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewExtension.swift; sourceTree = "<group>"; };
+		25D234C22BF3988C00E77E87 /* DrinkTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkTabViewModel.swift; sourceTree = "<group>"; };
+		25D234C42BF39A9400E77E87 /* CreateChallengePopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateChallengePopupView.swift; sourceTree = "<group>"; };
 		25F2BD612BEAD63C002E6253 /* ExploreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewModel.swift; sourceTree = "<group>"; };
 		25F2BD632BEAD768002E6253 /* PreviewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewProvider.swift; sourceTree = "<group>"; };
 		25F2BD672BEADC72002E6253 /* CurrentUserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserProfileView.swift; sourceTree = "<group>"; };
@@ -174,6 +184,7 @@
 		257C9B6B2BE4014900FA9768 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				25D234BD2BF38DF300E77E87 /* Notifiations */,
 				257BC33A2BEAD4AD00C22F61 /* Explore */,
 				257C9B882BE4321000FA9768 /* Components */,
 				257C9B812BE41D2100FA9768 /* Profile */,
@@ -210,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				25F2BD632BEAD768002E6253 /* PreviewProvider.swift */,
+				25D234C02BF38E5A00E77E87 /* TabViewExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -247,6 +259,8 @@
 			isa = PBXGroup;
 			children = (
 				257C9B792BE4166400FA9768 /* DrinkTabView.swift */,
+				25D234BB2BF38C3F00E77E87 /* TabbedItems.swift */,
+				25D234C22BF3988C00E77E87 /* DrinkTabViewModel.swift */,
 			);
 			path = TabBar;
 			sourceTree = "<group>";
@@ -267,6 +281,7 @@
 			children = (
 				257C9B7F2BE41D1600FA9768 /* CreateChallengeView.swift */,
 				253182A82BEBC05300553D99 /* CreateChallengeViewModel.swift */,
+				25D234C42BF39A9400E77E87 /* CreateChallengePopupView.swift */,
 			);
 			path = ChallengeCreation;
 			sourceTree = "<group>";
@@ -295,6 +310,14 @@
 				253182AA2BEBC5DA00553D99 /* TimerPickerView.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		25D234BD2BF38DF300E77E87 /* Notifiations */ = {
+			isa = PBXGroup;
+			children = (
+				25D234BE2BF38E0300E77E87 /* NotificationsView.swift */,
+			);
+			path = Notifiations;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -382,11 +405,13 @@
 				25F2BD642BEAD768002E6253 /* PreviewProvider.swift in Sources */,
 				257C9B832BE41D3800FA9768 /* ProfileView.swift in Sources */,
 				257C9B992BEABC5100FA9768 /* RegistrationViewModel.swift in Sources */,
+				25D234C52BF39A9400E77E87 /* CreateChallengePopupView.swift in Sources */,
 				257BC3342BEACDA400C22F61 /* UserService.swift in Sources */,
 				253182A92BEBC05300553D99 /* CreateChallengeViewModel.swift in Sources */,
 				25F2BD682BEADC72002E6253 /* CurrentUserProfileView.swift in Sources */,
 				253182AB2BEBC5DA00553D99 /* TimerPickerView.swift in Sources */,
 				257BC3392BEAD33B00C22F61 /* PlayerCell.swift in Sources */,
+				25D234C32BF3988C00E77E87 /* DrinkTabViewModel.swift in Sources */,
 				257C9B7A2BE4166400FA9768 /* DrinkTabView.swift in Sources */,
 				257C9B772BE4140100FA9768 /* TextFieldModifer.swift in Sources */,
 				257BC33C2BEAD4C600C22F61 /* ExploreView.swift in Sources */,
@@ -395,12 +420,15 @@
 				253182A72BEBBECF00553D99 /* ChallengeService.swift in Sources */,
 				257C9BA32BEAC53E00FA9768 /* LoginViewModel.swift in Sources */,
 				257C9B802BE41D1600FA9768 /* CreateChallengeView.swift in Sources */,
+				25D234C12BF38E5A00E77E87 /* TabViewExtension.swift in Sources */,
 				257C9B852BE41ED900FA9768 /* ChallengeCellView.swift in Sources */,
 				257BC3322BEACB1000C22F61 /* User.swift in Sources */,
+				25D234BC2BF38C3F00E77E87 /* TabbedItems.swift in Sources */,
 				25635FE92BEC054C0049ECC3 /* HomeViewModel.swift in Sources */,
 				25635FEB2BEC07640049ECC3 /* Player.swift in Sources */,
 				257C9B9B2BEABD0500FA9768 /* AuthService.swift in Sources */,
 				25F2BD6B2BEADCD7002E6253 /* CurrentUserProfileViewModel.swift in Sources */,
+				25D234BF2BF38E0300E77E87 /* NotificationsView.swift in Sources */,
 				257C9B8A2BE4322F00FA9768 /* CircleProfilePictureView.swift in Sources */,
 				25635FE32BEBEC340049ECC3 /* SearchUsers.swift in Sources */,
 				257C9B742BE40EAE00FA9768 /* RegistrationView.swift in Sources */,

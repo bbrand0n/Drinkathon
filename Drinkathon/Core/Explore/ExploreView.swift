@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct ExploreView: View {
-    @State private var searchText = ""
     @StateObject var viewModel = ExploreViewModel()
+    @State private var searchText = ""
+    @Binding var tab: Int
+    @Binding var doneCreateChallenge: Bool
     
     var body: some View {
         NavigationStack {
@@ -24,8 +26,9 @@ struct ExploreView: View {
                     }
                 }
             }
+            .padding(.top, 100)
             .navigationDestination(for: User.self, destination: { user in
-                ProfileView(user: user)
+                ProfileView(user: user, doneCreateChallenge: self.$doneCreateChallenge, tab: self.$tab)
             })
             .navigationTitle("Find Friends")
             .toolbarColorScheme(.dark, for: .navigationBar)
@@ -39,5 +42,7 @@ struct ExploreView: View {
 }
 
 #Preview {
-    ExploreView()
+    let tabView = DrinkTabView()
+    let exploreView = ExploreView(tab: tabView.$selectedTab, doneCreateChallenge: tabView.$doneCreateChallenge)
+    return exploreView
 }

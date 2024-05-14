@@ -8,42 +8,56 @@
 import SwiftUI
 
 struct DrinkTabView: View {
-    @State private var selectedTab = 0
-    
-    init() {
-        UITabBar.appearance().backgroundColor = .lighterBlue
-    }
+    @StateObject var viewModel = DrinkTabViewModel()
+    @State var selectedTab = 0
+    @State var doneCreateChallenge = false
     
     var body: some View {
-        TabView(selection: $selectedTab) {
-            
-            HomeView()
-                .tabItem {
-                    Image(systemName: selectedTab == 0 ? "house.fill" : "house")
-                        .environment(\.symbolVariants, selectedTab == 0 ? .fill : .none)
-                }
-                .onAppear { selectedTab = 0 }
-                .tag(0)
+        ZStack(alignment: .bottom) {
+            TabView(selection: $selectedTab) {
+                HomeView()
+                    .tag(0)
                 
+                ExploreView(tab: self.$selectedTab, doneCreateChallenge: self.$doneCreateChallenge)
+                    .tag(1)
+                
+                CreateChallengeView(done: self.$doneCreateChallenge)
+                    .tag(2)
+                
+                NotificationsView()
+                    .tag(3)
+                
+                CurrentUserProfileView(currentUser: viewModel.currentUser)
+                    .tag(4)
+            }
+            .ignoresSafeArea(edges: .bottom)
+            .background(.lighterBlue)
+            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+            .animation(.easeInOut(duration: 0.2), value: selectedTab)
             
-            ExploreView()
-                .tabItem {
-                    Image(systemName: selectedTab == 1 ? "person.2.fill" : "person.2")
-                        .environment(\.symbolVariants, selectedTab == 1 ? .fill : .none)
+            ZStack {
+                HStack {
+                    ForEach(TabbedItems.allCases, id: \.self) { item in
+                        Button {
+                            selectedTab = item.rawValue
+                        } label: {
+                            CustomTabItem(imageName: item.iconName, title: item.title, isActive: (selectedTab == item.rawValue))
+                        }
+                    }
                 }
-                .onAppear { selectedTab = 1 }
-                .tag(1)
-            
-            CurrentUserProfileView()
-                .tabItem {
-                    Image(systemName: selectedTab == 2 ? "person.fill" : "person")
-                        .environment(\.symbolVariants, selectedTab == 2 ? .fill : .none)
+                .padding(6)
+            }
+            .onChange(of: doneCreateChallenge) {
+                if doneCreateChallenge == true {
+                    selectedTab = 0
+                    doneCreateChallenge = false
                 }
-                .onAppear { selectedTab = 2 }
-                .tag(2)
+            }
+            .frame(height: 70)
+            .background(.lighterBlue.opacity(0.5))
+            .clipShape(RoundedRectangle(cornerRadius: 35))
+            .padding(.horizontal, 20)
         }
-        .tint(.teal)
-        .ignoresSafeArea(edges: .top)
     }
 }
 
