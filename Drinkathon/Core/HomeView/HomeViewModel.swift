@@ -78,15 +78,22 @@ class HomeViewModel: ObservableObject {
     
     @MainActor
     private func fetchUserDataForChallenges() async throws {
-        for i in 0 ..< challenges.count {
-            let challenge = challenges[i]
-            let uid1 = challenge.player1.id
-            let uid2 = challenge.player2.id
-            let p1User = try await UserService.fetchUser(withUid: uid1)
-            let p2User = try await UserService.fetchUser(withUid: uid2)
+        for i in 0 ..< self.challenges.count {
             
-            challenges[i].player1.user = p1User
-            challenges[i].player2.user = p2User
+            // Redundant check to make sure array didnt change during execution
+            if i < self.challenges.endIndex {
+                let challenge = challenges[i]
+                let uid1 = challenge.player1.id
+                let uid2 = challenge.player2.id
+                let p1User = try await UserService.fetchUser(withUid: uid1)
+                let p2User = try await UserService.fetchUser(withUid: uid2)
+                
+                // Redundant check to make sure array didnt change during execution
+                if i < self.challenges.endIndex{
+                    challenges[i].player1.user = p1User
+                    challenges[i].player2.user = p2User
+                }
+            }
         }
     }
     

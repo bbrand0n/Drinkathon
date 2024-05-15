@@ -49,7 +49,6 @@ struct ChallengeService {
         Firestore
             .firestore()
             .collection("challenges")
-            .whereField("status", isEqualTo: "active")
             .whereField("timeToEnd", isLessThanOrEqualTo: date)
             .getDocuments(completion: { querySnapshot, error in
                 if let err = error {

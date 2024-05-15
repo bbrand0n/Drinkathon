@@ -160,6 +160,13 @@ struct CreateChallengeView: View {
             SearchUsers().environmentObject(viewModel)
         })
         
+        .onAppear {
+            title = ""
+            viewModel.selectedUsers.removeAll()
+            selectedHoursAmount = 1
+            selectedMinutesAnount = 30
+        }
+        
     }
 }
 
