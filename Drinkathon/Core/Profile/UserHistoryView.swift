@@ -15,11 +15,14 @@ struct UserHistoryView: View {
     }
     
     var body: some View {
-        VStack {
+        ScrollView {
             ForEach(viewModel.challengesHistory) { challenge in
                 ChallengeCellView(challenge: challenge)
                     .padding([.bottom])
             }
+        }
+        .refreshable {
+            Task{ try await viewModel.fetchUserHistory() }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.darkerBlue)

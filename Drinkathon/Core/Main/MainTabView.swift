@@ -15,8 +15,6 @@ struct MainTabView: View {
         ZStack(alignment: .bottom) {
             TabView(selection: $selectedTab) {
                 
-                // Make sure user is populated
-                if let user = viewModel.currentUser {
                     HomeView(rootModel: viewModel)
                         .tag(0)
                     
@@ -29,9 +27,8 @@ struct MainTabView: View {
                     NotificationsView(selectedTab: self.$selectedTab)
                         .tag(3)
                     
-                    CurrentUserProfileView(user: user)
+                    CurrentUserProfileView(rootModel: viewModel)
                         .tag(4)
-                }
             }
             .onChange(of: viewModel.currentUser) {
                 print("User changed in TabView")

@@ -32,8 +32,8 @@ class CreateChallengeViewModel: ObservableObject {
         }
         
         // Set up players
-        var player1 = Player(id: currentUser.id, username: currentUser.username)
-        var player2 = Player(id: opponent.id, username: opponent.username)
+        let player1 = Player(id: currentUser.id, username: currentUser.username)
+        let player2 = Player(id: opponent.id, username: opponent.username)
         
         // Upload challenge to DB
         let challenge = Challenge(ownerId: currentUser.id, title: title, timeSent: Timestamp(), timeToEnd: timeToEnd, player1: player1, player2: player2)

@@ -77,6 +77,7 @@ class MainTabViewModel: ObservableObject {
         
         // Add snapshot to our challenges
         challengeListener = Firestore.firestore().collection("challenges").whereField(FieldPath.documentID(), in: challengeIds)
+            .order(by: "timeSent", descending: true)
             .addSnapshotListener { querySnapshot, error in
                 guard let documents = querySnapshot?.documents else {
                     print("Error fetching challenges \(error!)")

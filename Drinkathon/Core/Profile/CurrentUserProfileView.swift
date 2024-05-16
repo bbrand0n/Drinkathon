@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct CurrentUserProfileView: View {
-    var user: User
+    @ObservedObject var rootModel: MainTabViewModel
     @State private var showEditProfile = false
     
     var body: some View {
         VStack(spacing: 20) {
             
-            ProfileHeaderView(user: user)
+            if let user = rootModel.currentUser{
+                ProfileHeaderView(user: user)
+            }
             
             VStack {
                 
@@ -62,17 +64,20 @@ struct CurrentUserProfileView: View {
             }
             
             // User history
-            ScrollView(showsIndicators: false) {
-                UserHistoryView(user: user)
-                    .clipShape(RoundedRectangle(cornerRadius: 16))
+            VStack {
+                if let user = rootModel.currentUser {
+                    UserHistoryView(user: user)
+                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                }
             }
             .padding(.bottom,45)
-            
         }
         
         // Edit profile sheet
         .sheet(isPresented: $showEditProfile, content: {
-            EditProfileView(user: user)
+            if let user = rootModel.currentUser {
+                EditProfileView(user: user)
+            }
         })
         .padding(.horizontal)
         .padding(.top)
@@ -82,6 +87,7 @@ struct CurrentUserProfileView: View {
 }
 
 #Preview {
-    let profileView = CurrentUserProfileView(user: DeveloperPreview.shared.user1)
+    let mainView = MainTabView()
+    let profileView = CurrentUserProfileView(rootModel: mainView.viewModel)
     return profileView
 }

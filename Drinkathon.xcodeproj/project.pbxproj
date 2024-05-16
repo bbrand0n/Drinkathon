@@ -187,7 +187,7 @@
 				257C9B882BE4321000FA9768 /* Components */,
 				257C9B812BE41D2100FA9768 /* Profile */,
 				257C9B7E2BE41D0300FA9768 /* ChallengeCreation */,
-				257C9B782BE415FB00FA9768 /* TabBar */,
+				257C9B782BE415FB00FA9768 /* Main */,
 				257C9B7B2BE41B1C00FA9768 /* HomeView */,
 				257C9B6C2BE4015200FA9768 /* Authentication */,
 				257C9B6E2BE4017100FA9768 /* Root */,
@@ -253,13 +253,13 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		257C9B782BE415FB00FA9768 /* TabBar */ = {
+		257C9B782BE415FB00FA9768 /* Main */ = {
 			isa = PBXGroup;
 			children = (
 				257C9B792BE4166400FA9768 /* MainTabView.swift */,
 				25D234C22BF3988C00E77E87 /* MainTabViewModel.swift */,
 			);
-			path = TabBar;
+			path = Main;
 			sourceTree = "<group>";
 		};
 		257C9B7B2BE41B1C00FA9768 /* HomeView */ = {

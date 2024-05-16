@@ -137,6 +137,7 @@ struct ChallengeService {
             .firestore()
             .collection("challenges")
             .whereField(FieldPath.documentID(), in: challengeIds)
+            .order(by: "timeToEnd", descending: true)
             .getDocuments()
         
         return snapshot.documents.compactMap({ try? $0.data(as: Challenge.self) })
@@ -150,7 +151,9 @@ struct ChallengeService {
             .firestore()
             .collection("challenges")
             .whereField(FieldPath.documentID(), in: ids)
+            .order(by: "timeToEnd", descending: true)
             .getDocuments()
+        
         
         return snapshot.documents.compactMap({ try? $0.data(as: Challenge.self) })
     }
