@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct CreateChallengeTabView: View {
-    @Binding var done: Bool
+    @Binding var selectedTab: Int
     
     var body: some View {
         VStack {
-            CreateChallengeView(done: self.$done)
+            CreateChallengeView(selectedTab: self.$selectedTab)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.darkerBlue)
@@ -21,7 +21,7 @@ struct CreateChallengeTabView: View {
 
 #Preview {
     let tabView = DrinkTabView()
-    let createView = CreateChallengeTabView(done: tabView.$doneCreateChallenge)
+    let createView = CreateChallengeTabView(selectedTab: tabView.$selectedTab)
 
     return createView
 }

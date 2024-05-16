@@ -7,16 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		251BEFFA2BECFA5100E17FE3 /* ChallengeFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251BEFF92BECFA5100E17FE3 /* ChallengeFeedView.swift */; };
-		251BEFFC2BECFD4E00E17FE3 /* ChallengeFeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251BEFFB2BECFD4E00E17FE3 /* ChallengeFeedViewModel.swift */; };
 		253182A72BEBBECF00553D99 /* ChallengeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253182A62BEBBECF00553D99 /* ChallengeService.swift */; };
 		253182A92BEBC05300553D99 /* CreateChallengeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253182A82BEBC05300553D99 /* CreateChallengeViewModel.swift */; };
 		253182AB2BEBC5DA00553D99 /* TimerPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253182AA2BEBC5DA00553D99 /* TimerPickerView.swift */; };
+		253680D12BF56BBF00F116A6 /* CurrentUserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253680D02BF56BBF00F116A6 /* CurrentUserProfileViewModel.swift */; };
 		25635FE32BEBEC340049ECC3 /* SearchUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25635FE22BEBEC340049ECC3 /* SearchUsers.swift */; };
 		25635FE72BEBFB050049ECC3 /* AddPlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25635FE62BEBFB050049ECC3 /* AddPlayerCell.swift */; };
 		25635FE92BEC054C0049ECC3 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25635FE82BEC054C0049ECC3 /* HomeViewModel.swift */; };
 		25635FEB2BEC07640049ECC3 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25635FEA2BEC07640049ECC3 /* Player.swift */; };
 		257687062BF3EE1B00CE1A9E /* CreateChallengeTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257687052BF3EE1B00CE1A9E /* CreateChallengeTabView.swift */; };
+		257687082BF4EEEC00CE1A9E /* UserHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257687072BF4EEEC00CE1A9E /* UserHistoryView.swift */; };
+		2576870A2BF4EF6F00CE1A9E /* UserHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257687092BF4EF6F00CE1A9E /* UserHistoryViewModel.swift */; };
 		257BC3322BEACB1000C22F61 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257BC3312BEACB1000C22F61 /* User.swift */; };
 		257BC3342BEACDA400C22F61 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257BC3332BEACDA400C22F61 /* UserService.swift */; };
 		257BC3392BEAD33B00C22F61 /* PlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257BC3382BEAD33B00C22F61 /* PlayerCell.swift */; };
@@ -48,11 +49,9 @@
 		25D234BF2BF38E0300E77E87 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D234BE2BF38E0300E77E87 /* NotificationsView.swift */; };
 		25D234C12BF38E5A00E77E87 /* TabViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D234C02BF38E5A00E77E87 /* TabViewExtension.swift */; };
 		25D234C32BF3988C00E77E87 /* DrinkTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D234C22BF3988C00E77E87 /* DrinkTabViewModel.swift */; };
-		25D234C52BF39A9400E77E87 /* CreateChallengePopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D234C42BF39A9400E77E87 /* CreateChallengePopupView.swift */; };
 		25F2BD622BEAD63C002E6253 /* ExploreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F2BD612BEAD63C002E6253 /* ExploreViewModel.swift */; };
 		25F2BD642BEAD768002E6253 /* PreviewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F2BD632BEAD768002E6253 /* PreviewProvider.swift */; };
 		25F2BD682BEADC72002E6253 /* CurrentUserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F2BD672BEADC72002E6253 /* CurrentUserProfileView.swift */; };
-		25F2BD6B2BEADCD7002E6253 /* CurrentUserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F2BD6A2BEADCD7002E6253 /* CurrentUserProfileViewModel.swift */; };
 		25F2BD6E2BEADF4E002E6253 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F2BD6D2BEADF4E002E6253 /* ProfileHeaderView.swift */; };
 		25F2BD712BEAE421002E6253 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F2BD702BEAE421002E6253 /* EditProfileView.swift */; };
 		25F2BD732BEAEBA7002E6253 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F2BD722BEAEBA7002E6253 /* EditProfileViewModel.swift */; };
@@ -61,16 +60,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		251BEFF92BECFA5100E17FE3 /* ChallengeFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeFeedView.swift; sourceTree = "<group>"; };
-		251BEFFB2BECFD4E00E17FE3 /* ChallengeFeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeFeedViewModel.swift; sourceTree = "<group>"; };
 		253182A62BEBBECF00553D99 /* ChallengeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeService.swift; sourceTree = "<group>"; };
 		253182A82BEBC05300553D99 /* CreateChallengeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateChallengeViewModel.swift; sourceTree = "<group>"; };
 		253182AA2BEBC5DA00553D99 /* TimerPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerPickerView.swift; sourceTree = "<group>"; };
+		253680D02BF56BBF00F116A6 /* CurrentUserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserProfileViewModel.swift; sourceTree = "<group>"; };
 		25635FE22BEBEC340049ECC3 /* SearchUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUsers.swift; sourceTree = "<group>"; };
 		25635FE62BEBFB050049ECC3 /* AddPlayerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayerCell.swift; sourceTree = "<group>"; };
 		25635FE82BEC054C0049ECC3 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		25635FEA2BEC07640049ECC3 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		257687052BF3EE1B00CE1A9E /* CreateChallengeTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateChallengeTabView.swift; sourceTree = "<group>"; };
+		257687072BF4EEEC00CE1A9E /* UserHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHistoryView.swift; sourceTree = "<group>"; };
+		257687092BF4EF6F00CE1A9E /* UserHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHistoryViewModel.swift; sourceTree = "<group>"; };
 		257BC3312BEACB1000C22F61 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		257BC3332BEACDA400C22F61 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		257BC3382BEAD33B00C22F61 /* PlayerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerCell.swift; sourceTree = "<group>"; };
@@ -99,11 +99,9 @@
 		25D234BE2BF38E0300E77E87 /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
 		25D234C02BF38E5A00E77E87 /* TabViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewExtension.swift; sourceTree = "<group>"; };
 		25D234C22BF3988C00E77E87 /* DrinkTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkTabViewModel.swift; sourceTree = "<group>"; };
-		25D234C42BF39A9400E77E87 /* CreateChallengePopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateChallengePopupView.swift; sourceTree = "<group>"; };
 		25F2BD612BEAD63C002E6253 /* ExploreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewModel.swift; sourceTree = "<group>"; };
 		25F2BD632BEAD768002E6253 /* PreviewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewProvider.swift; sourceTree = "<group>"; };
 		25F2BD672BEADC72002E6253 /* CurrentUserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserProfileView.swift; sourceTree = "<group>"; };
-		25F2BD6A2BEADCD7002E6253 /* CurrentUserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserProfileViewModel.swift; sourceTree = "<group>"; };
 		25F2BD6D2BEADF4E002E6253 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		25F2BD702BEAE421002E6253 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		25F2BD722BEAEBA7002E6253 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
@@ -272,8 +270,6 @@
 			children = (
 				257C9B7C2BE41C9600FA9768 /* HomeView.swift */,
 				25635FE82BEC054C0049ECC3 /* HomeViewModel.swift */,
-				251BEFF92BECFA5100E17FE3 /* ChallengeFeedView.swift */,
-				251BEFFB2BECFD4E00E17FE3 /* ChallengeFeedViewModel.swift */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -283,7 +279,6 @@
 			children = (
 				257C9B7F2BE41D1600FA9768 /* CreateChallengeView.swift */,
 				253182A82BEBC05300553D99 /* CreateChallengeViewModel.swift */,
-				25D234C42BF39A9400E77E87 /* CreateChallengePopupView.swift */,
 				257687052BF3EE1B00CE1A9E /* CreateChallengeTabView.swift */,
 			);
 			path = ChallengeCreation;
@@ -294,10 +289,12 @@
 			children = (
 				25F2BD722BEAEBA7002E6253 /* EditProfileViewModel.swift */,
 				25F2BD702BEAE421002E6253 /* EditProfileView.swift */,
-				25F2BD6A2BEADCD7002E6253 /* CurrentUserProfileViewModel.swift */,
 				25F2BD672BEADC72002E6253 /* CurrentUserProfileView.swift */,
+				253680D02BF56BBF00F116A6 /* CurrentUserProfileViewModel.swift */,
 				257C9B822BE41D3800FA9768 /* ProfileView.swift */,
 				25F2BD6D2BEADF4E002E6253 /* ProfileHeaderView.swift */,
+				257687072BF4EEEC00CE1A9E /* UserHistoryView.swift */,
+				257687092BF4EF6F00CE1A9E /* UserHistoryViewModel.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -408,20 +405,21 @@
 				25F2BD642BEAD768002E6253 /* PreviewProvider.swift in Sources */,
 				257C9B832BE41D3800FA9768 /* ProfileView.swift in Sources */,
 				257C9B992BEABC5100FA9768 /* RegistrationViewModel.swift in Sources */,
-				25D234C52BF39A9400E77E87 /* CreateChallengePopupView.swift in Sources */,
 				257BC3342BEACDA400C22F61 /* UserService.swift in Sources */,
 				253182A92BEBC05300553D99 /* CreateChallengeViewModel.swift in Sources */,
 				25F2BD682BEADC72002E6253 /* CurrentUserProfileView.swift in Sources */,
+				253680D12BF56BBF00F116A6 /* CurrentUserProfileViewModel.swift in Sources */,
 				253182AB2BEBC5DA00553D99 /* TimerPickerView.swift in Sources */,
 				257BC3392BEAD33B00C22F61 /* PlayerCell.swift in Sources */,
 				25D234C32BF3988C00E77E87 /* DrinkTabViewModel.swift in Sources */,
 				257687062BF3EE1B00CE1A9E /* CreateChallengeTabView.swift in Sources */,
 				257C9B7A2BE4166400FA9768 /* DrinkTabView.swift in Sources */,
 				257C9B772BE4140100FA9768 /* TextFieldModifer.swift in Sources */,
+				257687082BF4EEEC00CE1A9E /* UserHistoryView.swift in Sources */,
 				257BC33C2BEAD4C600C22F61 /* ExploreView.swift in Sources */,
 				25F2BD622BEAD63C002E6253 /* ExploreViewModel.swift in Sources */,
-				251BEFFA2BECFA5100E17FE3 /* ChallengeFeedView.swift in Sources */,
 				253182A72BEBBECF00553D99 /* ChallengeService.swift in Sources */,
+				2576870A2BF4EF6F00CE1A9E /* UserHistoryViewModel.swift in Sources */,
 				257C9BA32BEAC53E00FA9768 /* LoginViewModel.swift in Sources */,
 				257C9B802BE41D1600FA9768 /* CreateChallengeView.swift in Sources */,
 				25D234C12BF38E5A00E77E87 /* TabViewExtension.swift in Sources */,
@@ -431,7 +429,6 @@
 				25635FE92BEC054C0049ECC3 /* HomeViewModel.swift in Sources */,
 				25635FEB2BEC07640049ECC3 /* Player.swift in Sources */,
 				257C9B9B2BEABD0500FA9768 /* AuthService.swift in Sources */,
-				25F2BD6B2BEADCD7002E6253 /* CurrentUserProfileViewModel.swift in Sources */,
 				25D234BF2BF38E0300E77E87 /* NotificationsView.swift in Sources */,
 				257C9B8A2BE4322F00FA9768 /* CircleProfilePictureView.swift in Sources */,
 				25635FE32BEBEC340049ECC3 /* SearchUsers.swift in Sources */,
@@ -444,7 +441,6 @@
 				257C9BA12BEAC14A00FA9768 /* ContentView.swift in Sources */,
 				257C9B5F2BE4013100FA9768 /* LoginView.swift in Sources */,
 				257C9B5D2BE4013100FA9768 /* DrinkathonApp.swift in Sources */,
-				251BEFFC2BECFD4E00E17FE3 /* ChallengeFeedViewModel.swift in Sources */,
 				25F2BD732BEAEBA7002E6253 /* EditProfileViewModel.swift in Sources */,
 				25F2BD712BEAE421002E6253 /* EditProfileView.swift in Sources */,
 				257C9B872BE4211800FA9768 /* Challenge.swift in Sources */,

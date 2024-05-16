@@ -9,17 +9,19 @@ import SwiftUI
 import PhotosUI
 
 struct EditProfileView: View {
-    let user: User
+    @StateObject var viewModel: EditProfileViewModel
+    
+    init(user: User) {
+        self._viewModel = StateObject(wrappedValue: EditProfileViewModel(user: user))
+    }
+    
+    @State private var fullname = ""
     @State private var bio = ""
-    @State private var link = ""
     @Environment(\.dismiss) var dismiss
-    @StateObject var viewModel = EditProfileViewModel()
     
     var body: some View {
         NavigationStack {
             ZStack {
-                Color(.systemGroupedBackground)
-                    .edgesIgnoringSafeArea([.bottom, .horizontal])
                 
                 VStack {
                     PhotosPicker(selection: $viewModel.selectedItem) {
@@ -30,11 +32,12 @@ struct EditProfileView: View {
                                 .frame(width:40, height: 40)
                                 .clipShape(Circle())
                         } else {
-                            CircleProfilePictureView(user: user, size: .xLarge)
+                            CircleProfilePictureView(user: viewModel.user, size: .xLarge)
                         }
                     }
                     
                     Divider()
+                        .overlay(.gray)
                         .padding(.top, 10)
                         .padding(.bottom, 8)
                     
@@ -43,8 +46,11 @@ struct EditProfileView: View {
                         VStack(alignment: .leading) {
                             Text("Name")
                                 .fontWeight(.semibold)
+                                .foregroundStyle(.white)
                             
-                            Text(user.fullname)
+                            TextField("", text: $fullname,
+                                      prompt: Text("Full name").foregroundStyle(.gray))
+                            .foregroundStyle(.white)
                         }
                         .font(.footnote)
                         
@@ -52,34 +58,33 @@ struct EditProfileView: View {
                     }
                     
                     Divider()
+                        .overlay(.gray)
+                        .padding(.bottom, 8)
                     
                     VStack(alignment: .leading) {
                         Text("Bio")
                             .fontWeight(.semibold)
+                            .foregroundStyle(.white)
                         
-                        TextField("Add bio...", text: $bio)
-                    }
-                    .font(.footnote)
-                    
-                    Divider()
-                    
-                    VStack(alignment: .leading) {
-                        Text("Link")
-                            .fontWeight(.semibold)
-                        
-                        TextField("Add link...", text: $link)
+                        TextField("", text: $bio,
+                                  prompt: Text("Add bio...").foregroundStyle(.gray))
+                        .foregroundStyle(.white)
                     }
                     .font(.footnote)
                 }
                 .font(.footnote)
                 .padding()
-                .background(.white)
+                .background(.lighterBlue)
                 .cornerRadius(10)
                 .overlay {
                     RoundedRectangle(cornerRadius: 10)
                         .stroke(Color(.systemGray4), lineWidth: 1)
                 }
                 .padding()
+            }
+            .onAppear {
+                self.fullname = viewModel.user.fullname
+                self.bio = viewModel.user.bio ?? ""
             }
             .navigationTitle("Edit Profile")
             .navigationBarTitleDisplayMode(.inline)
@@ -94,8 +99,9 @@ struct EditProfileView: View {
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Done") {
+                        
                         Task{
-                            try await viewModel.updateUserData()
+                            try await viewModel.updateUserData(fullname: fullname, bio: bio)
                             dismiss()
                         }
                     }
@@ -104,6 +110,8 @@ struct EditProfileView: View {
                     .foregroundColor(.black)
                 }
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(.darkerBlue)
         }
     }
 }

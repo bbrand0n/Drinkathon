@@ -25,14 +25,11 @@ struct HomeView: View {
                     LazyVStack {
                         ForEach(viewModel.challenges) { challenge in
                             ChallengeCellView(challenge: challenge)
+                                .padding(.bottom)
                         }
                     }
                 }
                 .padding(.top)
-                
-//                .sheet(isPresented: $showCreateChallenge, content: {
-//                    CreateChallengeView()
-//                })
                 .refreshable {
                     print("DEBUG: Refresh called")
                     Task{ try await viewModel.fetchChallenges() }
@@ -48,23 +45,6 @@ struct HomeView: View {
                 .toolbarBackground(Color.lighterBlue, for: .navigationBar)
                 .toolbarBackground(.visible, for: .navigationBar)
                 .navigationBarTitleDisplayMode(.inline)
-//                .toolbar {
-//                    
-//                    ToolbarItem(placement: .navigationBarTrailing) {
-//                        Button {
-//                            showCreateChallenge.toggle()
-//                        } label: {
-//                            Image(systemName: "plus")
-//                                .resizable()
-//                                .frame(width: 25, height: 25)
-//                                .foregroundColor(Color(.blue))
-//                        }
-//                        .font(.subheadline)
-//                        .fontWeight(.semibold)
-//                        .foregroundColor(.black)
-//                    }
-//                }
-                
                 
                 Divider()
                     .overlay(.gray)
@@ -83,13 +63,9 @@ struct HomeView: View {
                         .background(Color(.green))
                         .cornerRadius(8)
                 }
-//                .padding(.bottom, 120)
                 .padding(.bottom, 50)
-
             }
-            .containerRelativeFrame([.horizontal, .vertical])
             .background(.darkerBlue)
-//            .padding(.bottom)
         }
     }
 }

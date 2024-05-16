@@ -9,14 +9,16 @@ import PhotosUI
 import SwiftUI
 
 class EditProfileViewModel: ObservableObject {
+    @Published var user: User
     @Published var selectedItem: PhotosPickerItem? {
         didSet { Task { await loadImage() } }
     }
     @Published var profileImage: Image?
     private var uiImage: UIImage?
     
-    func updateUserData() async throws {
-        try await updateProfileImage()
+    init(user: User)
+    {
+        self.user = user
     }
     
     @MainActor
@@ -33,5 +35,14 @@ class EditProfileViewModel: ObservableObject {
         guard let image = self.uiImage else { return }
         guard let imageUrl = try? await ImageUploader.uploadImage(image) else { return }
         try await UserService.shared.updateUserProfileImage(withImageUrl: imageUrl)
+    }
+    
+    @MainActor
+    func updateUserData(fullname: String, bio: String) async throws {
+        self.user.fullname = fullname
+        self.user.bio = bio
+        
+        try await updateProfileImage()
+        try await UserService.shared.updateCurrentUserProfile(fullname: fullname, bio: bio)
     }
 }

@@ -8,11 +8,39 @@
 import SwiftUI
 
 struct NotificationsView: View {
+    @Binding var selectedTab: Int
+    
     var body: some View {
-        Text("Hello, Notifications!")
+        VStack {
+            Text("Hello, Notifications!")
+            
+            Button {
+                selectedTab = 0
+            } label: {
+                Text("Send me to Home tab")
+            }
+            Button {
+                selectedTab = 1
+            } label: {
+                Text("Send me to Explore tab")
+            }
+            Button {
+                selectedTab = 2
+            } label: {
+                Text("Send me to Create Exercise tab")
+            }
+            Button {
+                selectedTab = 4
+            } label: {
+                Text("Send me to Profile tab")
+            }
+        }
+        
     }
 }
 
 #Preview {
-    NotificationsView()
+    let tabView = DrinkTabView()
+    let notificationsView = NotificationsView(selectedTab: tabView.$selectedTab)
+    return notificationsView
 }

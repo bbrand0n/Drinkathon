@@ -18,37 +18,35 @@ class HomeViewModel: ObservableObject {
     
     init() {
         setupSubscribers()
-        Task { try await fetchChallenges() }
     }
     
     private func setupSubscribers() {
         UserService.shared.$currentUser.sink{ [weak self] user in
             self?.currentUser = user
         }.store(in: &cancellables)
-
     }
     
     @MainActor
     func fetchChallenges() async throws {
         // Update current user
-        guard let uid = currentUser?.id else { 
+        guard let uid = currentUser?.id else {
             print("ERROR: No user ID in fetch challenges")
             return
         }
         
-        Task { try await ChallengeService.cleanChallenges() }
-        
-        
-        
+        // Get current user
         Firestore.firestore().collection("users").document(uid)
             .addSnapshotListener { docSnapshot, error in
                 guard let document = docSnapshot else {
                     print("Error fetching user \(error!)")
                     return
                 }
-
-                Task { try self.currentUser = document.data(as: User.self) }
                 
+                do {
+                    try self.currentUser = document.data(as: User.self)
+                } catch {
+                    print("Error decoding user in fetch challenges")
+                }
             }
         
         // Get challenge IDs to query
@@ -63,6 +61,9 @@ class HomeViewModel: ObservableObject {
                     return
                 }
                 
+                // Clean challenges
+                Task { try await ChallengeService.cleanChallenges() }
+                
                 // Get updated data
                 self.challenges = documents.compactMap({ try? $0.data(as: Challenge.self) })
                 
@@ -71,9 +72,11 @@ class HomeViewModel: ObservableObject {
                     if (diff.type == .added) {
                         Task { try await self.fetchUserDataForChallenges() }
                     }
-                        
                 }
             }
+        
+        self.currentUser = try await UserService.fetchUser(withUid: uid)
+        self.challenges = try await ChallengeService.fetchUserChallenges(uid: uid)
     }
     
     @MainActor

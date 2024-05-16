@@ -26,6 +26,15 @@ class UserService {
     }
     
     @MainActor
+    func updateCurrentUserProfile(fullname: String, bio: String) async throws {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        try await Firestore.firestore().collection("users").document(uid).updateData([
+            "fullname" : fullname,
+            "bio" : bio
+        ])
+    }
+    
+    @MainActor
     static func fetchUsers() async throws -> [User] {
         guard let currentUid = Auth.auth().currentUser?.uid else { return [] }
         let snapshot = try await Firestore.firestore().collection("users").getDocuments()
@@ -34,6 +43,7 @@ class UserService {
         return users.filter({ $0.id != currentUid })
     }
     
+    @MainActor
     static func fetchUser(withUid uid: String) async throws -> User? {
         let snapshot = try await Firestore.firestore().collection("users").document(uid).getDocument()
         return try snapshot.data(as: User.self)

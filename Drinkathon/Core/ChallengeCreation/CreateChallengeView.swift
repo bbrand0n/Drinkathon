@@ -9,19 +9,25 @@ import SwiftUI
 
 struct CreateChallengeView: View {
     @StateObject var viewModel = CreateChallengeViewModel()
-    @Binding var done: Bool
+    @Binding var selectedTab: Int
+    
     @State private var showSearchUsers = false
     @State private var title = ""
     @State private var selectedHoursAmount = 1
     @State private var selectedMinutesAnount = 30
+    @State private var titleFocused = false
     
     var submitDisabled: Bool {
         title.isEmpty ||
-        (viewModel.selectedUsers.count != 1)
+        (viewModel.selectedUsers.count != 1) ||
+        (selectedHoursAmount == 0 && selectedMinutesAnount == 0)
     }
     
     let hoursRange = 0...23
     let minutesRange = 0...59
+    
+    enum Field: Hashable { case title }
+    @FocusState private var focusedField: Field?
     
     var body: some View {
         VStack {
@@ -46,6 +52,7 @@ struct CreateChallengeView: View {
                               prompt: Text("Title for your challenge").foregroundStyle(.gray))
                     .foregroundStyle(.white)
                     .autocorrectionDisabled()
+                    .focused($focusedField, equals: .title)
                 }
                 .font(.footnote)
                 
@@ -76,7 +83,6 @@ struct CreateChallengeView: View {
                         ForEach(viewModel.selectedUsers) { user in
                             CircleProfilePictureView(user: user, size: .xSmall)
                         }
-                        
                     }
                     
                     Spacer()
@@ -84,6 +90,7 @@ struct CreateChallengeView: View {
                     // Add players
                     Button {
                         showSearchUsers.toggle()
+                        focusedField = nil
                     } label: {
                         Image(systemName: "plus.circle")
                             .resizable()
@@ -125,6 +132,8 @@ struct CreateChallengeView: View {
             
             // Challenge button
             Button {
+                focusedField = nil
+                
                 // Calculate date
                 let seconds = (selectedHoursAmount * 60 * 60) + (selectedMinutesAnount * 60)
                 let duration = Date.now.addingTimeInterval(TimeInterval(seconds))
@@ -132,9 +141,11 @@ struct CreateChallengeView: View {
                 Task {
                     // Upload challenge
                     try await viewModel.uploadChallenge(title: title, timeToEnd: duration)
+                    
+                    // Switch back to Home
+                    selectedTab = 0
                 }
                 
-                done = true
             } label: {
                 Text("Challenge!")
                     .font(.subheadline)
@@ -147,7 +158,6 @@ struct CreateChallengeView: View {
             }
             .disabled(submitDisabled)
         }
-        
         .font(.footnote)
         .padding()
         .background(.lighterBlue)
@@ -160,19 +170,18 @@ struct CreateChallengeView: View {
             SearchUsers().environmentObject(viewModel)
         })
         
+        // Reset fields when appeared
         .onAppear {
             title = ""
             viewModel.selectedUsers.removeAll()
             selectedHoursAmount = 1
             selectedMinutesAnount = 30
         }
-        
     }
 }
 
 #Preview {
     let tabView = DrinkTabView()
-    let createView = CreateChallengeView(done: tabView.$doneCreateChallenge)
-
+    let createView = CreateChallengeView(selectedTab: tabView.$selectedTab)
     return createView
 }

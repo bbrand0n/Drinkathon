@@ -10,7 +10,6 @@ import SwiftUI
 struct DrinkTabView: View {
     @StateObject var viewModel = DrinkTabViewModel()
     @State var selectedTab = 0
-    @State var doneCreateChallenge = false
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -18,22 +17,20 @@ struct DrinkTabView: View {
                 HomeView()
                     .tag(0)
                 
-                ExploreView(tab: self.$selectedTab, doneCreateChallenge: self.$doneCreateChallenge)
+                ExploreView(selectedTab: self.$selectedTab)
                     .tag(1)
                 
-                CreateChallengeTabView(done: self.$doneCreateChallenge)
+                CreateChallengeTabView(selectedTab: self.$selectedTab)
                     .tag(2)
                 
-                NotificationsView()
+                NotificationsView(selectedTab: self.$selectedTab)
                     .tag(3)
                 
-                CurrentUserProfileView(currentUser: viewModel.currentUser)
+                CurrentUserProfileView()
                     .tag(4)
             }
             .ignoresSafeArea(edges: .bottom)
             .background(.lighterBlue)
-//            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-//            .animation(.smooth(duration: 0.2), value: selectedTab)
             
             ZStack {
                 HStack {
@@ -46,12 +43,6 @@ struct DrinkTabView: View {
                     }
                 }
                 .padding(6)
-            }
-            .onChange(of: doneCreateChallenge) {
-                if doneCreateChallenge == true {
-                    selectedTab = 0
-                    doneCreateChallenge = false
-                }
             }
             .frame(height: 70)
             .background(.lighterBlue.opacity(0.5))

@@ -22,27 +22,10 @@ struct ChallengeCellView: View {
         return formatter
     }()
     
-    //    var displayString: String {
-    //        if challenge.status != .finished {
-    //            return duration
-    //        } else {
-    //            if challenge.winner == "tie" {
-    //                return "TIE!"
-    //            }
-    //            else if challenge.winner != "none" {
-    //                Task {
-    //                    if let winner = challenge.winner {
-    //                        let username = try await UserService.fetchUser(withUid: winner)
-    //                        return username?.username
-    //                }
-    //            }
-    //        }
-    //    }
-    
     var body: some View {
         VStack {
             HStack(alignment: .top, spacing: 8) {
-                CircleProfilePictureView(user: nil, size: .small)
+                CircleProfilePictureView(user: challenge.player1.user, size: .small)
                 
                 VStack(alignment: .leading, spacing: 2) {
                     Text(challenge.title)
@@ -62,8 +45,8 @@ struct ChallengeCellView: View {
                                             y: .value("Name", item.username),
                                             width: .fixed(12)
                                     )
-                                    .foregroundStyle(.red)
-                                    .clipShape(RoundedRectangle(cornerRadius: 16))
+                                    .foregroundStyle(LinearGradient(gradient: Gradient(colors: [Color.neonGreen, Color.midnightBlue]), startPoint: .leading, endPoint: .trailing))
+                                    .clipShape(RoundedRectangle(cornerRadius: 20))
                                     .cornerRadius(8)
                                     .annotation(position: .top, alignment: .leading) {
                                         Text(item.username)
@@ -77,13 +60,13 @@ struct ChallengeCellView: View {
                                             .font(.caption)
                                     }
                                     
-                                    // Regular score > 0
+                                // Regular score > 0
                                 } else {
                                     BarMark(x: .value("Amount", item.score),
                                             y: .value("Name", item.username),
                                             width: .fixed(12)
                                     )
-                                    .foregroundStyle(.blue)
+                                    .foregroundStyle(LinearGradient(gradient: Gradient(colors: [Color.neonGreen, Color.midnightBlue]), startPoint: .leading, endPoint: .trailing))
                                     .clipShape(RoundedRectangle(cornerRadius: 16))
                                     .cornerRadius(8)
                                     .annotation(position: .top, alignment: .leading) {
@@ -99,7 +82,6 @@ struct ChallengeCellView: View {
                                     }
                                 }
                             }
-                            .padding(.bottom)
                             .chartXAxis(.hidden)
                             .chartYAxis(.hidden)
                             .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
@@ -112,26 +94,32 @@ struct ChallengeCellView: View {
                             
                             Divider()
                                 .overlay(.gray)
-                                .padding(.bottom, 5)
+                                .padding(.bottom, 7)
                             
                             // Time left
                             HStack(alignment: .bottom, spacing: 5) {
                                 
+                                // If game is not finished, display time left
                                 if challenge.status != .finished {
                                     Text("Time left: ")
                                         .font(.footnote)
                                         .fontWeight(.semibold)
                                         .foregroundColor(.white)
+                                    
+                                    Text(duration)
+                                        .font(.footnote)
+                                        .fontWeight(.medium)
+                                        .foregroundColor(Color.red)
+                                } else {
+                                    Text(duration)
+                                        .font(.subheadline)
+                                        .fontWeight(.medium)
+                                        .foregroundColor(Color.mint)
                                 }
-                                
-                                
-                                Text(duration)
-                                    .font(.footnote)
-                                    .fontWeight(.medium)
-                                    .foregroundColor(Color.red)
                                 
                                 Spacer()
                                 
+                                // Record
                                 Text("4-1")
                                     .font(.caption2)
                                     .fontWeight(.medium)
@@ -146,11 +134,12 @@ struct ChallengeCellView: View {
                                     Task {
                                         try await ChallengeService.cleanChallenges()
                                         
+                                        // Display winner
                                         if challenge.status != .finished {
                                             delta = 0
                                         } else {
                                             if challenge.winner == "tie" {
-                                                duration = "TIE!"
+                                                duration = "Tie"
                                             }
                                             else if challenge.winner != "none" {
                                                 if let winner = challenge.winner {
@@ -160,7 +149,6 @@ struct ChallengeCellView: View {
                                             }
                                         }
                                     }
-                                    
                                 }
                                 duration = ChallengeCellView.durationFormatter.string(from: delta) ?? "---"
                             }
@@ -172,16 +160,12 @@ struct ChallengeCellView: View {
                 }
             }
             .padding(.horizontal)
-            Divider()
-                .overlay(.gray)
-                .padding()
         }
-        
     }
 }
 
 #Preview {
-    let challengeCell = ChallengeCellView(challenge: DeveloperPreview.shared.challenge)
+    let challengeCell = ChallengeCellView(challenge: DeveloperPreview.shared.challenge1)
     
     return challengeCell
 }

@@ -37,8 +37,20 @@ struct ChallengeService {
             .collection("users")
             .document(uid)
             .getDocument()
-
+        
         guard let challengeIds = snapshot.get("challenges") as? [String] else { return [] }
+        return challengeIds
+    }
+    
+    @MainActor
+    static func fetchUserHistoryIDs(uid: String) async throws -> [String] {
+        let snapshot = try await Firestore
+            .firestore()
+            .collection("users")
+            .document(uid)
+            .getDocument()
+        
+        guard let challengeIds = snapshot.get("history") as? [String] else { return [] }
         return challengeIds
     }
     
@@ -55,14 +67,16 @@ struct ChallengeService {
                     print(err.localizedDescription)
                     return
                 }
-
+                
                 guard let docs = querySnapshot?.documents else { return }
-
+                
                 for doc in docs {
                     let ref = doc.reference
                     var winner: String = "none"
                     
                     Task {
+                        
+                        // Determine winner
                         let challenge = try doc.data(as: Challenge.self)
                         if challenge.player1.score > challenge.player2.score {
                             winner = challenge.player1.id
@@ -73,19 +87,20 @@ struct ChallengeService {
                         else {
                             winner = "tie"
                         }
-                        print("winner: \(winner)")
                         
                         // Update winner and status
                         ref.updateData(["winner": winner])
                         ref.updateData(["status": "finished"])
                         
-                        // Update players profiles
+                        // Update player1 profile
                         Firestore.firestore().collection("users")
                             .document(challenge.player1.id)
                             .updateData([
                                 "challenges": FieldValue.arrayRemove([challenge.id]),
                                 "history": FieldValue.arrayUnion([challenge.id])
                             ])
+                        
+                        // Update player2 profile
                         Firestore.firestore().collection("users")
                             .document(challenge.player2.id)
                             .updateData([
@@ -93,12 +108,8 @@ struct ChallengeService {
                                 "history": FieldValue.arrayUnion([challenge.id])
                             ])
                     }
-                    
-                    
                 }
             })
-        
-//        print("active: \(snapshot.count)")
     }
     
     @MainActor
@@ -109,14 +120,31 @@ struct ChallengeService {
             .collection("challenges")
             .whereField(FieldPath.documentID(), in: ids)
             .getDocuments()
-
+        
+        return snapshot.documents.compactMap({ try? $0.data(as: Challenge.self) })
+    }
+    
+    @MainActor
+    static func fetchUserHistory(uid: String) async throws -> [Challenge] {
+        guard let ids = try? await fetchUserHistoryIDs(uid: uid) else { return [] }
+        let snapshot = try await Firestore
+            .firestore()
+            .collection("challenges")
+            .whereField(FieldPath.documentID(), in: ids)
+            .getDocuments()
+        
         return snapshot.documents.compactMap({ try? $0.data(as: Challenge.self) })
     }
     
     @MainActor
     static func logNewDrink(uid: String, challengeIds: [String]) async throws {
         guard Auth.auth().currentUser != nil else { return }
-        let date = Timestamp()
+        guard !challengeIds.isEmpty else {
+            print("DEBUG: No active challenges")
+            return
+        }
+        
+        // TODO: gotta be a better way to do this...
         
         // If we are player 1
         let snapshot1 = try await Firestore
@@ -128,7 +156,7 @@ struct ChallengeService {
                 Filter.whereField("player1.id", isEqualTo: uid)
             ]))
             .getDocuments().documents
-            
+        
         snapshot1.forEach { document in
             Task {
                 try await Firestore.firestore().collection("challenges").document(document.documentID).updateData([
