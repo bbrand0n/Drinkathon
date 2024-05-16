@@ -8,13 +8,9 @@
 import SwiftUI
 
 struct HomeView: View {
-    @ObservedObject var viewModel = HomeViewModel()
+    @ObservedObject var rootModel: MainTabViewModel
     @State private var showCreateChallenge = false
-    
-    private var currentUser: User? {
-        return viewModel.currentUser
-    }
-    
+
     var body: some View {
         NavigationStack {
             VStack {
@@ -23,22 +19,35 @@ struct HomeView: View {
                 // Challenges
                 ScrollView(showsIndicators: false) {
                     LazyVStack {
-                        ForEach(viewModel.challenges) { challenge in
-                            ChallengeCellView(challenge: challenge)
-                                .padding(.bottom)
+                        if (!rootModel.challenges.isEmpty) {
+                            
+                            // Challenges if not empty
+                            ForEach(rootModel.challenges) { challenge in
+                                ChallengeCellView(challenge: challenge)
+                                    .padding(.bottom)
+                            }
+                        } else {
+                            
+                            // No Challenges to display
+                            Text("No challenges")
+                                .font(.title3)
+                                .foregroundStyle(.gray)
+                                .padding(.top, 70)
+                                .opacity(0.8)
+                            Text("Go to \"+\" tab to compete with friends!")
+                                .font(.title3)
+                                .foregroundStyle(.gray)
+                                .padding(.top)
+                                .opacity(0.8)
                         }
                     }
                 }
                 .padding(.top)
                 .refreshable {
-                    print("DEBUG: Refresh called")
-                    Task{ try await viewModel.fetchChallenges() }
-                }
-                .onChange(of: viewModel.currentUser) {
-                    Task{ try await viewModel.fetchChallenges() }
-                }
-                .onAppear {
-                    Task{ try await viewModel.fetchChallenges() }
+                    print("HomeView: Refresh called")
+                    Task{
+                        try await rootModel.fetchChallenges()
+                    }
                 }
                 .navigationTitle("Recent Challenges")
                 .toolbarColorScheme(.dark, for: .navigationBar)
@@ -50,10 +59,9 @@ struct HomeView: View {
                     .overlay(.gray)
                     .padding()
                 
-                
                 // Add drink
                 Button {
-                    Task { try await viewModel.incrementDrink() }
+                    Task { try await rootModel.incrementDrink() }
                 } label: {
                     Text("Log Drink")
                         .font(.subheadline)
@@ -71,6 +79,7 @@ struct HomeView: View {
 }
 
 #Preview {
-    let homeView = HomeView()
+    let rootModel = MainTabViewModel()
+    let homeView = HomeView(rootModel: rootModel)
     return homeView
 }

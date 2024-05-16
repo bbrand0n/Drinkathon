@@ -19,4 +19,12 @@ struct User: Identifiable, Codable, Hashable {
     var history: [String]?
 }
 
+class UserController: ObservableObject {
+    @Published var user: User
+    
+    init(user: User) {
+        self.user = user
+    }
+}
+
 

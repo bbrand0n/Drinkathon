@@ -25,15 +25,15 @@ struct LoginView: View {
                 VStack {
                     TextField("", text: $viewModel.email,
                               prompt: Text("Enter your email").foregroundColor(.gray))
-                        .foregroundColor(.white)
-                        .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
-                        .modifier(TextFieldModifer())
-                        
-
+                    .foregroundColor(.white)
+                    .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                    .modifier(TextFieldModifer())
+                    
+                    
                     SecureField("", text: $viewModel.password,
                                 prompt: Text("Enter your password").foregroundColor(.gray))
-                        .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
-                        .modifier(TextFieldModifer())
+                    .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                    .modifier(TextFieldModifer())
                 }
                 
                 NavigationLink {
@@ -59,7 +59,7 @@ struct LoginView: View {
                         .foregroundColor(.black)
                         .frame(width: 320, height: 44)
                         .background(Color.primaryBlue)
-                        
+                    
                         .cornerRadius(8)
                 }
                 

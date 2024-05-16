@@ -12,35 +12,46 @@ struct NotificationsView: View {
     
     var body: some View {
         VStack {
-            Text("Hello, Notifications!")
-            
-            Button {
-                selectedTab = 0
-            } label: {
-                Text("Send me to Home tab")
+            VStack {
+                Text("Hello, Notifications!")
+                    .font(.title)
+                    .foregroundStyle(.gray)
+                
+                Button {
+                    selectedTab = 0
+                } label: {
+                    Text("Send me to Home tab")
+                }.buttonStyle(BorderedButtonStyle())
+                
+                Button {
+                    selectedTab = 1
+                } label: {
+                    Text("Send me to Explore tab")
+                }.buttonStyle(BorderedButtonStyle())
+                
+                Button {
+                    selectedTab = 2
+                } label: {
+                    Text("Send me to Create Exercise tab")
+                }.buttonStyle(BorderedButtonStyle())
+                
+                Button {
+                    selectedTab = 4
+                } label: {
+                    Text("Send me to Profile tab")
+                }.buttonStyle(BorderedButtonStyle())
             }
-            Button {
-                selectedTab = 1
-            } label: {
-                Text("Send me to Explore tab")
-            }
-            Button {
-                selectedTab = 2
-            } label: {
-                Text("Send me to Create Exercise tab")
-            }
-            Button {
-                selectedTab = 4
-            } label: {
-                Text("Send me to Profile tab")
-            }
+            .padding()
+            .background(.lighterBlue)
+            .clipShape(RoundedRectangle(cornerRadius: 25.0))
         }
-        
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(.darkerBlue)
     }
 }
 
 #Preview {
-    let tabView = DrinkTabView()
+    let tabView = MainTabView()
     let notificationsView = NotificationsView(selectedTab: tabView.$selectedTab)
     return notificationsView
 }

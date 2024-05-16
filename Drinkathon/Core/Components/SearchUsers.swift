@@ -42,8 +42,6 @@ struct SearchUsers: View {
             }
             .background(.darkerBlue)
         }
-        
-        
     }
 }
 

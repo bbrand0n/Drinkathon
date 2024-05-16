@@ -20,32 +20,28 @@ class CreateChallengeViewModel: ObservableObject {
     @MainActor
     func uploadChallenge(title: String, timeToEnd: Date) async throws {
         try await UserService.shared.fetchCurrentUser()
-        guard let uid = Auth.auth().currentUser?.uid else {
-            print("ERROR: Could not get currentUser.uid from auth()")
-            return
-        }
+
         guard let currentUser = UserService.shared.currentUser else {
             print("ERROR: no current user selected")
             return
         }
         
-        // Add owner to players
-        selectedUsers.append(currentUser)
-        
-        // Convert the users to players
-        var players = [Player]()
-        selectedUsers.forEach{ user in
-            players.append(Player(id: user.id, username: user.username))
+        guard let opponent = selectedUsers.first else {
+            print("Could not retriece opponent")
+            return
         }
         
+        // Set up players
+        var player1 = Player(id: currentUser.id, username: currentUser.username)
+        var player2 = Player(id: opponent.id, username: opponent.username)
+        
         // Upload challenge to DB
-        let challenge = Challenge(ownerId: uid, title: title, timeSent: Timestamp(), timeToEnd: timeToEnd, player1: players[0], player2: players[1])
+        let challenge = Challenge(ownerId: currentUser.id, title: title, timeSent: Timestamp(), timeToEnd: timeToEnd, player1: player1, player2: player2)
         let challengeId = try await ChallengeService.uploadChallenge(challenge)
         
         // Add challenge to DB
-        selectedUsers.forEach{ user in
-            Task{ try await UserService.addUserChallenge(uid: user.id, cid: challengeId) }
-        }
+        try await UserService.addUserChallenge(uid: player1.id, cid: challengeId)
+        try await UserService.addUserChallenge(uid: player2.id, cid: challengeId)
     }
     
     @MainActor

@@ -20,8 +20,8 @@ struct CreateChallengeTabView: View {
 }
 
 #Preview {
-    let tabView = DrinkTabView()
+    let tabView = MainTabView()
     let createView = CreateChallengeTabView(selectedTab: tabView.$selectedTab)
-
+    
     return createView
 }

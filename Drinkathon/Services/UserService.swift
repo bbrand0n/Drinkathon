@@ -8,7 +8,7 @@
 import Firebase
 import FirebaseFirestoreSwift
 
-class UserService {
+class UserService: ObservableObject {
     @Published var currentUser: User?
     
     static let shared = UserService()
@@ -16,10 +16,15 @@ class UserService {
     init() {
         Task { try await fetchCurrentUser() }
     }
+
     
     @MainActor
     func fetchCurrentUser() async throws {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
+        guard let uid = Auth.auth().currentUser?.uid else { 
+            print("UserService: No current user in fetchCurrentUser")
+            return
+        }
+        print("UserService: Fetching user")
         let snapshot = try await Firestore.firestore().collection("users").document(uid).getDocument()
         let user = try snapshot.data(as: User.self)
         self.currentUser = user
@@ -79,6 +84,4 @@ class UserService {
             "challenges": FieldValue.arrayRemove([cid])
         ])
     }
-    
-
 }

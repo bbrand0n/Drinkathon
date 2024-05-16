@@ -24,29 +24,29 @@ struct RegistrationView: View {
             VStack {
                 TextField("", text: $viewModel.email,
                           prompt: Text("Email").foregroundColor(.gray))
-                    .foregroundStyle(.white)
-                    .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
-                    .autocorrectionDisabled()
-                    .modifier(TextFieldModifer())
+                .foregroundStyle(.white)
+                .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                .autocorrectionDisabled()
+                .modifier(TextFieldModifer())
                 
                 TextField("", text: $viewModel.username,
                           prompt: Text("UserName").foregroundColor(.gray))
-                    .foregroundStyle(.white)
-                    .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
-                    .autocorrectionDisabled()
-                    .modifier(TextFieldModifer())
+                .foregroundStyle(.white)
+                .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                .autocorrectionDisabled()
+                .modifier(TextFieldModifer())
                 
                 TextField("", text: $viewModel.fullname,
                           prompt: Text("Full name").foregroundColor(.gray))
-                    .foregroundStyle(.white)
-                    .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
-                    .autocorrectionDisabled()
-                    .modifier(TextFieldModifer())
+                .foregroundStyle(.white)
+                .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                .autocorrectionDisabled()
+                .modifier(TextFieldModifer())
                 
                 SecureField("", text: $viewModel.password,
                             prompt: Text("Password").foregroundColor(.gray))
-                    .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
-                    .modifier(TextFieldModifer())
+                .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                .modifier(TextFieldModifer())
             }
             .padding(.bottom, 30)
             
@@ -59,7 +59,7 @@ struct RegistrationView: View {
                     .foregroundColor(.black)
                     .frame(width: 320, height: 44)
                     .background(Color.primaryBlue)
-                    
+                
                     .cornerRadius(8)
             }
             

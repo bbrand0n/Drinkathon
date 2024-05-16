@@ -60,7 +60,7 @@ struct ChallengeCellView: View {
                                             .font(.caption)
                                     }
                                     
-                                // Regular score > 0
+                                    // Regular score > 0
                                 } else {
                                     BarMark(x: .value("Amount", item.score),
                                             y: .value("Name", item.username),
@@ -127,30 +127,33 @@ struct ChallengeCellView: View {
                             }
                             .onReceive(timer) { _ in
                                 var delta = challenge.timeToEnd.timeIntervalSinceNow
+                                
+                                // Timer done
                                 if delta <= 0 {
+                                    
+                                    // Cancel timer
                                     delta = 0
                                     timer.upstream.connect().cancel()
                                     
-                                    Task {
-                                        try await ChallengeService.cleanChallenges()
+                                    // Display winner
+                                    if challenge.status == .finished {
+                                        if challenge.winner == "tie" {
+                                            duration = "Tie"
+                                        }
+                                        else if challenge.winner != "none" {
+                                            let username = ChallengeService.getWinnerUsername(challenge: self.challenge)
+                                            duration = "Winner: \(username)"
+                                        }
+                                    } else {
                                         
-                                        // Display winner
-                                        if challenge.status != .finished {
-                                            delta = 0
-                                        } else {
-                                            if challenge.winner == "tie" {
-                                                duration = "Tie"
-                                            }
-                                            else if challenge.winner != "none" {
-                                                if let winner = challenge.winner {
-                                                    let username = try await UserService.fetchUser(withUid: winner)
-                                                    duration = "Winner: \(username?.username ?? "")"
-                                                }
-                                            }
+                                        // Challenge hasnt been updated on database yet
+                                        Task {
+                                            try await ChallengeService.finishChallenge(challenge: challenge)
                                         }
                                     }
+                                } else {
+                                    duration = ChallengeCellView.durationFormatter.string(from: delta) ?? "---"
                                 }
-                                duration = ChallengeCellView.durationFormatter.string(from: delta) ?? "---"
                             }
                         }
                     }

@@ -12,8 +12,6 @@ struct AddPlayerCell: View {
     @State var userSelected = false
     let user: User
     
-    
-    
     var body: some View {
         HStack {
             CircleProfilePictureView(user: user, size: .small)

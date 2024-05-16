@@ -23,8 +23,7 @@ struct TimerPickerView: View {
             Picker(title, selection: binding) {
                 ForEach(range, id: \.self) { timeIncrement in
                     HStack {
-                        // Forces the text in the Picker to be
-                        // right-aligned
+                        // Forces the text in the Picker to be right-side
                         Text("\(timeIncrement)")
                             .foregroundStyle(.white)
                             .multilineTextAlignment(.trailing)

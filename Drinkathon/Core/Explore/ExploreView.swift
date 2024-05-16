@@ -41,7 +41,7 @@ struct ExploreView: View {
 }
 
 #Preview {
-    let tabView = DrinkTabView()
+    let tabView = MainTabView()
     let exploreView = ExploreView(selectedTab: tabView.$selectedTab)
     return exploreView
 }

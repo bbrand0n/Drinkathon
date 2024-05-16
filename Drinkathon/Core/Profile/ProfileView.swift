@@ -84,7 +84,7 @@ struct ProfileView: View {
 }
 
 #Preview {
-    let tabView = DrinkTabView()
+    let tabView = MainTabView()
     
     let profileView = ProfileView(
         user: DeveloperPreview.shared.user1,

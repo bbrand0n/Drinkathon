@@ -7,27 +7,35 @@
 
 import SwiftUI
 
-struct DrinkTabView: View {
-    @StateObject var viewModel = DrinkTabViewModel()
+struct MainTabView: View {
+    @ObservedObject var viewModel = MainTabViewModel()
     @State var selectedTab = 0
     
     var body: some View {
         ZStack(alignment: .bottom) {
             TabView(selection: $selectedTab) {
-                HomeView()
-                    .tag(0)
                 
-                ExploreView(selectedTab: self.$selectedTab)
-                    .tag(1)
+                // Make sure user is populated
+                if let user = viewModel.currentUser {
+                    HomeView(rootModel: viewModel)
+                        .tag(0)
+                    
+                    ExploreView(selectedTab: self.$selectedTab)
+                        .tag(1)
+                    
+                    CreateChallengeTabView(selectedTab: self.$selectedTab)
+                        .tag(2)
+                    
+                    NotificationsView(selectedTab: self.$selectedTab)
+                        .tag(3)
+                    
+                    CurrentUserProfileView(user: user)
+                        .tag(4)
+                }
+            }
+            .onChange(of: viewModel.currentUser) {
+                print("User changed in TabView")
                 
-                CreateChallengeTabView(selectedTab: self.$selectedTab)
-                    .tag(2)
-                
-                NotificationsView(selectedTab: self.$selectedTab)
-                    .tag(3)
-                
-                CurrentUserProfileView()
-                    .tag(4)
             }
             .ignoresSafeArea(edges: .bottom)
             .background(.lighterBlue)
@@ -53,5 +61,5 @@ struct DrinkTabView: View {
 }
 
 #Preview {
-    DrinkTabView()
+    MainTabView()
 }

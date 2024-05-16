@@ -8,19 +8,16 @@
 import SwiftUI
 
 struct CurrentUserProfileView: View {
-    @StateObject var viewModel = CurrentUserProfileViewModel()
+    var user: User
     @State private var showEditProfile = false
     
     var body: some View {
         VStack(spacing: 20) {
             
-            // Profile header
-            if let user = viewModel.currentUser {
-                ProfileHeaderView(user: user)
-            }
+            ProfileHeaderView(user: user)
             
             VStack {
-
+                
                 // Show edit profile
                 Button {
                     showEditProfile.toggle()
@@ -66,15 +63,8 @@ struct CurrentUserProfileView: View {
             
             // User history
             ScrollView(showsIndicators: false) {
-                if let user = viewModel.currentUser {
-                    UserHistoryView(user: user)
-                        .clipShape(RoundedRectangle(cornerRadius: 16))
-                } else {
-                    Text("No previous challenges to show")
-                        .font(.subheadline)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.gray)
-                }
+                UserHistoryView(user: user)
+                    .clipShape(RoundedRectangle(cornerRadius: 16))
             }
             .padding(.bottom,45)
             
@@ -82,9 +72,7 @@ struct CurrentUserProfileView: View {
         
         // Edit profile sheet
         .sheet(isPresented: $showEditProfile, content: {
-            if let user = viewModel.currentUser {
-                EditProfileView(user: user)
-            }
+            EditProfileView(user: user)
         })
         .padding(.horizontal)
         .padding(.top)
@@ -94,6 +82,6 @@ struct CurrentUserProfileView: View {
 }
 
 #Preview {
-    let profileView = CurrentUserProfileView()
+    let profileView = CurrentUserProfileView(user: DeveloperPreview.shared.user1)
     return profileView
 }

@@ -21,9 +21,6 @@ struct UserHistoryView: View {
                     .padding([.bottom])
             }
         }
-        .onAppear {
-            //            Task { try await viewModel.fetchHistory() }
-        }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.darkerBlue)
     }
@@ -32,6 +29,5 @@ struct UserHistoryView: View {
 #Preview {
     UserHistoryView(
         user: DeveloperPreview.shared.user1
-        //        challenges: [DeveloperPreview.shared.challenge1, DeveloperPreview.shared.challenge2]
     )
 }

@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-extension DrinkTabView {
+extension MainTabView {
     func CustomTabItem(imageName: String, title: String, isActive: Bool) -> some View {
         HStack(spacing: 10) {
             Spacer()
