@@ -12,9 +12,10 @@ struct MainTabView: View {
     @State var selectedTab = 0
     
     var body: some View {
-        ZStack(alignment: .bottom) {
-            TabView(selection: $selectedTab) {
-                
+        GeometryReader{ _ in
+            ZStack(alignment: .bottom) {
+                TabView(selection: $selectedTab) {
+                    
                     HomeView(rootModel: viewModel)
                         .tag(0)
                     
@@ -29,31 +30,33 @@ struct MainTabView: View {
                     
                     CurrentUserProfileView(rootModel: viewModel)
                         .tag(4)
-            }
-            .onChange(of: viewModel.currentUser) {
-                print("User changed in TabView")
+                }
+                .onChange(of: viewModel.currentUser) {
+                    print("User changed in TabView")
+                    
+                }
+                .ignoresSafeArea(edges: .bottom)
+                .background(.lighterBlue)
                 
-            }
-            .ignoresSafeArea(edges: .bottom)
-            .background(.lighterBlue)
-            
-            ZStack {
-                HStack {
-                    ForEach(TabbedItems.allCases, id: \.self) { item in
-                        Button {
-                            selectedTab = item.rawValue
-                        } label: {
-                            CustomTabItem(imageName: item.iconName, title: item.title, isActive: (selectedTab == item.rawValue))
+                ZStack {
+                    HStack {
+                        ForEach(TabbedItems.allCases, id: \.self) { item in
+                            Button {
+                                selectedTab = item.rawValue
+                            } label: {
+                                CustomTabItem(imageName: item.iconName, title: item.title, isActive: (selectedTab == item.rawValue))
+                            }
                         }
                     }
+                    .padding(6)
                 }
-                .padding(6)
+                .frame(height: 70)
+                .background(.lighterBlue.opacity(0.5))
+                .clipShape(RoundedRectangle(cornerRadius: 35))
+                .padding(.horizontal, 20)
             }
-            .frame(height: 70)
-            .background(.lighterBlue.opacity(0.5))
-            .clipShape(RoundedRectangle(cornerRadius: 35))
-            .padding(.horizontal, 20)
         }
+        .ignoresSafeArea(.keyboard)
     }
 }
 

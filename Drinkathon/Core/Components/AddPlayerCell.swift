@@ -33,14 +33,11 @@ struct AddPlayerCell: View {
                 // Add or Remove users from selected list
                 if (!parentViewModel.selectedUsers.contains(user))
                 {
+                    parentViewModel.selectedUsers.removeAll()
                     parentViewModel.selectedUsers.append(user)
-                    print("DEBUG: Added to selected users: \(user.username)")
                     
                 } else {
-                    
                     parentViewModel.selectedUsers.removeAll(){$0.username == user.username}
-                    print("DEBUG: Removed from selected users: \(user.username)")
-                    
                 }
                 userSelected.toggle()
             } label: {

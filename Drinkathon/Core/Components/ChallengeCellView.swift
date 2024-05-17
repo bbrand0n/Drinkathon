@@ -10,6 +10,7 @@ import Charts
 
 struct ChallengeCellView: View {
     let challenge: Challenge
+    let currentUsername: String
     @State private var duration = "---"
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
@@ -25,16 +26,43 @@ struct ChallengeCellView: View {
     var body: some View {
         VStack {
             HStack(alignment: .top, spacing: 8) {
-                CircleProfilePictureView(user: challenge.player1.user, size: .small)
-                
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(challenge.title)
-                        .font(.title3)
-                        .fontWeight(.medium)
-                        .foregroundStyle(Color.white)
-                    
                     GroupBox {
-                        VStack(alignment: .leading, spacing: 2) {
+                        VStack(alignment: .leading) {
+                            HStack{
+                                Text(challenge.title)
+                                    .font(.subheadline)
+                                    .fontWeight(.medium)
+                                    .foregroundStyle(Color.white)
+                                
+                                Spacer()
+                                
+                                // Display winner if game is done
+                                if challenge.status == .finished {
+                                    let winner = ChallengeService.getWinnerUsername(challenge: challenge)
+                                    
+                                    if winner == currentUsername {
+                                        Text("Win")
+                                            .font(.subheadline)
+                                            .fontWeight(.bold)
+                                            .foregroundStyle(.neonGreen)
+                                    } else if winner == "Tie" {
+                                        Text("Tie")
+                                            .font(.subheadline)
+                                            .fontWeight(.bold)
+                                            .foregroundStyle(.yellow)
+                                    } else {
+                                        Text("Loss")
+                                            .font(.subheadline)
+                                            .fontWeight(.bold)
+                                            .foregroundStyle(.red)
+                                    }
+                                }
+                            }
+                            
+                            Divider()
+                                .overlay(.gray)
+                                .padding(.bottom, 4)
                             
                             // Chart
                             Chart([challenge.player1, challenge.player2]) { item in
@@ -60,8 +88,9 @@ struct ChallengeCellView: View {
                                             .font(.caption)
                                     }
                                     
-                                    // Regular score > 0
+                                    
                                 } else {
+                                    // Regular score > 0
                                     BarMark(x: .value("Amount", item.score),
                                             y: .value("Name", item.username),
                                             width: .fixed(12)
@@ -101,29 +130,24 @@ struct ChallengeCellView: View {
                                 
                                 // If game is not finished, display time left
                                 if challenge.status != .finished {
-                                    Text("Time left: ")
-                                        .font(.footnote)
-                                        .fontWeight(.semibold)
-                                        .foregroundColor(.white)
-                                    
                                     Text(duration)
                                         .font(.footnote)
                                         .fontWeight(.medium)
                                         .foregroundColor(Color.red)
                                 } else {
-                                    Text(duration)
+                                    Text("Complete")
                                         .font(.subheadline)
                                         .fontWeight(.medium)
-                                        .foregroundColor(Color.mint)
+                                        .foregroundColor(Color.lavender)
                                 }
                                 
                                 Spacer()
                                 
-                                // Record
-                                Text("4-1")
-                                    .font(.caption2)
-                                    .fontWeight(.medium)
-                                    .foregroundStyle(Color.gray)
+                                Button {
+                                    
+                                } label: {
+                                    Image(systemName: "info.circle")
+                                }
                             }
                             .onReceive(timer) { _ in
                                 var delta = challenge.timeToEnd.timeIntervalSinceNow
@@ -135,22 +159,11 @@ struct ChallengeCellView: View {
                                     delta = 0
                                     timer.upstream.connect().cancel()
                                     
-                                    // Display winner
-                                    if challenge.status == .finished {
-                                        if challenge.winner == "tie" {
-                                            duration = "Tie"
-                                        }
-                                        else if challenge.winner != "none" {
-                                            let username = ChallengeService.getWinnerUsername(challenge: self.challenge)
-                                            duration = "Winner: \(username)"
-                                        }
-                                    } else {
-                                        
-                                        // Challenge hasnt been updated on database yet
-                                        Task {
-                                            try await ChallengeService.finishChallenge(challenge: challenge)
-                                        }
+                                    // If not updated yet, update
+                                    if (challenge.status != .finished) {
+                                        Task { try await ChallengeService.finishChallenge(challenge:challenge)}
                                     }
+                                    
                                 } else {
                                     duration = ChallengeCellView.durationFormatter.string(from: delta) ?? "---"
                                 }
@@ -158,7 +171,6 @@ struct ChallengeCellView: View {
                         }
                     }
                     .backgroundStyle(Color.lighterBlue)
-                    .padding(.top, 5)
                     .cornerRadius(15)
                 }
             }
@@ -168,7 +180,7 @@ struct ChallengeCellView: View {
 }
 
 #Preview {
-    let challengeCell = ChallengeCellView(challenge: DeveloperPreview.shared.challenge1)
+    let challengeCell = ChallengeCellView(challenge: DeveloperPreview.shared.challenge1, currentUsername: "bgibbons")
     
     return challengeCell
 }

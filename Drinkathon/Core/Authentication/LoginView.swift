@@ -23,44 +23,57 @@ struct LoginView: View {
                     .padding()
                 
                 VStack {
-                    TextField("", text: $viewModel.email,
-                              prompt: Text("Enter your email").foregroundColor(.gray))
-                    .foregroundColor(.white)
-                    .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
-                    .modifier(TextFieldModifer())
-                    
-                    
-                    SecureField("", text: $viewModel.password,
-                                prompt: Text("Enter your password").foregroundColor(.gray))
-                    .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
-                    .modifier(TextFieldModifer())
-                }
-                
-                NavigationLink {
-                    Text("Forgot password")
-                } label: {
-                    Text("Forgot Password?")
-                        .font(.footnote)
-                        .fontWeight(.semibold)
-                        .padding(.top, 2)
-                        .padding(.bottom)
-                        .padding(.trailing)
-                        .padding(.horizontal, 15)
-                        .foregroundColor(.white)
-                        .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .trailing)
-                }
-                
-                Button {
-                    Task { try await viewModel.login() }
-                } label: {
-                    Text("Login")
+                    VStack {
+                        TextField("", text: $viewModel.email,
+                                  prompt: Text("Enter your email").foregroundColor(.gray))
                         .font(.subheadline)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.black)
-                        .frame(width: 320, height: 44)
-                        .background(Color.primaryBlue)
+                        .padding(12)
+                        .background(Color(.lighterBlue))
+                        .cornerRadius(10)
+                        .padding(.horizontal, 24)
+                        .foregroundStyle(.white)
+                        .textInputAutocapitalization(.never)
+                        .autocorrectionDisabled()
+                        
+                        
+                        SecureField("", text: $viewModel.password,
+                                    prompt: Text("Enter your password").foregroundColor(.gray))
+                        .font(.subheadline)
+                        .padding(12)
+                        .background(Color(.lighterBlue))
+                        .cornerRadius(10)
+                        .padding(.horizontal, 24)
+                        .foregroundStyle(.white)
+                    }
                     
-                        .cornerRadius(8)
+                    NavigationLink {
+                        VStack{
+                            Text("Forgot password")
+                        }
+                    } label: {
+                        Spacer()
+                        
+                        Text("Forgot Password?")
+                            .font(.footnote)
+                            .fontWeight(.semibold)
+                            .padding(.top, 2)
+                            .padding(.bottom)
+                            .padding(.trailing)
+                            .padding(.horizontal, 15)
+                            .foregroundColor(.white)
+                    }
+                    
+                    Button {
+                        Task { try await viewModel.login() }
+                    } label: {
+                        Text("Login")
+                            .font(.subheadline)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.black)
+                            .frame(width: 320, height: 44)
+                            .background(Color.primaryBlue)
+                            .cornerRadius(8)
+                    }
                 }
                 
                 Spacer()
@@ -83,7 +96,7 @@ struct LoginView: View {
                 }
                 .padding(.vertical, 16)
             }
-            .background(Color.black)
+            .background(Color.darkerBlue)
         }
     }
 }

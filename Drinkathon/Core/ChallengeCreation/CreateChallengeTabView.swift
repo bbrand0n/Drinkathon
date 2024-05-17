@@ -11,11 +11,20 @@ struct CreateChallengeTabView: View {
     @Binding var selectedTab: Int
     
     var body: some View {
-        VStack {
-            CreateChallengeView(selectedTab: self.$selectedTab)
+        NavigationStack {
+            VStack {
+                CreateChallengeView(selectedTab: self.$selectedTab)
+            }
+            .navigationTitle("Create Challenge")
+            .toolbarColorScheme(.dark, for: .navigationBar)
+            .toolbarBackground(Color.lighterBlue, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
+            .navigationBarTitleDisplayMode(.inline)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(.darkerBlue)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(.darkerBlue)
+        
+        
     }
 }
 

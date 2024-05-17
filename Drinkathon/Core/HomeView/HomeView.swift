@@ -23,7 +23,7 @@ struct HomeView: View {
                             
                             // Challenges if not empty
                             ForEach(rootModel.challenges) { challenge in
-                                ChallengeCellView(challenge: challenge)
+                                ChallengeCellView(challenge: challenge, currentUsername: rootModel.currentUser?.username ?? "")
                                     .padding(.bottom)
                             }
                         } else {

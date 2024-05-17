@@ -43,9 +43,8 @@ struct CircleProfilePictureView: View {
             Image(systemName: "person.circle.fill")
                 .resizable()
                 .frame(width: size.dimension, height: size.dimension)
-                .foregroundColor(Color(.systemGray4))
+                .foregroundColor(Color(.gray))
         }
-        
     }
 }
 

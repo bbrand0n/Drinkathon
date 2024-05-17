@@ -16,6 +16,7 @@ struct CurrentUserProfileView: View {
             
             if let user = rootModel.currentUser{
                 ProfileHeaderView(user: user)
+                    .padding(.bottom)
             }
             
             VStack {
@@ -29,11 +30,12 @@ struct CurrentUserProfileView: View {
                         .fontWeight(.semibold)
                         .foregroundColor(.black)
                         .frame(width: 320, height: 44)
-                        .background(Color(.systemGray4))
+                        .background(Color(.white))
+                        .opacity(0.8)
                         .cornerRadius(8)
                         .overlay {
                             RoundedRectangle(cornerRadius: 8)
-                                .stroke(Color(.systemGray4), lineWidth: 1)
+                                .stroke(Color(.darkerBlue), lineWidth: 1)
                         }
                 }
                 

@@ -232,7 +232,7 @@ struct ChallengeService {
         } else if challenge.player1.score < challenge.player2.score {
             winner = challenge.player2.username
         } else {
-            winner = "---"
+            winner = "Tie"
         }
         
         return winner
