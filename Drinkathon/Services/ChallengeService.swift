@@ -184,9 +184,13 @@ struct ChallengeService {
         
         snapshot1.forEach { document in
             Task {
+                let challenge = try document.data(as: Challenge.self)
+                let newDrink = [Drink(time: Date.now, drink: challenge.player1.score + 1)]
+                let drink = try newDrink.map { try Firestore.Encoder().encode($0) }
                 try await Firestore.firestore().collection("challenges").document(document.documentID).updateData([
-                    "player1.score": FieldValue.increment(Int64(1))])
-            }
+                    "player1.score": FieldValue.increment(Int64(1)),
+                    "player1.drinks": FieldValue.arrayUnion(drink)
+                ])}
         }
         
         // If we are player 2
@@ -202,10 +206,44 @@ struct ChallengeService {
         
         snapshot2.forEach { document in
             Task {
+                let challenge = try document.data(as: Challenge.self)
+                let newDrink = [Drink(time: Date.now, drink: challenge.player2.score + 1)]
+                let drink = try newDrink.map { try Firestore.Encoder().encode($0) }
                 try await Firestore.firestore().collection("challenges").document(document.documentID).updateData([
-                    "player2.score": FieldValue.increment(Int64(1))])
+                    "player2.score": FieldValue.increment(Int64(1)),
+                    "player2.drinks": FieldValue.arrayUnion(drink)
+                ])
             }
         }
+    }
+    
+    @MainActor
+    static func deleteChallenge(challenge: Challenge) async throws {
+        
+        // Delete from collection
+        try await Firestore.firestore()
+            .collection("challenges")
+            .document(challenge.id)
+            .delete()
+        
+        // Remove for player1
+        try await removeChallengeFromUser(uid: challenge.player1.id, challengeId: challenge.id)
+        
+        // Remove for player2
+        try await removeChallengeFromUser(uid: challenge.player2.id, challengeId: challenge.id)
+    }
+    
+    @MainActor
+    static func removeChallengeFromUser(uid: String, challengeId: String) async throws {
+        
+        // Remove from challenges and history
+        try await Firestore.firestore()
+            .collection("users")
+            .document(uid)
+            .updateData([
+                "challenges": FieldValue.arrayRemove([challengeId]),
+                "history": FieldValue.arrayRemove([challengeId])
+            ])
     }
     
     static func calculateWinner(challenge: Challenge) -> String {

@@ -143,11 +143,21 @@ struct ChallengeCellView: View {
                                 
                                 Spacer()
                                 
-                                Button {
-                                    
+                                Menu {
+                                    // Delete button
+                                    Button(role: .destructive) {
+                                        Task {
+                                            try await ChallengeService.deleteChallenge(challenge: challenge)
+                                        }
+                                    } label: {
+                                        Label("Delete Challenge", systemImage: "trash")
+                                    }
                                 } label: {
-                                    Image(systemName: "info.circle")
+                                    Image(systemName: "ellipsis.circle")
+                                        .clipShape(Circle())
                                 }
+                                .disabled(challenge.status != .finished)
+                                
                             }
                             .onReceive(timer) { _ in
                                 var delta = challenge.timeToEnd.timeIntervalSinceNow

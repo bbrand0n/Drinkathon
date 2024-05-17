@@ -23,7 +23,7 @@ class UserHistoryViewModel : ObservableObject {
         print("UserHistoryViewModel: fetching history")
         
         challengesHistory = try await ChallengeService.fetchUserHistory(uid: currentUser.id)
-        try await fetchUserDataForChallenges()
+//        try await fetchUserDataForChallenges()
     }
     
     @MainActor

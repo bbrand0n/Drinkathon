@@ -14,6 +14,12 @@ struct Player: Identifiable, Codable {
     var score: Int = 0
     
     var user: User?
+    var drinks: [Drink]?
 }
 
+public struct Drink: Identifiable, Codable {
+    public var id = UUID()
+    let time: Date
+    let drink: Int
+}
 

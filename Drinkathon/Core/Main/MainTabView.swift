@@ -16,7 +16,8 @@ struct MainTabView: View {
             ZStack(alignment: .bottom) {
                 TabView(selection: $selectedTab) {
                     
-                    HomeView(rootModel: viewModel)
+                    HomeView()
+                        .environmentObject(self.viewModel)
                         .tag(0)
                     
                     ExploreView(selectedTab: self.$selectedTab)
@@ -30,10 +31,6 @@ struct MainTabView: View {
                     
                     CurrentUserProfileView(rootModel: viewModel)
                         .tag(4)
-                }
-                .onChange(of: viewModel.currentUser) {
-                    print("User changed in TabView")
-                    
                 }
                 .ignoresSafeArea(edges: .bottom)
                 .background(.lighterBlue)

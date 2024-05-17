@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct HomeView: View {
-    @ObservedObject var rootModel: MainTabViewModel
-    @State private var showCreateChallenge = false
+    @EnvironmentObject var rootModel: MainTabViewModel
+    @ObservedObject var store = StoreProvider.challengeStore
 
     var body: some View {
         NavigationStack {
@@ -19,12 +19,17 @@ struct HomeView: View {
                 // Challenges
                 ScrollView(showsIndicators: false) {
                     LazyVStack {
-                        if (!rootModel.challenges.isEmpty) {
+                        if (!store.challenges.isEmpty) {
                             
                             // Challenges if not empty
-                            ForEach(rootModel.challenges) { challenge in
-                                ChallengeCellView(challenge: challenge, currentUsername: rootModel.currentUser?.username ?? "")
-                                    .padding(.bottom)
+                            ForEach(0 ..< store.challenges.count, id: \.self) { index in
+                                NavigationLink(destination: ChallengeDetailsView(challenge: self.$store.challenges[index], currentUsername: rootModel.currentUser?.username ?? "")) {
+                                    
+                                    // Challenge cell to view details
+                                    ChallengeCellView(challenge: self.store.challenges[index], currentUsername: rootModel.currentUser?.username ?? "")
+                                        .padding(.bottom)
+                                }
+                                
                             }
                         } else {
                             
@@ -80,6 +85,6 @@ struct HomeView: View {
 
 #Preview {
     let rootModel = MainTabViewModel()
-    let homeView = HomeView(rootModel: rootModel)
+    let homeView = HomeView().environmentObject(rootModel)
     return homeView
 }

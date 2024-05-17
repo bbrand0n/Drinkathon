@@ -11,7 +11,8 @@ import SwiftUI
 
 class MainTabViewModel: ObservableObject {
     @Published var currentUser: User?
-    @Published var challenges = [Challenge]()
+//    @Published var challenges = [Challenge]()
+    @Published var store = StoreProvider.challengeStore
     
     var userListener: ListenerRegistration?
     var challengeListener: ListenerRegistration?
@@ -87,8 +88,8 @@ class MainTabViewModel: ObservableObject {
                 // Populate user data if it is new
                 Task {
                     // Get updated data
-                    self.challenges = documents.compactMap({ try? $0.data(as: Challenge.self) })
-                    try await self.fetchUserDataForChallenges()
+                    self.store.challenges = documents.compactMap({ try? $0.data(as: Challenge.self) })
+//                    try await self.fetchUserDataForChallenges()
                 }
             }
     }
@@ -97,15 +98,15 @@ class MainTabViewModel: ObservableObject {
     private func fetchUserDataForChallenges() async throws {
         do {
             // Fill local challenges with user data
-            for i in 0 ..< self.challenges.count {
-                let challenge = challenges[i]
+            for i in 0 ..< self.store.challenges.count {
+                let challenge = self.store.challenges[i]
                 let uid1 = challenge.player1.id
                 let uid2 = challenge.player2.id
                 let p1User = try await UserService.fetchUser(withUid: uid1)
                 let p2User = try await UserService.fetchUser(withUid: uid2)
                 
-                challenges[i].player1.user = p1User
-                challenges[i].player2.user = p2User
+                self.store.challenges[i].player1.user = p1User
+                self.store.challenges[i].player2.user = p2User
             }
         } catch {
             print("Out of bounds HomeView: \(error)")
@@ -136,6 +137,7 @@ class MainTabViewModel: ObservableObject {
     @MainActor
     func incrementDrink() async throws {
         guard let challenges = currentUser?.challenges else { return }
+        
         try await ChallengeService.logNewDrink(challengeIds: challenges)
     }
 }
