@@ -54,6 +54,7 @@ struct CircleProfilePictureView: View {
         fullname: "Brandon Gibbons",
         email: "brandon@gmail.com",
         username: "bgibbons",
+        fcmToken: "",
         challenges: [])
     let profileView = CircleProfilePictureView(user: user, size: .medium)
     return profileView

@@ -8,50 +8,86 @@
 import SwiftUI
 
 struct NotificationsView: View {
+    @StateObject var viewModel = NotificationsViewModel()
     @Binding var selectedTab: Int
     
     var body: some View {
-        VStack {
+        NavigationStack {
             VStack {
-                Text("Hello, Notifications!")
-                    .font(.title)
-                    .foregroundStyle(.gray)
-                
-                Button {
-                    selectedTab = 0
-                } label: {
-                    Text("Send me to Home tab")
-                }.buttonStyle(BorderedButtonStyle())
-                
-                Button {
-                    selectedTab = 1
-                } label: {
-                    Text("Send me to Explore tab")
-                }.buttonStyle(BorderedButtonStyle())
-                
-                Button {
-                    selectedTab = 2
-                } label: {
-                    Text("Send me to Create Exercise tab")
-                }.buttonStyle(BorderedButtonStyle())
-                
-                Button {
-                    selectedTab = 4
-                } label: {
-                    Text("Send me to Profile tab")
-                }.buttonStyle(BorderedButtonStyle())
+                if viewModel.notifications.isEmpty {
+                    Text("No notifications")
+                        .font(.title)
+                        .foregroundStyle(.gray)
+                    Image(systemName: "face.dashed.fill")
+                        .resizable()
+                        .frame(width: 100, height: 100)
+                        .foregroundStyle(.neonPink)
+                        .opacity(0.6)
+                } else {
+                    ScrollView {
+                        ForEach(viewModel.notifications.indices, id: \.self) { index in
+                            HStack {
+                                NotificationCell(notification: viewModel.notifications[index])
+                                
+                                Button {
+                                    Task {
+                                        Task {
+                                            try await viewModel.deleteNotification(viewModel.notifications[index].id)
+                                        }
+                                    }
+                                } label: {
+                                    Image(systemName: "trash")
+                                        .foregroundStyle(.red)
+                                }
+                            }
+                            .padding(.trailing, -40)
+                            .offset(x: viewModel.offsets[index].width)
+                            .gesture(
+                                DragGesture()
+                                    .onChanged { gesture in
+                                        viewModel.offsets[index] = gesture.translation
+                                        if viewModel.offsets[index].width > 50 {
+                                            viewModel.offsets[index] = .zero
+                                        }
+                                    }
+                                    .onEnded { _ in
+                                        if viewModel.offsets[index].width < -150 {
+                                            Task {
+                                                try await viewModel.deleteNotification(viewModel.notifications[index].id)
+                                            }
+                                        }
+                                        else if self.viewModel.offsets[index].width < -50 {
+                                            viewModel.offsets[index].width = -50
+                                        }
+                                    }
+                            )
+                        }
+                        .padding(.trailing)
+                    }
+                    .padding(.top)
+                    .padding(.bottom, 70)
+                    .scrollIndicators(.visible)
+                }
             }
-            .padding()
-            .background(.lighterBlue)
-            .clipShape(RoundedRectangle(cornerRadius: 25.0))
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(.darkerBlue)
+            .navigationTitle("Notifications")
+            .toolbarColorScheme(.dark, for: .navigationBar)
+            .toolbarBackground(Color.lighterBlue, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
+            .navigationBarTitleDisplayMode(.inline)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(.darkerBlue)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(.darkerBlue)
     }
 }
 
 #Preview {
     let tabView = MainTabView()
+    //    let notifications = [PushNotification(sender: "first", receiver: "iwwin", time: Date.now),
+    //                         PushNotification(sender: "second", receiver: "iwwin", time: Date.now),
+    //                         PushNotification(sender: "third", receiver: "iwwin", time: Date.now)]
+    //    let notificationsView = NotificationsView(notifications: notifications, selectedTab: tabView.$selectedTab)
     let notificationsView = NotificationsView(selectedTab: tabView.$selectedTab)
     return notificationsView
 }

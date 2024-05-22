@@ -49,6 +49,11 @@
 		25D234BF2BF38E0300E77E87 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D234BE2BF38E0300E77E87 /* NotificationsView.swift */; };
 		25D234C12BF38E5A00E77E87 /* TabViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D234C02BF38E5A00E77E87 /* TabViewExtension.swift */; };
 		25D234C32BF3988C00E77E87 /* MainTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D234C22BF3988C00E77E87 /* MainTabViewModel.swift */; };
+		25E169022BFC1DFA00179B56 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 25E169012BFC1DFA00179B56 /* FirebaseMessaging */; };
+		25E169042BFC1E7F00179B56 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E169032BFC1E7F00179B56 /* NotificationManager.swift */; };
+		25EDE5292BFD7943007C0876 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25EDE5282BFD7943007C0876 /* Notification.swift */; };
+		25EDE52B2BFE35FA007C0876 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25EDE52A2BFE35FA007C0876 /* NotificationCell.swift */; };
+		25EDE52D2BFE3644007C0876 /* NotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25EDE52C2BFE3644007C0876 /* NotificationsViewModel.swift */; };
 		25F2BD622BEAD63C002E6253 /* ExploreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F2BD612BEAD63C002E6253 /* ExploreViewModel.swift */; };
 		25F2BD642BEAD768002E6253 /* PreviewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F2BD632BEAD768002E6253 /* PreviewProvider.swift */; };
 		25F2BD682BEADC72002E6253 /* CurrentUserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F2BD672BEADC72002E6253 /* CurrentUserProfileView.swift */; };
@@ -100,6 +105,11 @@
 		25D234BE2BF38E0300E77E87 /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
 		25D234C02BF38E5A00E77E87 /* TabViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewExtension.swift; sourceTree = "<group>"; };
 		25D234C22BF3988C00E77E87 /* MainTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewModel.swift; sourceTree = "<group>"; };
+		25E169002BFC140D00179B56 /* Drinkathon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Drinkathon.entitlements; sourceTree = "<group>"; };
+		25E169032BFC1E7F00179B56 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		25EDE5282BFD7943007C0876 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		25EDE52A2BFE35FA007C0876 /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
+		25EDE52C2BFE3644007C0876 /* NotificationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewModel.swift; sourceTree = "<group>"; };
 		25F2BD612BEAD63C002E6253 /* ExploreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewModel.swift; sourceTree = "<group>"; };
 		25F2BD632BEAD768002E6253 /* PreviewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewProvider.swift; sourceTree = "<group>"; };
 		25F2BD672BEADC72002E6253 /* CurrentUserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserProfileView.swift; sourceTree = "<group>"; };
@@ -114,6 +124,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25E169022BFC1DFA00179B56 /* FirebaseMessaging in Frameworks */,
 				257C9B8F2BEAB9AF00FA9768 /* FirebaseAuth in Frameworks */,
 				257C9B952BEAB9AF00FA9768 /* FirebaseStorage in Frameworks */,
 				257C9B912BEAB9AF00FA9768 /* FirebaseFirestore in Frameworks */,
@@ -153,6 +164,7 @@
 		257C9B5B2BE4013100FA9768 /* Drinkathon */ = {
 			isa = PBXGroup;
 			children = (
+				25E169002BFC140D00179B56 /* Drinkathon.entitlements */,
 				253680D22BF6404F00F116A6 /* Info.plist */,
 				257C9B8B2BEAB8DF00FA9768 /* GoogleService-Info.plist */,
 				257C9B602BE4013200FA9768 /* Assets.xcassets */,
@@ -234,6 +246,7 @@
 				257C9B862BE4211800FA9768 /* Challenge.swift */,
 				257BC3312BEACB1000C22F61 /* User.swift */,
 				25635FEA2BEC07640049ECC3 /* Player.swift */,
+				25EDE5282BFD7943007C0876 /* Notification.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -318,6 +331,9 @@
 			isa = PBXGroup;
 			children = (
 				25D234BE2BF38E0300E77E87 /* NotificationsView.swift */,
+				25E169032BFC1E7F00179B56 /* NotificationManager.swift */,
+				25EDE52A2BFE35FA007C0876 /* NotificationCell.swift */,
+				25EDE52C2BFE3644007C0876 /* NotificationsViewModel.swift */,
 			);
 			path = Notifiations;
 			sourceTree = "<group>";
@@ -344,6 +360,7 @@
 				257C9B922BEAB9AF00FA9768 /* FirebaseFirestoreSwift */,
 				257C9B942BEAB9AF00FA9768 /* FirebaseStorage */,
 				25F2BD772BEBB261002E6253 /* Kingfisher */,
+				25E169012BFC1DFA00179B56 /* FirebaseMessaging */,
 			);
 			productName = Drinkathon;
 			productReference = 257C9B592BE4013100FA9768 /* Drinkathon.app */;
@@ -412,8 +429,10 @@
 				25F2BD682BEADC72002E6253 /* CurrentUserProfileView.swift in Sources */,
 				253182AB2BEBC5DA00553D99 /* TimerPickerView.swift in Sources */,
 				257BC3392BEAD33B00C22F61 /* PlayerCell.swift in Sources */,
+				25EDE5292BFD7943007C0876 /* Notification.swift in Sources */,
 				25D234C32BF3988C00E77E87 /* MainTabViewModel.swift in Sources */,
 				257687062BF3EE1B00CE1A9E /* CreateChallengeTabView.swift in Sources */,
+				25EDE52D2BFE3644007C0876 /* NotificationsViewModel.swift in Sources */,
 				257C9B7A2BE4166400FA9768 /* MainTabView.swift in Sources */,
 				257C9B772BE4140100FA9768 /* TextFieldModifer.swift in Sources */,
 				257687082BF4EEEC00CE1A9E /* UserHistoryView.swift in Sources */,
@@ -421,6 +440,7 @@
 				25F2BD622BEAD63C002E6253 /* ExploreViewModel.swift in Sources */,
 				253182A72BEBBECF00553D99 /* ChallengeService.swift in Sources */,
 				2576870A2BF4EF6F00CE1A9E /* UserHistoryViewModel.swift in Sources */,
+				25E169042BFC1E7F00179B56 /* NotificationManager.swift in Sources */,
 				257C9BA32BEAC53E00FA9768 /* LoginViewModel.swift in Sources */,
 				257C9B802BE41D1600FA9768 /* CreateChallengeView.swift in Sources */,
 				258F72202BF798480094D3DA /* ChallengeStore.swift in Sources */,
@@ -430,6 +450,7 @@
 				25D234BC2BF38C3F00E77E87 /* TabbedItems.swift in Sources */,
 				25635FEB2BEC07640049ECC3 /* Player.swift in Sources */,
 				257C9B9B2BEABD0500FA9768 /* AuthService.swift in Sources */,
+				25EDE52B2BFE35FA007C0876 /* NotificationCell.swift in Sources */,
 				25D234BF2BF38E0300E77E87 /* NotificationsView.swift in Sources */,
 				257C9B8A2BE4322F00FA9768 /* CircleProfilePictureView.swift in Sources */,
 				25635FE32BEBEC340049ECC3 /* SearchUsers.swift in Sources */,
@@ -576,6 +597,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Drinkathon/Drinkathon.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Drinkathon/Preview Content\"";
@@ -606,6 +628,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Drinkathon/Drinkathon.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Drinkathon/Preview Content\"";
@@ -693,6 +716,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 257C9B8D2BEAB9AF00FA9768 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		25E169012BFC1DFA00179B56 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 257C9B8D2BEAB9AF00FA9768 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
 		};
 		25F2BD772BEBB261002E6253 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;

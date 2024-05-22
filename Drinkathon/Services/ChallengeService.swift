@@ -16,6 +16,8 @@ struct ChallengeService {
         guard let challengeData = try? Firestore.Encoder().encode(challenge) else { return "" }
         let ref = try await Firestore.firestore().collection("challenges").addDocument(data: challengeData)
         
+        try await UserService.sendNotification(challenge: challenge)
+        
         return ref.documentID
     }
     

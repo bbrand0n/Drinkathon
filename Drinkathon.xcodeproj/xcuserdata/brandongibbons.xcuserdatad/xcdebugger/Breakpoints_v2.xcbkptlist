@@ -56,8 +56,8 @@
             filePath = "Drinkathon/Core/Main/MainTabViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
             landmarkName = "listenToChallenges()"
             landmarkType = "7">
          </BreakpointContent>
@@ -72,8 +72,8 @@
             filePath = "Drinkathon/Services/ChallengeService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "175"
-            endingLineNumber = "175"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
             landmarkName = "logNewDrink(challengeIds:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -88,8 +88,8 @@
             filePath = "Drinkathon/Services/ChallengeService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "187"
-            endingLineNumber = "187"
+            startingLineNumber = "189"
+            endingLineNumber = "189"
             landmarkName = "logNewDrink(challengeIds:)"
             landmarkType = "7">
          </BreakpointContent>

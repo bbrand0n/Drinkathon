@@ -25,20 +25,21 @@ struct RegistrationView: View {
                 TextField("", text: $viewModel.email,
                           prompt: Text("Email").foregroundColor(.gray))
                 .foregroundStyle(.white)
-                .textInputAutocapitalization(.none)
+                .textInputAutocapitalization(.never)
                 .autocorrectionDisabled()
                 .modifier(TextFieldModifer())
                 
                 TextField("", text: $viewModel.username,
                           prompt: Text("User name").foregroundColor(.gray))
                 .foregroundStyle(.white)
-                .textInputAutocapitalization(.none)
+                .textInputAutocapitalization(.never)
                 .autocorrectionDisabled()
                 .modifier(TextFieldModifer())
                 
                 TextField("", text: $viewModel.fullname,
                           prompt: Text("Full name").foregroundColor(.gray))
                 .foregroundStyle(.white)
+                .textInputAutocapitalization(.words)
                 .autocorrectionDisabled()
                 .modifier(TextFieldModifer())
                 

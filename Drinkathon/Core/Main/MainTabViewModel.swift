@@ -11,8 +11,8 @@ import SwiftUI
 
 class MainTabViewModel: ObservableObject {
     @Published var currentUser: User?
-//    @Published var challenges = [Challenge]()
     @Published var store = StoreProvider.challengeStore
+    @Published var isLoading = false
     
     var userListener: ListenerRegistration?
     var challengeListener: ListenerRegistration?
@@ -24,6 +24,8 @@ class MainTabViewModel: ObservableObject {
             
             // Clean challlenges that ended while app was closed
             try await cleanChallenges()
+            
+            print("home init")
         }
     }
     
@@ -41,6 +43,11 @@ class MainTabViewModel: ObservableObject {
             // Update current user
             do {
                 // Update and listen to challenges
+                if document.get("fcmToken") == nil {
+                    Task {
+                        try await UserService.shared.updateUserFcmToken()
+                    }
+                }
                 self.currentUser = try document.data(as: User.self)
                 self.listenToChallenges()
                 

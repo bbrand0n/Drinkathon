@@ -17,7 +17,7 @@ struct Player: Identifiable, Codable {
     var drinks: [Drink]?
 }
 
-public struct Drink: Identifiable, Codable {
+public struct Drink: Identifiable, Codable, Hashable {
     public var id = UUID()
     let time: Date
     let drink: Int

@@ -11,6 +11,7 @@ import Firebase
 class CreateChallengeViewModel: ObservableObject {
     @Published var usersList = [User]()
     @Published var selectedUsers = [User]()
+    @Published var isLoading = false
     
     init() {
         // TODO: filter for friends only?
@@ -32,8 +33,8 @@ class CreateChallengeViewModel: ObservableObject {
         }
         
         // Set up players
-        let player1 = Player(id: currentUser.id, username: currentUser.username)
-        let player2 = Player(id: opponent.id, username: opponent.username)
+        let player1 = Player(id: currentUser.id, username: currentUser.username, drinks: [Drink(time: Date.now, drink: 0)])
+        let player2 = Player(id: opponent.id, username: opponent.username, drinks: [Drink(time: Date.now, drink: 0)])
         
         // Upload challenge to DB
         let challenge = Challenge(ownerId: currentUser.id, title: title, timeSent: Timestamp(), timeToEnd: timeToEnd, player1: player1, player2: player2)

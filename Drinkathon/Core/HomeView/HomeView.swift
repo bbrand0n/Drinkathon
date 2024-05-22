@@ -66,15 +66,28 @@ struct HomeView: View {
                 
                 // Add drink
                 Button {
-                    Task { try await rootModel.incrementDrink() }
+                    rootModel.isLoading = true
+                    Task {
+                        try await rootModel.incrementDrink()
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            rootModel.isLoading = false
+                        }
+                    }
                 } label: {
-                    Text("Log Drink")
-                        .font(.subheadline)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.black)
-                        .frame(width: 320, height: 44)
-                        .background(Color(.green))
-                        .cornerRadius(8)
+                    Group {
+                        if rootModel.isLoading {
+                            ProgressView()
+                        } else {
+                            Text("Log Drink")
+                                .font(.subheadline)
+                                .fontWeight(.semibold)
+                                .foregroundColor(.black)
+                        }
+                    }
+                    .frame(width: 320, height: 44)
+                    .background(Color(.green))
+                    .cornerRadius(8)
                 }
                 .padding(.bottom, 50)
             }

@@ -132,6 +132,7 @@ struct CreateChallengeView: View {
             
             // Challenge button
             Button {
+                viewModel.isLoading = true
                 focusedField = nil
                 
                 // Calculate date
@@ -144,17 +145,26 @@ struct CreateChallengeView: View {
                     
                     // Switch back to Home
                     selectedTab = 0
+                    
+                    viewModel.isLoading = false
                 }
                 
             } label: {
-                Text("Challenge!")
-                    .font(.subheadline)
-                    .fontWeight(.semibold)
-                    .foregroundColor(.black)
-                    .frame(width: 320, height: 44)
-                    .background(submitDisabled ? Color.gray : Color.primaryBlue)
-                    .cornerRadius(8)
-                    .padding(.top, 8)
+                Group {
+                    if (viewModel.isLoading) {
+                        ProgressView()
+                    } else {
+                        Text("Challenge!")
+                            .font(.subheadline)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.black)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    }
+                }
+                .frame(width: 320, height: 44)
+                .background(submitDisabled ? Color.gray : Color.primaryBlue)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .padding(.top, 8)
             }
             .disabled(submitDisabled)
         }

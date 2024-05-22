@@ -15,16 +15,10 @@ struct User: Identifiable, Codable, Hashable {
     var profileImageUrl: String?
     var bio: String?
     
+    var fcmToken: String?
+    
     var challenges: [String]?
     var history: [String]?
-}
-
-class UserController: ObservableObject {
-    @Published var user: User
-    
-    init(user: User) {
-        self.user = user
-    }
 }
 
 

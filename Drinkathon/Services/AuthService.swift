@@ -7,6 +7,7 @@
 
 import Firebase
 import FirebaseFirestoreSwift
+import FirebaseMessaging
 
 class AuthService {
     
@@ -59,7 +60,8 @@ class AuthService {
         username: String,
         id: String
     ) async throws {
-        let user = User(id: id, fullname: fullname, email: email, username: username, challenges: [])
+         let fcmToken = try await Messaging.messaging().token()
+        let user = User(id: id, fullname: fullname, email: email, username: username, fcmToken: fcmToken, challenges: [])
         guard let userData = try? Firestore.Encoder().encode(user) else { return }
         try await Firestore.firestore().collection("users").document(id).setData(userData)
         
