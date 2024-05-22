@@ -82,7 +82,6 @@ struct ChallengeDetailsView: View {
                             }
                         }
                         .onAppear {
-                            print("ChallengeCell onAppear called")
                             player1.username = challenge.player1.username
                             player2.username = challenge.player2.username
                             animateUpdate()
@@ -107,7 +106,7 @@ struct ChallengeDetailsView: View {
                             Text("Time remaining: ")
                                 .font(.footnote)
                                 .foregroundStyle(.white)
-
+                            
                             Text(duration)
                                 .font(.footnote)
                                 .fontWeight(.medium)
@@ -120,23 +119,6 @@ struct ChallengeDetailsView: View {
                         }
                         
                         Spacer()
-                        
-                        Menu {
-                            // Delete button
-                            Button(role: .destructive) {
-                                timer.upstream.connect().cancel()
-                                dismiss()
-                                Task {
-                                    try await ChallengeService.deleteChallenge(challenge: challenge)
-                                }
-                            } label: {
-                                Label("Delete Challenge", systemImage: "trash")
-                            }
-                        } label: {
-                            Image(systemName: "ellipsis.circle")
-                                .clipShape(Circle())
-                        }
-                        .disabled(challenge.status != .finished)
                         
                     }
                     .onDisappear {
@@ -166,53 +148,119 @@ struct ChallengeDetailsView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 20))
                 .padding()
                 
+                HStack {
+                    
+                    // Extend time
+                    Button {
+                        Task {
+                            try await rootModel.incrementTime(cid: challenge.id, currentTimeToEnd: challenge.timeToEnd)
+                        }
+                    } label: {
+                        VStack {
+                            Image(systemName: "clock.badge.checkmark")
+                                .frame(width: 20, height: 20)
+                                .foregroundStyle(.black)
+                            Text("Add hour")
+                                .font(.caption)
+                                .fontWeight(.semibold)
+                                .foregroundColor(.black)
+                                
+                        }
+                        .frame(width: 120, height: 44)
+                        .padding(.vertical, 10)
+                        .background(LinearGradient(
+                            colors: [.primaryBlue, .blue.opacity(0.8)],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing))
+                        .clipShape(RoundedRectangle(cornerRadius: 15))
+                        
+                    }
+                    
+                    // Remove time
+                    Button {
+                        Task {
+                            try await rootModel.decrementTime(cid: challenge.id, currentTimeToEnd: challenge.timeToEnd)
+                        }
+                    } label: {
+                        VStack {
+                            Image(systemName: "clock.badge.xmark")
+                                .frame(width: 20, height: 20)
+                                .foregroundStyle(.black)
+                            Text("Remove hour")
+                                .font(.caption)
+                                .fontWeight(.semibold)
+                                .foregroundColor(.black)
+                                
+                        }
+                        .frame(width: 120, height: 44)
+                        .padding(.vertical, 10)
+                        .background(LinearGradient(
+                            colors: [.red, .red.opacity(0.8)],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing))
+                        .clipShape(RoundedRectangle(cornerRadius: 15))
+                        
+                        
+                    }
+                }
+                
                 Spacer()
                 
                 // Buttons
-                VStack (spacing: 20){
+                ZStack {
+                    RoundedRectangle(cornerRadius: 30)
+                        .frame(height: 180)
+                        .foregroundStyle(LinearGradient(
+                            colors: [.lighterBlue.opacity(1), .lighterBlue.opacity(0.50), .lighterBlue.opacity(0)],
+                            startPoint: .top,
+                            endPoint: .bottom))
                     
-                    // Add drink
-                    Button {
-                        Task {
-                            try await rootModel.incrementDrink()
-                        }
-                    } label: {
-                        Text("Log Drink")
-                            .font(.subheadline)
-                            .fontWeight(.semibold)
-                            .foregroundColor(.black)
-                            .frame(width: 320, height: 44)
-                            .background(Color(.green))
-                            .cornerRadius(8)
-                    }
-                    
-                    // Delete challenge
-                    Button {
-                        presentConfirm = true
+                    VStack (spacing: 20) {
                         
-                    } label: {
-                        Text("Delete Challenge")
-                            .font(.subheadline)
-                            .fontWeight(.semibold)
-                            .foregroundColor(.black)
-                            .frame(width: 320, height: 44)
-                            .background(Color(.red))
-                            .cornerRadius(8)
-                    }
-                    
-                    // Confirm delete
-                    .confirmationDialog("Are you sure?", isPresented: $presentConfirm) {
-                        Button("Delete Challenge", role: .destructive) {
-                            dismiss()
+                        // Add drink
+                        Button {
                             Task {
-                                try await ChallengeService.deleteChallenge(challenge: challenge)
+                                try await rootModel.incrementDrink()
                             }
-                            
-                            presentConfirm = false
+                        } label: {
+                            Text("Log Drink")
+                                .font(.subheadline)
+                                .fontWeight(.semibold)
+                                .foregroundColor(.black)
+                                .frame(width: 320, height: 44)
+                                .background(Color(.green))
+                                .cornerRadius(15)
                         }
+                        
+                        // Delete challenge
+                        Button {
+                            presentConfirm = true
+                            
+                        } label: {
+                            Text("Delete Challenge")
+                                .font(.subheadline)
+                                .fontWeight(.semibold)
+                                .foregroundColor(.black)
+                                .frame(width: 320, height: 44)
+                                .background(Color(.red).opacity(0.85))
+                                .cornerRadius(15)
+                        }
+                        
+                        // Confirm delete
+                        .confirmationDialog("Are you sure?", isPresented: $presentConfirm) {
+                            Button("Delete Challenge", role: .destructive) {
+                                dismiss()
+                                Task {
+                                    try await ChallengeService.deleteChallenge(challenge: challenge)
+                                }
+                                
+                                presentConfirm = false
+                            }
+                        }
+                        .dialogIcon(Image(systemName: "trash.circle.fill"))
                     }
-                    .dialogIcon(Image(systemName: "trash.circle.fill"))
-                    .padding(.bottom, 50)
+                    .padding()
+                    .padding(.bottom, 20)
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)

@@ -86,7 +86,7 @@ struct HomeView: View {
                     }
                     .frame(width: 320, height: 44)
                     .background(Color(.green))
-                    .cornerRadius(8)
+                    .cornerRadius(15)
                 }
                 .padding(.bottom, 50)
             }

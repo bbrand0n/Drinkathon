@@ -135,6 +135,26 @@ class MainTabViewModel: ObservableObject {
     }
     
     @MainActor
+    func incrementTime(cid: String, currentTimeToEnd: Date) async throws {
+        // Add one hour to end time
+        let cur = currentTimeToEnd
+        let newTimeToEnd = cur.addingTimeInterval(3600)
+        try await ChallengeService.extendChallengeTime(cid, newTime: newTimeToEnd)
+    }
+    
+    @MainActor
+    func decrementTime(cid: String, currentTimeToEnd: Date) async throws {
+        // Subtract one hour from end time
+        let timeLeft = currentTimeToEnd.addingTimeInterval(-3600)
+        if timeLeft < Date.now {
+            print("Not enough time left")
+        } else {
+            try await ChallengeService.extendChallengeTime(cid, newTime: timeLeft)
+        }
+        
+    }
+    
+    @MainActor
     func cleanChallenges() async throws {
         try await ChallengeService.cleanChallenges()
     }

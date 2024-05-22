@@ -242,6 +242,16 @@ struct ChallengeService {
             ])
     }
     
+    @MainActor
+    static func extendChallengeTime(_ cid: String, newTime: Date) async throws {
+        try await Firestore.firestore()
+            .collection("challenges")
+            .document(cid)
+            .updateData([
+                "timeToEnd": newTime
+            ])
+    }
+    
     static func calculateWinner(challenge: Challenge) -> String {
         var winner: String
 
