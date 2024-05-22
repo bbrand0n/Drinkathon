@@ -16,8 +16,8 @@ struct UserHistoryView: View {
     
     var body: some View {
         ScrollView {
-            ForEach(viewModel.challengesHistory) { challenge in
-                ChallengeCellView(challenge: challenge, currentUsername: viewModel.currentUser.username)
+            ForEach(viewModel.challengesHistory.indices, id: \.self) { challenge in
+                ChallengeCellView(challenge: $viewModel.challengesHistory[challenge], currentUsername: viewModel.currentUser.username)
                     .padding([.bottom])
             }
         }

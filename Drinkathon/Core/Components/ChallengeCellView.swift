@@ -9,19 +9,29 @@ import SwiftUI
 import Charts
 
 struct ChallengeCellView: View {
-    let challenge: Challenge
-    let currentUsername: String
-    @State private var duration = "---"
-    private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    @Binding var challenge: Challenge
     
-    // Time formatter
-    static var durationFormatter: DateComponentsFormatter = {
-        let formatter = DateComponentsFormatter()
-        formatter.allowedUnits = [.hour, .minute, .second]
-        formatter.unitsStyle = .abbreviated
-        formatter.zeroFormattingBehavior = .dropLeading
-        return formatter
-    }()
+    @State var player1 = Player(id: "Player1", username: "Player1", score: 0)
+    @State var player2 = Player(id: "Player2", username: "Player2", score: 0)
+    @State private var duration = "---"
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    let currentUsername: String
+    
+    func animateUpdate() {
+        withAnimation(.spring(.bouncy(duration: 1), blendDuration: 1)) {
+            player1.score = challenge.player1.score
+            player2.score = challenge.player2.score
+        }
+    }
+    
+    var maxScore: Int {
+        let max = player1.score > player2.score ? player1.score : player2.score
+        if max == 0 || max == 1 {
+            return 3
+        } else {
+            return max
+        }
+    }
     
     var body: some View {
         VStack {
@@ -65,60 +75,45 @@ struct ChallengeCellView: View {
                                 .padding(.bottom, 4)
                             
                             // Chart
-                            Chart([challenge.player1, challenge.player2]) { item in
-                                
-                                // If score is 0
-                                if (item.score == 0) {
-                                    BarMark(x: .value("Amount", 1),
-                                            y: .value("Name", item.username),
-                                            width: .fixed(12)
-                                    )
-                                    .foregroundStyle(LinearGradient(gradient: Gradient(colors: [Color.neonGreen, Color.midnightBlue]), startPoint: .leading, endPoint: .trailing))
-                                    .clipShape(RoundedRectangle(cornerRadius: 20))
-                                    .cornerRadius(8)
-                                    .annotation(position: .top, alignment: .leading) {
-                                        Text(item.username)
-                                            .foregroundColor(Color.white)
-                                            .font(.caption)
-                                            .padding(.bottom, 2)
-                                    }
-                                    .annotation(position: .trailing) {
-                                        Text("0")
-                                            .foregroundColor(Color.white)
-                                            .font(.caption)
-                                    }
-                                    
-                                    
-                                } else {
-                                    // Regular score > 0
-                                    BarMark(x: .value("Amount", item.score),
-                                            y: .value("Name", item.username),
-                                            width: .fixed(12)
-                                    )
-                                    .foregroundStyle(LinearGradient(gradient: Gradient(colors: [Color.neonGreen, Color.midnightBlue]), startPoint: .leading, endPoint: .trailing))
-                                    .clipShape(RoundedRectangle(cornerRadius: 16))
-                                    .cornerRadius(8)
-                                    .annotation(position: .top, alignment: .leading) {
-                                        Text(item.username)
-                                            .foregroundColor(Color.white)
-                                            .font(.caption)
-                                            .padding(.bottom, 2)
-                                    }
-                                    .annotation(position: .trailing) {
-                                        Text(item.score.formatted())
-                                            .foregroundColor(Color.white)
-                                            .font(.caption)
-                                    }
+                            Chart([player1, player2]) { player in
+                                BarMark(x: .value("Score", player.score < 1 ? 1 : player.score + 1),
+                                        y: .value("Player", player.username),
+                                        width: .fixed(12)
+                                )
+                                .foregroundStyle(LinearGradient(gradient: Gradient(colors: [Color.blue, Color.midnightBlue]), startPoint: .leading, endPoint: .trailing))
+                                .clipShape(RoundedRectangle(cornerRadius: 16))
+                                .annotation(position: .top, alignment: .leading) {
+                                    Text(player.username)
+                                        .foregroundColor(Color.white)
+                                        .font(.caption)
+                                        .padding(.bottom, 2)
+                                }
+                                .annotation(position: .trailing) {
+                                    Text(player.score.formatted())
+                                        .foregroundColor(Color.white)
+                                        .font(.caption)
                                 }
                             }
+                            .chartXScale(domain: 0 ... maxScore + 2, range: .plotDimension, type: .linear)
                             .chartXAxis(.hidden)
                             .chartYAxis(.hidden)
                             .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
                             .chartYAxis {
-                                AxisMarks(preset: .automatic, position: .leading) { _ in
+                                AxisMarks(preset: .aligned, position: .leading) { _ in
                                     AxisValueLabel(horizontalSpacing: 8)
                                         .font(.footnote)
                                 }
+                            }
+                            .onAppear {
+                                player1.username = challenge.player1.username
+                                player2.username = challenge.player2.username
+                                animateUpdate()
+                            }
+                            .onChange(of: challenge.player1.score) {
+                                animateUpdate()
+                            }
+                            .onChange(of: challenge.player2.score) {
+                                animateUpdate()
                             }
                             
                             Divider()
@@ -143,21 +138,29 @@ struct ChallengeCellView: View {
                                 
                                 Spacer()
                                 
-                                Menu {
-                                    // Delete button
-                                    Button(role: .destructive) {
-                                        Task {
-                                            try await ChallengeService.deleteChallenge(challenge: challenge)
+                                if challenge.status == .finished {
+                                    Menu {
+                                        // Delete button
+                                        Button(role: .destructive) {
+                                            Task {
+                                                try await ChallengeService.deleteChallenge(challenge: challenge)
+                                            }
+                                        } label: {
+                                            Label("Delete Challenge", systemImage: "trash")
                                         }
                                     } label: {
-                                        Label("Delete Challenge", systemImage: "trash")
+                                        Image(systemName: "ellipsis.circle")
+                                            .clipShape(Circle())
                                     }
-                                } label: {
-                                    Image(systemName: "ellipsis.circle")
+                                } else {
+                                    // Details
+                                    Image(systemName: "greaterthan.circle")
                                         .clipShape(Circle())
+                                    
                                 }
-                                .disabled(challenge.status != .finished)
-                                
+                            }
+                            .onDisappear {
+                                timer.upstream.connect().cancel()
                             }
                             .onReceive(timer) { _ in
                                 var delta = challenge.timeToEnd.timeIntervalSinceNow
@@ -175,7 +178,7 @@ struct ChallengeCellView: View {
                                     }
                                     
                                 } else {
-                                    duration = ChallengeCellView.durationFormatter.string(from: delta) ?? "---"
+                                    duration = DateTimeString.durationFormatter.string(from: delta) ?? "---"
                                 }
                             }
                         }
@@ -190,7 +193,8 @@ struct ChallengeCellView: View {
 }
 
 #Preview {
-    let challengeCell = ChallengeCellView(challenge: DeveloperPreview.shared.challenge1, currentUsername: "bgibbons")
+    @State var challenge = DeveloperPreview.shared.challenge1
+    let challengeCell = ChallengeCellView(challenge: $challenge, currentUsername: "bgibbons")
     
     return challengeCell
 }

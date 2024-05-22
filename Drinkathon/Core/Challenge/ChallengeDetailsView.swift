@@ -11,34 +11,30 @@ import Charts
 struct ChallengeDetailsView: View {
     @EnvironmentObject var rootModel: MainTabViewModel
     @Binding var challenge: Challenge
-    let currentUsername: String
+    
+    @State var player1 = Player(id: "Player1", username: "Player1", score: 0)
+    @State var player2 = Player(id: "Player2", username: "Player2", score: 0)
+    @State private var duration = "---"
     @Environment(\.dismiss) var dismiss
     @State var presentConfirm = false
-    @State private var duration = "---"
-    private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    let currentUsername: String
     
-    func graphLineAreaGradient(color: Color) -> LinearGradient {
-        return LinearGradient(gradient: Gradient(colors: [
-            color.opacity(0.5),
-            color.opacity(0.3),
-            color.opacity(0.2)]), startPoint: .top, endPoint: .bottom)
+    func animateUpdate() {
+        withAnimation(.spring(.bouncy(duration: 1), blendDuration: 1)) {
+            player1.score = challenge.player1.score
+            player2.score = challenge.player2.score
+        }
     }
     
-    func gradient(_ color1: Color, _ color2: Color) -> RadialGradient {
-//        return LinearGradient(gradient: Gradient(colors: [
-//            color1, color1.opacity(0.8),color2]),
-//                              startPoint: .top, endPoint: .bottom)
-        return RadialGradient(colors: [color1, color2], center: .center, startRadius: 1, endRadius: 1000)
+    var maxScore: Int {
+        let max = player1.score > player2.score ? player1.score : player2.score
+        if max == 0 || max == 1 {
+            return 3
+        } else {
+            return max
+        }
     }
-    
-    // Time formatter
-    static var durationFormatter: DateComponentsFormatter = {
-        let formatter = DateComponentsFormatter()
-        formatter.allowedUnits = [.hour, .minute, .second]
-        formatter.unitsStyle = .abbreviated
-        formatter.zeroFormattingBehavior = .dropLeading
-        return formatter
-    }()
     
     var body: some View {
         NavigationStack {
@@ -56,62 +52,47 @@ struct ChallengeDetailsView: View {
                             .padding(.bottom, 4)
                         
                         // Chart
-                        Chart([challenge.player1, challenge.player2]) { item in
-                            
-                            // If score is 0
-                            if (item.score == 0) {
-                                BarMark(x: .value("Amount", 1),
-                                        y: .value("Name", item.username),
-                                        width: .fixed(12)
-                                )
-                                .foregroundStyle(LinearGradient(gradient: Gradient(colors: [Color.neonGreen, Color.midnightBlue]), startPoint: .leading, endPoint: .trailing))
-                                .clipShape(RoundedRectangle(cornerRadius: 20))
-                                .cornerRadius(8)
-                                .annotation(position: .top, alignment: .leading) {
-                                    Text(item.username)
-                                        .foregroundColor(Color.white)
-                                        .font(.caption)
-                                        .padding(.bottom, 2)
-                                }
-                                .annotation(position: .trailing) {
-                                    Text("0")
-                                        .foregroundColor(Color.white)
-                                        .font(.caption)
-                                }
-                                
-                                
-                            } else {
-                                // Regular score > 0
-                                BarMark(x: .value("Amount", item.score),
-                                        y: .value("Name", item.username),
-                                        width: .fixed(12)
-                                )
-                                .foregroundStyle(LinearGradient(gradient: Gradient(colors: [Color.neonGreen, Color.midnightBlue]), startPoint: .leading, endPoint: .trailing))
-                                .clipShape(RoundedRectangle(cornerRadius: 16))
-                                .cornerRadius(8)
-                                .annotation(position: .top, alignment: .leading) {
-                                    Text(item.username)
-                                        .foregroundColor(Color.white)
-                                        .font(.caption)
-                                        .padding(.bottom, 2)
-                                }
-                                .annotation(position: .trailing) {
-                                    Text(item.score.formatted())
-                                        .foregroundColor(Color.white)
-                                        .font(.caption)
-                                }
+                        Chart([player1, player2]) { player in
+                            BarMark(x: .value("Score", player.score < 1 ? 1 : player.score + 1),
+                                    y: .value("Player", player.username),
+                                    width: .fixed(12)
+                            )
+                            .foregroundStyle(LinearGradient(gradient: Gradient(colors: [Color.blue, Color.midnightBlue]), startPoint: .leading, endPoint: .trailing))
+                            .clipShape(RoundedRectangle(cornerRadius: 16))
+                            .annotation(position: .top, alignment: .leading) {
+                                Text(player.username)
+                                    .foregroundColor(Color.white)
+                                    .font(.caption)
+                                    .padding(.bottom, 2)
+                            }
+                            .annotation(position: .trailing) {
+                                Text(player.score.formatted())
+                                    .foregroundColor(Color.white)
+                                    .font(.caption)
                             }
                         }
+                        .chartXScale(domain: 0 ... maxScore + 2, range: .plotDimension, type: .linear)
                         .chartXAxis(.hidden)
                         .chartYAxis(.hidden)
                         .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
                         .chartYAxis {
-                            AxisMarks(preset: .automatic, position: .leading) { _ in
+                            AxisMarks(preset: .aligned, position: .leading) { _ in
                                 AxisValueLabel(horizontalSpacing: 8)
                                     .font(.footnote)
                             }
                         }
-                        .frame(height: 120)
+                        .onAppear {
+                            print("ChallengeCell onAppear called")
+                            player1.username = challenge.player1.username
+                            player2.username = challenge.player2.username
+                            animateUpdate()
+                        }
+                        .onChange(of: challenge.player1.score) {
+                            animateUpdate()
+                        }
+                        .onChange(of: challenge.player2.score) {
+                            animateUpdate()
+                        }
                     }
                     
                     Divider()
@@ -123,10 +104,14 @@ struct ChallengeDetailsView: View {
                         
                         // If game is not finished, display time left
                         if challenge.status != .finished {
+                            Text("Time remaining: ")
+                                .font(.footnote)
+                                .foregroundStyle(.white)
+
                             Text(duration)
                                 .font(.footnote)
                                 .fontWeight(.medium)
-                                .foregroundColor(Color.red)
+                                .foregroundStyle(.red)
                         } else {
                             Text("Complete")
                                 .font(.subheadline)
@@ -139,6 +124,8 @@ struct ChallengeDetailsView: View {
                         Menu {
                             // Delete button
                             Button(role: .destructive) {
+                                timer.upstream.connect().cancel()
+                                dismiss()
                                 Task {
                                     try await ChallengeService.deleteChallenge(challenge: challenge)
                                 }
@@ -151,6 +138,9 @@ struct ChallengeDetailsView: View {
                         }
                         .disabled(challenge.status != .finished)
                         
+                    }
+                    .onDisappear {
+                        timer.upstream.connect().cancel()
                     }
                     .onReceive(timer) { _ in
                         var delta = challenge.timeToEnd.timeIntervalSinceNow
@@ -168,7 +158,7 @@ struct ChallengeDetailsView: View {
                             }
                             
                         } else {
-                            duration = ChallengeCellView.durationFormatter.string(from: delta) ?? "---"
+                            duration = DateTimeString.durationFormatter.string(from: delta) ?? "---"
                         }
                     }
                 }
@@ -213,10 +203,11 @@ struct ChallengeDetailsView: View {
                     // Confirm delete
                     .confirmationDialog("Are you sure?", isPresented: $presentConfirm) {
                         Button("Delete Challenge", role: .destructive) {
+                            dismiss()
                             Task {
                                 try await ChallengeService.deleteChallenge(challenge: challenge)
                             }
-                            dismiss()
+                            
                             presentConfirm = false
                         }
                     }

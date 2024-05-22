@@ -187,11 +187,8 @@ struct ChallengeService {
         snapshot1.forEach { document in
             Task {
                 let challenge = try document.data(as: Challenge.self)
-                let newDrink = [Drink(time: Date.now, drink: challenge.player1.score + 1)]
-                let drink = try newDrink.map { try Firestore.Encoder().encode($0) }
                 try await Firestore.firestore().collection("challenges").document(document.documentID).updateData([
-                    "player1.score": FieldValue.increment(Int64(1)),
-                    "player1.drinks": FieldValue.arrayUnion(drink)
+                    "player1.score": FieldValue.increment(Int64(1))
                 ])}
         }
         
@@ -209,11 +206,8 @@ struct ChallengeService {
         snapshot2.forEach { document in
             Task {
                 let challenge = try document.data(as: Challenge.self)
-                let newDrink = [Drink(time: Date.now, drink: challenge.player2.score + 1)]
-                let drink = try newDrink.map { try Firestore.Encoder().encode($0) }
                 try await Firestore.firestore().collection("challenges").document(document.documentID).updateData([
-                    "player2.score": FieldValue.increment(Int64(1)),
-                    "player2.drinks": FieldValue.arrayUnion(drink)
+                    "player2.score": FieldValue.increment(Int64(1))
                 ])
             }
         }

@@ -94,9 +94,7 @@ class MainTabViewModel: ObservableObject {
                 
                 // Populate user data if it is new
                 Task {
-                    // Get updated data
                     self.store.challenges = documents.compactMap({ try? $0.data(as: Challenge.self) })
-//                    try await self.fetchUserDataForChallenges()
                 }
             }
     }

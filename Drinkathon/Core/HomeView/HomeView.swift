@@ -22,14 +22,13 @@ struct HomeView: View {
                         if (!store.challenges.isEmpty) {
                             
                             // Challenges if not empty
-                            ForEach(0 ..< store.challenges.count, id: \.self) { index in
-                                NavigationLink(destination: ChallengeDetailsView(challenge: self.$store.challenges[index], currentUsername: rootModel.currentUser?.username ?? "")) {
+                            ForEach(store.challenges.indices) { index in
+                                NavigationLink(destination: ChallengeDetailsView(challenge: $store.challenges[index], currentUsername: rootModel.currentUser?.username ?? "")) {
                                     
                                     // Challenge cell to view details
-                                    ChallengeCellView(challenge: self.store.challenges[index], currentUsername: rootModel.currentUser?.username ?? "")
+                                    ChallengeCellView(challenge: $store.challenges[index], currentUsername: rootModel.currentUser?.username ?? "")
                                         .padding(.bottom)
                                 }
-                                
                             }
                         } else {
                             
@@ -54,7 +53,7 @@ struct HomeView: View {
                         try await rootModel.fetchChallenges()
                     }
                 }
-                .navigationTitle("Recent Challenges")
+                .navigationTitle("Active Challenges")
                 .toolbarColorScheme(.dark, for: .navigationBar)
                 .toolbarBackground(Color.lighterBlue, for: .navigationBar)
                 .toolbarBackground(.visible, for: .navigationBar)

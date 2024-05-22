@@ -56,8 +56,8 @@
             filePath = "Drinkathon/Core/Main/MainTabViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
             landmarkName = "listenToChallenges()"
             landmarkType = "7">
          </BreakpointContent>

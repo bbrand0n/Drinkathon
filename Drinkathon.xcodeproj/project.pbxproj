@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2530AAB02BFE7EB300996E2B /* DateTimeString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2530AAAF2BFE7EB300996E2B /* DateTimeString.swift */; };
 		253182A72BEBBECF00553D99 /* ChallengeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253182A62BEBBECF00553D99 /* ChallengeService.swift */; };
 		253182A92BEBC05300553D99 /* CreateChallengeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253182A82BEBC05300553D99 /* CreateChallengeViewModel.swift */; };
 		253182AB2BEBC5DA00553D99 /* TimerPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253182AA2BEBC5DA00553D99 /* TimerPickerView.swift */; };
@@ -50,7 +51,6 @@
 		25D234C12BF38E5A00E77E87 /* TabViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D234C02BF38E5A00E77E87 /* TabViewExtension.swift */; };
 		25D234C32BF3988C00E77E87 /* MainTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D234C22BF3988C00E77E87 /* MainTabViewModel.swift */; };
 		25E169022BFC1DFA00179B56 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 25E169012BFC1DFA00179B56 /* FirebaseMessaging */; };
-		25E169042BFC1E7F00179B56 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E169032BFC1E7F00179B56 /* NotificationManager.swift */; };
 		25EDE5292BFD7943007C0876 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25EDE5282BFD7943007C0876 /* Notification.swift */; };
 		25EDE52B2BFE35FA007C0876 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25EDE52A2BFE35FA007C0876 /* NotificationCell.swift */; };
 		25EDE52D2BFE3644007C0876 /* NotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25EDE52C2BFE3644007C0876 /* NotificationsViewModel.swift */; };
@@ -65,6 +65,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2530AAAF2BFE7EB300996E2B /* DateTimeString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeString.swift; sourceTree = "<group>"; };
 		253182A62BEBBECF00553D99 /* ChallengeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeService.swift; sourceTree = "<group>"; };
 		253182A82BEBC05300553D99 /* CreateChallengeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateChallengeViewModel.swift; sourceTree = "<group>"; };
 		253182AA2BEBC5DA00553D99 /* TimerPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerPickerView.swift; sourceTree = "<group>"; };
@@ -106,7 +107,6 @@
 		25D234C02BF38E5A00E77E87 /* TabViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewExtension.swift; sourceTree = "<group>"; };
 		25D234C22BF3988C00E77E87 /* MainTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewModel.swift; sourceTree = "<group>"; };
 		25E169002BFC140D00179B56 /* Drinkathon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Drinkathon.entitlements; sourceTree = "<group>"; };
-		25E169032BFC1E7F00179B56 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		25EDE5282BFD7943007C0876 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		25EDE52A2BFE35FA007C0876 /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		25EDE52C2BFE3644007C0876 /* NotificationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewModel.swift; sourceTree = "<group>"; };
@@ -267,6 +267,7 @@
 			isa = PBXGroup;
 			children = (
 				257C9B762BE4140100FA9768 /* TextFieldModifer.swift */,
+				2530AAAF2BFE7EB300996E2B /* DateTimeString.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -331,7 +332,6 @@
 			isa = PBXGroup;
 			children = (
 				25D234BE2BF38E0300E77E87 /* NotificationsView.swift */,
-				25E169032BFC1E7F00179B56 /* NotificationManager.swift */,
 				25EDE52A2BFE35FA007C0876 /* NotificationCell.swift */,
 				25EDE52C2BFE3644007C0876 /* NotificationsViewModel.swift */,
 			);
@@ -434,13 +434,13 @@
 				257687062BF3EE1B00CE1A9E /* CreateChallengeTabView.swift in Sources */,
 				25EDE52D2BFE3644007C0876 /* NotificationsViewModel.swift in Sources */,
 				257C9B7A2BE4166400FA9768 /* MainTabView.swift in Sources */,
+				2530AAB02BFE7EB300996E2B /* DateTimeString.swift in Sources */,
 				257C9B772BE4140100FA9768 /* TextFieldModifer.swift in Sources */,
 				257687082BF4EEEC00CE1A9E /* UserHistoryView.swift in Sources */,
 				257BC33C2BEAD4C600C22F61 /* ExploreView.swift in Sources */,
 				25F2BD622BEAD63C002E6253 /* ExploreViewModel.swift in Sources */,
 				253182A72BEBBECF00553D99 /* ChallengeService.swift in Sources */,
 				2576870A2BF4EF6F00CE1A9E /* UserHistoryViewModel.swift in Sources */,
-				25E169042BFC1E7F00179B56 /* NotificationManager.swift in Sources */,
 				257C9BA32BEAC53E00FA9768 /* LoginViewModel.swift in Sources */,
 				257C9B802BE41D1600FA9768 /* CreateChallengeView.swift in Sources */,
 				258F72202BF798480094D3DA /* ChallengeStore.swift in Sources */,
