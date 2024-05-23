@@ -8,21 +8,44 @@
 import SwiftUI
 
 struct UserHistoryView: View {
-    @StateObject var viewModel: UserHistoryViewModel
+    @State var challengeHistory = [Challenge]()
+    @State var user: User
     
-    init(user: User) {
-        self._viewModel = StateObject(wrappedValue: UserHistoryViewModel(user: user))
+    var isCurrentUser: Bool {
+        return user.id == AuthService.shared.userSession?.uid ?? ""
     }
     
     var body: some View {
         ScrollView {
-            ForEach(viewModel.challengesHistory.indices, id: \.self) { challenge in
-                ChallengeCellView(challenge: $viewModel.challengesHistory[challenge], currentUsername: viewModel.currentUser.username)
+            ForEach(challengeHistory) { challenge in
+                ChallengeHistoryCellView(challenge: challenge, currentUsername: user.username)
+                .overlay(alignment: .trailingLastTextBaseline) {
+                    if isCurrentUser {
+                        Menu {
+                            // Delete button
+                            Button(role: .destructive) {
+                                Task {
+                                    try await ChallengeService.deleteChallenge(challenge: challenge)
+                                    Task { challengeHistory = try await ChallengeService.fetchUserHistory(uid: user.id) }
+                                }
+                            } label: {
+                                Label("Delete Challenge", systemImage: "trash")
+                            }
+                        } label: {
+                            Image(systemName: "ellipsis.circle")
+                                .clipShape(Circle())
+                                .padding(.trailing, 35)
+                        }
+                    }
+                }
                     .padding([.bottom])
             }
         }
+        .onAppear {
+            Task { challengeHistory = try await ChallengeService.fetchUserHistory(uid: user.id) }
+        }
         .refreshable {
-            Task{ try await viewModel.fetchUserHistory() }
+            Task { challengeHistory = try await ChallengeService.fetchUserHistory(uid: user.id) }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.darkerBlue)
@@ -30,7 +53,9 @@ struct UserHistoryView: View {
 }
 
 #Preview {
-    UserHistoryView(
+
+    let view = UserHistoryView(
         user: DeveloperPreview.shared.user1
     )
+    return view
 }

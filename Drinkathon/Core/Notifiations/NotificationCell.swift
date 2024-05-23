@@ -12,27 +12,31 @@ struct NotificationCell: View {
     
     var body: some View {
         Group {
-            VStack(alignment: .trailing) {
-                HStack(alignment: .top) {
-                    Image(systemName: "gamecontroller")
-                        .foregroundStyle(.neonGreen)
-                        .padding(.horizontal, 10)
-                    
-                    Text(notification.sender)
-                        .fontWeight(.bold)
-                        .foregroundStyle(.white)
-                    
-                    Text("challenged you!")
-                        .foregroundStyle(.white)
-                    
-                    Spacer()
+            HStack {
+                Image(systemName: "gamecontroller")
+                    .resizable()
+                    .frame(width: 30, height: 20)
+                    .foregroundStyle(.neonGreen)
+                    .padding(.horizontal, 7)
+                VStack(alignment: .trailing) {
+                    HStack(alignment: .top) {
+                        
+                        
+                        Text(notification.sender)
+                            .fontWeight(.bold)
+                            .foregroundStyle(.white)
+                        
+                        Text("challenged you!")
+                            .foregroundStyle(.white)
+                        
+                        Spacer()
+                    }
+                    Text(notification.time.formatted(date: .abbreviated, time: .shortened))
+                        .font(.caption2)
+                        .foregroundStyle(.gray)
+                        .padding(.top, 2)
                 }
-                Text(notification.time.formatted(date: .abbreviated, time: .shortened))
-                    .font(.caption2)
-                    .foregroundStyle(.gray)
-                    .padding(.top, 2)
             }
-            
         }
         .padding()
         .background(.lighterBlue)

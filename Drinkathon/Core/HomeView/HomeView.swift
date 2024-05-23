@@ -22,7 +22,7 @@ struct HomeView: View {
                         if (!store.challenges.isEmpty) {
                             
                             // Challenges if not empty
-                            ForEach(store.challenges.indices) { index in
+                            ForEach(store.challenges.indices, id: \.self) { index in
                                 NavigationLink(destination: ChallengeDetailsView(challenge: $store.challenges[index], currentUsername: rootModel.currentUser?.username ?? "")) {
                                     
                                     // Challenge cell to view details

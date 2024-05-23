@@ -16,7 +16,9 @@ struct ChallengeDetailsView: View {
     @State var player2 = Player(id: "Player2", username: "Player2", score: 0)
     @State private var duration = "---"
     @Environment(\.dismiss) var dismiss
-    @State var presentConfirm = false
+    @State var deleteConfirm = false
+    @State var endConfirm = false
+    @State var timeToEnd = Date.now
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     let currentUsername: String
     
@@ -41,11 +43,31 @@ struct ChallengeDetailsView: View {
             VStack {
                 GroupBox {
                     VStack{
-                        Text(challenge.title)
-                            .font(.subheadline)
-                            .fontWeight(.medium)
-                            .foregroundStyle(Color.white)
-                            .padding(.bottom, 7)
+                        HStack(alignment: .center) {
+                            Text(challenge.title)
+                                .font(.subheadline)
+                                .fontWeight(.medium)
+                                .foregroundStyle(Color.white)
+                                .padding(.bottom, 7)
+                            
+                            Spacer()
+                            
+                            Menu {
+                                // Delete button
+                                Button(role: .destructive) {
+                                    Task {
+                                        deleteConfirm = true
+                                    }
+                                } label: {
+                                    Label("Delete Challenge", systemImage: "trash")
+                                }
+                            } label: {
+                                Image(systemName: "trash")
+                                    .foregroundColor(.red)
+                                    .padding(.bottom, 7)
+                            }
+                        }
+                        
                         
                         Divider()
                             .overlay(.gray)
@@ -82,6 +104,7 @@ struct ChallengeDetailsView: View {
                             }
                         }
                         .onAppear {
+                            timeToEnd = challenge.timeToEnd
                             player1.username = challenge.player1.username
                             player2.username = challenge.player2.username
                             animateUpdate()
@@ -92,40 +115,60 @@ struct ChallengeDetailsView: View {
                         .onChange(of: challenge.player2.score) {
                             animateUpdate()
                         }
+                        .onChange(of: challenge.timeToEnd) {
+                            timeToEnd = challenge.timeToEnd
+                        }
                     }
                     
                     Divider()
                         .overlay(.gray)
                         .padding(.bottom, 7)
                     
-                    // Time left
-                    HStack(alignment: .bottom, spacing: 5) {
-                        
-                        // If game is not finished, display time left
-                        if challenge.status != .finished {
-                            Text("Time remaining: ")
-                                .font(.footnote)
-                                .foregroundStyle(.white)
+                    VStack {
+                        // Time left
+                        HStack(alignment: .center, spacing: 5) {
                             
-                            Text(duration)
-                                .font(.footnote)
-                                .fontWeight(.medium)
-                                .foregroundStyle(.red)
-                        } else {
-                            Text("Complete")
-                                .font(.subheadline)
-                                .fontWeight(.medium)
-                                .foregroundColor(Color.lavender)
+                            // If game is not finished, display time left
+                            if challenge.status != .finished {
+                                Text("Time remaining: ")
+                                    .font(.subheadline)
+                                    .foregroundStyle(.white)
+                                
+                                Text(duration)
+                                    .font(.subheadline)
+                                    .fontWeight(.medium)
+                                    .foregroundStyle(.red)
+                            } else {
+                                Text("Complete")
+                                    .font(.subheadline)
+                                    .fontWeight(.medium)
+                                    .foregroundColor(Color.lavender)
+                            }
+                            
+                            Spacer()
+                            
+                            Menu {
+                                // Delete button
+                                Button(role: .cancel) {
+                                    Task {
+                                        try await rootModel.decrementDrink()
+                                    }
+                                } label: {
+                                    Label("Remove Last Drink", systemImage: "wineglass")
+                                }
+                            } label: {
+                                Image(systemName: "ellipsis.circle")
+                                    .clipShape(Circle())
+                            }
                         }
-                        
-                        Spacer()
-                        
                     }
+                    
+                    .padding(.top, 2)
                     .onDisappear {
                         timer.upstream.connect().cancel()
                     }
                     .onReceive(timer) { _ in
-                        var delta = challenge.timeToEnd.timeIntervalSinceNow
+                        var delta = timeToEnd.timeIntervalSinceNow
                         
                         // Timer done
                         if delta <= 0 {
@@ -148,62 +191,66 @@ struct ChallengeDetailsView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 20))
                 .padding()
                 
-                HStack {
-                    
-                    // Extend time
-                    Button {
-                        Task {
-                            try await rootModel.incrementTime(cid: challenge.id, currentTimeToEnd: challenge.timeToEnd)
-                        }
-                    } label: {
-                        VStack {
-                            Image(systemName: "clock.badge.checkmark")
-                                .frame(width: 20, height: 20)
-                                .foregroundStyle(.black)
-                            Text("Add hour")
-                                .font(.caption)
-                                .fontWeight(.semibold)
-                                .foregroundColor(.black)
+                VStack {
+                    HStack {
+                        
+                        // Extend time
+                        Button {
+                            Task {
+                                try await rootModel.incrementTime(cid: challenge.id, currentTimeToEnd: challenge.timeToEnd)
+                            }
+                        } label: {
+                            VStack {
+                                Image(systemName: "clock.badge.checkmark")
+                                    .frame(width: 20, height: 20)
+                                    .foregroundStyle(.black)
+                                Text("Add hour")
+                                    .font(.caption)
+                                    .fontWeight(.semibold)
+                                    .padding(.horizontal)
+                                    .fixedSize(horizontal: false, vertical: true)
+                                    .foregroundColor(.black)
                                 
+                            }
+                            .frame(width: 80, height: 44)
+                            .padding(.vertical, 10)
+                            .background(LinearGradient(
+                                colors: [.primaryBlue, .blue.opacity(0.8)],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing))
+                            .clipShape(RoundedRectangle(cornerRadius: 15))
+                            
                         }
-                        .frame(width: 120, height: 44)
-                        .padding(.vertical, 10)
-                        .background(LinearGradient(
-                            colors: [.primaryBlue, .blue.opacity(0.8)],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing))
-                        .clipShape(RoundedRectangle(cornerRadius: 15))
                         
-                    }
-                    
-                    // Remove time
-                    Button {
-                        Task {
-                            try await rootModel.decrementTime(cid: challenge.id, currentTimeToEnd: challenge.timeToEnd)
-                        }
-                    } label: {
-                        VStack {
-                            Image(systemName: "clock.badge.xmark")
-                                .frame(width: 20, height: 20)
-                                .foregroundStyle(.black)
-                            Text("Remove hour")
-                                .font(.caption)
-                                .fontWeight(.semibold)
-                                .foregroundColor(.black)
+                        // Remove time
+                        Button {
+                            Task {
+                                try await rootModel.decrementTime(cid: challenge.id, currentTimeToEnd: challenge.timeToEnd)
+                            }
+                        } label: {
+                            VStack {
+                                Image(systemName: "clock.badge.xmark")
+                                    .frame(width: 20, height: 20)
+                                    .foregroundStyle(.black)
+                                Text("Remove hour")
+                                    .font(.caption)
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.black)
+                                    .fixedSize(horizontal: false, vertical: true)
+                                    .padding(.horizontal, 5)
                                 
+                            }
+                            .frame(width: 80, height: 44)
+                            .padding(.vertical, 10)
+                            .background(LinearGradient(
+                                colors: [.red, .red.opacity(0.8)],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing))
+                            .clipShape(RoundedRectangle(cornerRadius: 15))
                         }
-                        .frame(width: 120, height: 44)
-                        .padding(.vertical, 10)
-                        .background(LinearGradient(
-                            colors: [.red, .red.opacity(0.8)],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing))
-                        .clipShape(RoundedRectangle(cornerRadius: 15))
-                        
-                        
                     }
                 }
-                
+                                
                 Spacer()
                 
                 // Buttons
@@ -234,10 +281,10 @@ struct ChallengeDetailsView: View {
                         
                         // Delete challenge
                         Button {
-                            presentConfirm = true
+                            endConfirm = true
                             
                         } label: {
-                            Text("Delete Challenge")
+                            Text("End Challenge")
                                 .font(.subheadline)
                                 .fontWeight(.semibold)
                                 .foregroundColor(.black)
@@ -247,17 +294,30 @@ struct ChallengeDetailsView: View {
                         }
                         
                         // Confirm delete
-                        .confirmationDialog("Are you sure?", isPresented: $presentConfirm) {
+                        .confirmationDialog("Are you sure?", isPresented: $deleteConfirm) {
                             Button("Delete Challenge", role: .destructive) {
                                 dismiss()
                                 Task {
                                     try await ChallengeService.deleteChallenge(challenge: challenge)
                                 }
                                 
-                                presentConfirm = false
+                                deleteConfirm = false
                             }
                         }
                         .dialogIcon(Image(systemName: "trash.circle.fill"))
+                        
+                        // Confirm delete
+                        .confirmationDialog("End challenge?", isPresented: $endConfirm) {
+                            Button("End Challenge", role: .destructive) {
+                                dismiss()
+                                Task {
+                                    try await rootModel.endChallenge(cid: challenge.id)
+                                }
+                                
+                                endConfirm = false
+                            }
+                        }
+                        .dialogIcon(Image(systemName: "x.circle"))
                     }
                     .padding()
                     .padding(.bottom, 20)

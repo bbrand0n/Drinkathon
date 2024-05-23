@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProfileView: View {
-    let user: User
+    var user: User
     @Binding var selectedTab: Int
     @State private var showCreateChallenge = false
     @Environment(\.dismiss) var dismiss
@@ -84,11 +84,12 @@ struct ProfileView: View {
 }
 
 #Preview {
-    let tabView = MainTabView()
-    
+    @State var user = DeveloperPreview.shared.user1
+    @State var tab = 1
+
     let profileView = ProfileView(
-        user: DeveloperPreview.shared.user1,
-        selectedTab: tabView.$selectedTab
+        user: user,
+        selectedTab: $tab
     )
     
     return profileView

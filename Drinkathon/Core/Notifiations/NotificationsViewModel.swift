@@ -47,7 +47,8 @@ class NotificationsViewModel: ObservableObject {
     }
     
     @MainActor
-    func deleteNotification(_ id: String) async throws {
+    func deleteNotification(_ index: Int, _ id: String) async throws {
+        notifications.remove(at: index)
         try await UserService.deleteNotification(id)
     }
 }

@@ -161,6 +161,57 @@ struct ChallengeService {
     }
     
     @MainActor
+    static func removeLastDrink(challengeIds: [String]) async throws {
+        guard let uid = UserService.shared.currentUser?.id else {
+            print("ChallengeService: no UID in logNewDrink")
+            return
+        }
+        guard !challengeIds.isEmpty else {
+            print("ChallengeService: No active challenges")
+            return
+        }
+        
+        // TODO: gotta be a better way to do this...
+        
+        // If we are player 1
+        let snapshot1 = try await Firestore
+            .firestore()
+            .collection("challenges")
+            .whereField(FieldPath.documentID(), in: challengeIds)
+            .whereField("status", isEqualTo: "active")
+            .whereFilter(Filter.orFilter([
+                Filter.whereField("player1.id", isEqualTo: uid)
+            ]))
+            .getDocuments().documents
+        
+        snapshot1.forEach { document in
+            Task {
+                try await Firestore.firestore().collection("challenges").document(document.documentID).updateData([
+                    "player1.score": FieldValue.increment(Int64(-1))
+                ])}
+        }
+        
+        // If we are player 2
+        let snapshot2 = try await Firestore
+            .firestore()
+            .collection("challenges")
+            .whereField(FieldPath.documentID(), in: challengeIds)
+            .whereField("status", isEqualTo: "active")
+            .whereFilter(Filter.orFilter([
+                Filter.whereField("player2.id", isEqualTo: uid)
+            ]))
+            .getDocuments().documents
+        
+        snapshot2.forEach { document in
+            Task {
+                try await Firestore.firestore().collection("challenges").document(document.documentID).updateData([
+                    "player2.score": FieldValue.increment(Int64(-1))
+                ])
+            }
+        }
+    }
+    
+    @MainActor
     static func logNewDrink(challengeIds: [String]) async throws {
         guard let uid = UserService.shared.currentUser?.id else {
             print("ChallengeService: no UID in logNewDrink")
@@ -186,7 +237,6 @@ struct ChallengeService {
         
         snapshot1.forEach { document in
             Task {
-                let challenge = try document.data(as: Challenge.self)
                 try await Firestore.firestore().collection("challenges").document(document.documentID).updateData([
                     "player1.score": FieldValue.increment(Int64(1))
                 ])}
@@ -205,7 +255,6 @@ struct ChallengeService {
         
         snapshot2.forEach { document in
             Task {
-                let challenge = try document.data(as: Challenge.self)
                 try await Firestore.firestore().collection("challenges").document(document.documentID).updateData([
                     "player2.score": FieldValue.increment(Int64(1))
                 ])
@@ -243,7 +292,7 @@ struct ChallengeService {
     }
     
     @MainActor
-    static func extendChallengeTime(_ cid: String, newTime: Date) async throws {
+    static func updateChallengeTime(_ cid: String, newTime: Date) async throws {
         try await Firestore.firestore()
             .collection("challenges")
             .document(cid)

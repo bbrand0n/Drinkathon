@@ -72,24 +72,8 @@
             filePath = "Drinkathon/Services/ChallengeService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "177"
-            endingLineNumber = "177"
-            landmarkName = "logNewDrink(challengeIds:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "725333A3-A2F3-437C-B9C8-3BECDDA71943"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Drinkathon/Services/ChallengeService.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "189"
-            endingLineNumber = "189"
+            startingLineNumber = "228"
+            endingLineNumber = "228"
             landmarkName = "logNewDrink(challengeIds:)"
             landmarkType = "7">
          </BreakpointContent>

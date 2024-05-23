@@ -32,7 +32,7 @@ struct NotificationsView: View {
                                 Button {
                                     Task {
                                         Task {
-                                            try await viewModel.deleteNotification(viewModel.notifications[index].id)
+                                            try await viewModel.deleteNotification(index, viewModel.notifications[index].id)
                                         }
                                     }
                                 } label: {
@@ -46,18 +46,21 @@ struct NotificationsView: View {
                                 DragGesture()
                                     .onChanged { gesture in
                                         viewModel.offsets[index] = gesture.translation
-                                        if viewModel.offsets[index].width > 50 {
+                                        if viewModel.offsets[index].width > 10 {
                                             viewModel.offsets[index] = .zero
                                         }
                                     }
                                     .onEnded { _ in
                                         if viewModel.offsets[index].width < -150 {
                                             Task {
-                                                try await viewModel.deleteNotification(viewModel.notifications[index].id)
+                                                try await viewModel.deleteNotification(index, viewModel.notifications[index].id)
                                             }
                                         }
                                         else if self.viewModel.offsets[index].width < -50 {
                                             viewModel.offsets[index].width = -50
+                                        }
+                                        else if self.viewModel.offsets[index].width < -10 {
+                                            viewModel.offsets[index].width = .zero
                                         }
                                     }
                             )
