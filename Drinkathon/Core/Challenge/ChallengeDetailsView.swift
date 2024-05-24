@@ -14,7 +14,8 @@ struct ChallengeDetailsView: View {
     
     @State var player1 = Player(id: "Player1", username: "Player1", score: 0)
     @State var player2 = Player(id: "Player2", username: "Player2", score: 0)
-    @State private var duration = "---"
+    @State var duration = "---"
+    @State var progress = 0.97
     @Environment(\.dismiss) var dismiss
     @State var deleteConfirm = false
     @State var endConfirm = false
@@ -38,6 +39,10 @@ struct ChallengeDetailsView: View {
         }
     }
     
+    var totalDuration: TimeInterval {
+        return challenge.timeToEnd.timeIntervalSince(challenge.timeSent.dateValue())
+    }
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -45,33 +50,15 @@ struct ChallengeDetailsView: View {
                     VStack{
                         HStack(alignment: .center) {
                             Text(challenge.title)
-                                .font(.subheadline)
+                                .font(.title3)
                                 .fontWeight(.medium)
                                 .foregroundStyle(Color.white)
                                 .padding(.bottom, 7)
-                            
-                            Spacer()
-                            
-                            Menu {
-                                // Delete button
-                                Button(role: .destructive) {
-                                    Task {
-                                        deleteConfirm = true
-                                    }
-                                } label: {
-                                    Label("Delete Challenge", systemImage: "trash")
-                                }
-                            } label: {
-                                Image(systemName: "trash")
-                                    .foregroundColor(.red)
-                                    .padding(.bottom, 7)
-                            }
                         }
-                        
                         
                         Divider()
                             .overlay(.gray)
-                            .padding(.bottom, 4)
+                            .padding(.bottom, 15)
                         
                         // Chart
                         Chart([player1, player2]) { player in
@@ -130,14 +117,15 @@ struct ChallengeDetailsView: View {
                             
                             // If game is not finished, display time left
                             if challenge.status != .finished {
-                                Text("Time remaining: ")
-                                    .font(.subheadline)
-                                    .foregroundStyle(.white)
+                                Text("Started: ")
+                                    .font(.footnote)
+                                    .foregroundStyle(.gray)
                                 
-                                Text(duration)
-                                    .font(.subheadline)
-                                    .fontWeight(.medium)
-                                    .foregroundStyle(.red)
+                                Text(challenge.timeSent.dateValue()
+                                    .formatted(date: .omitted, time: .shortened))
+                                .font(.footnote)
+                                .fontWeight(.medium)
+                                .foregroundStyle(.gray)
                             } else {
                                 Text("Complete")
                                     .font(.subheadline)
@@ -148,13 +136,21 @@ struct ChallengeDetailsView: View {
                             Spacer()
                             
                             Menu {
-                                // Delete button
+                                // Remove drink button
                                 Button(role: .cancel) {
                                     Task {
                                         try await rootModel.decrementDrink()
                                     }
                                 } label: {
                                     Label("Remove Last Drink", systemImage: "wineglass")
+                                }
+                                // Delete button
+                                Button(role: .destructive) {
+                                    Task {
+                                        deleteConfirm = true
+                                    }
+                                } label: {
+                                    Label("Delete Challenge", systemImage: "trash")
                                 }
                             } label: {
                                 Image(systemName: "ellipsis.circle")
@@ -169,6 +165,8 @@ struct ChallengeDetailsView: View {
                     }
                     .onReceive(timer) { _ in
                         var delta = timeToEnd.timeIntervalSinceNow
+                        let temp = (delta / totalDuration)
+                        progress = temp > 0.97 ? 0.97 : temp
                         
                         // Timer done
                         if delta <= 0 {
@@ -192,7 +190,7 @@ struct ChallengeDetailsView: View {
                 .padding()
                 
                 VStack {
-                    HStack {
+                    HStack(alignment: .center, spacing: 20) {
                         
                         // Extend time
                         Button {
@@ -203,24 +201,25 @@ struct ChallengeDetailsView: View {
                             VStack {
                                 Image(systemName: "clock.badge.checkmark")
                                     .frame(width: 20, height: 20)
-                                    .foregroundStyle(.black)
-                                Text("Add hour")
+                                    .foregroundStyle(.white)
+                                Text("+1hr")
                                     .font(.caption)
                                     .fontWeight(.semibold)
                                     .padding(.horizontal)
                                     .fixedSize(horizontal: false, vertical: true)
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.green)
                                 
                             }
-                            .frame(width: 80, height: 44)
-                            .padding(.vertical, 10)
-                            .background(LinearGradient(
-                                colors: [.primaryBlue, .blue.opacity(0.8)],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing))
-                            .clipShape(RoundedRectangle(cornerRadius: 15))
+                            .frame(width: 70, height: 44)
+                            .padding(.vertical, 15)
+                            .background(
+                                RadialGradient(colors: [.lighterBlue, .lighterBlue.opacity(0.2)], center: .center, startRadius: 10, endRadius: 60)
+                            )
+                            .clipShape(Circle())
                             
                         }
+                        
+                        CountdownTimer(progress: $progress, duration: duration).opacity(0.9)
                         
                         // Remove time
                         Button {
@@ -231,26 +230,28 @@ struct ChallengeDetailsView: View {
                             VStack {
                                 Image(systemName: "clock.badge.xmark")
                                     .frame(width: 20, height: 20)
-                                    .foregroundStyle(.black)
-                                Text("Remove hour")
+                                    .foregroundStyle(.white)
+                                Text("-1hr")
                                     .font(.caption)
                                     .fontWeight(.semibold)
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.red)
                                     .fixedSize(horizontal: false, vertical: true)
                                     .padding(.horizontal, 5)
                                 
                             }
-                            .frame(width: 80, height: 44)
-                            .padding(.vertical, 10)
-                            .background(LinearGradient(
-                                colors: [.red, .red.opacity(0.8)],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing))
-                            .clipShape(RoundedRectangle(cornerRadius: 15))
+                            .frame(width: 70, height: 44)
+                            .padding(.vertical, 15)
+                            .background(
+                                RadialGradient(colors: [.lighterBlue, .lighterBlue.opacity(0.2)], center: .center, startRadius: 10, endRadius: 60)
+                            )
+                            .clipShape(Circle())
                         }
                     }
+                    
                 }
-                                
+                .padding(.vertical, 45)
+                .padding()
+                
                 Spacer()
                 
                 // Buttons
@@ -270,13 +271,19 @@ struct ChallengeDetailsView: View {
                                 try await rootModel.incrementDrink()
                             }
                         } label: {
-                            Text("Log Drink")
-                                .font(.subheadline)
-                                .fontWeight(.semibold)
-                                .foregroundColor(.black)
-                                .frame(width: 320, height: 44)
-                                .background(Color(.green))
-                                .cornerRadius(15)
+                            HStack {
+                                Image(systemName: "wineglass")
+                                    .foregroundColor(.black)
+                                
+                                Text("Log Drink")
+                                    .font(.subheadline)
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.black)
+                            }
+                            .frame(width: 320, height: 44)
+                            .background(Color(.green))
+                            .cornerRadius(15)
+                            
                         }
                         
                         // Delete challenge
@@ -284,13 +291,20 @@ struct ChallengeDetailsView: View {
                             endConfirm = true
                             
                         } label: {
-                            Text("End Challenge")
-                                .font(.subheadline)
-                                .fontWeight(.semibold)
-                                .foregroundColor(.black)
-                                .frame(width: 320, height: 44)
-                                .background(Color(.red).opacity(0.85))
-                                .cornerRadius(15)
+                            HStack {
+                                Image(systemName: "flag.2.crossed")
+                                    .foregroundColor(.black)
+                                
+                                Text("End Challenge")
+                                    .font(.subheadline)
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.black)
+                                
+                            }
+                            .frame(width: 320, height: 44)
+                            .background(Color(.red).opacity(0.85))
+                            .cornerRadius(15)
+                            
                         }
                         
                         // Confirm delete
@@ -331,7 +345,6 @@ struct ChallengeDetailsView: View {
             .navigationBarTitleDisplayMode(.inline)
         }
     }
-    
 }
 
 

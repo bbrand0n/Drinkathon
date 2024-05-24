@@ -47,6 +47,8 @@
 		258F721E2BF796D90094D3DA /* ChallengeDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258F721D2BF796D90094D3DA /* ChallengeDetailsView.swift */; };
 		258F72202BF798480094D3DA /* ChallengeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258F721F2BF798480094D3DA /* ChallengeStore.swift */; };
 		25B5E90F2BFFF06F00D9C628 /* ChallengeHistoryCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B5E90E2BFFF06E00D9C628 /* ChallengeHistoryCellView.swift */; };
+		25B5E9112C00089500D9C628 /* CountdownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B5E9102C00089500D9C628 /* CountdownTimer.swift */; };
+		25B5E9132C0009CC00D9C628 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B5E9122C0009CC00D9C628 /* TimeInterval.swift */; };
 		25D234BC2BF38C3F00E77E87 /* TabbedItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D234BB2BF38C3F00E77E87 /* TabbedItems.swift */; };
 		25D234BF2BF38E0300E77E87 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D234BE2BF38E0300E77E87 /* NotificationsView.swift */; };
 		25D234C12BF38E5A00E77E87 /* TabViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D234C02BF38E5A00E77E87 /* TabViewExtension.swift */; };
@@ -104,6 +106,8 @@
 		258F721D2BF796D90094D3DA /* ChallengeDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeDetailsView.swift; sourceTree = "<group>"; };
 		258F721F2BF798480094D3DA /* ChallengeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeStore.swift; sourceTree = "<group>"; };
 		25B5E90E2BFFF06E00D9C628 /* ChallengeHistoryCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeHistoryCellView.swift; sourceTree = "<group>"; };
+		25B5E9102C00089500D9C628 /* CountdownTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownTimer.swift; sourceTree = "<group>"; };
+		25B5E9122C0009CC00D9C628 /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
 		25D234BB2BF38C3F00E77E87 /* TabbedItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbedItems.swift; sourceTree = "<group>"; };
 		25D234BE2BF38E0300E77E87 /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
 		25D234C02BF38E5A00E77E87 /* TabViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewExtension.swift; sourceTree = "<group>"; };
@@ -238,6 +242,7 @@
 			children = (
 				25F2BD632BEAD768002E6253 /* PreviewProvider.swift */,
 				25D234C02BF38E5A00E77E87 /* TabViewExtension.swift */,
+				25B5E9122C0009CC00D9C628 /* TimeInterval.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -327,6 +332,7 @@
 				25D234BB2BF38C3F00E77E87 /* TabbedItems.swift */,
 				253182AA2BEBC5DA00553D99 /* TimerPickerView.swift */,
 				25B5E90E2BFFF06E00D9C628 /* ChallengeHistoryCellView.swift */,
+				25B5E9102C00089500D9C628 /* CountdownTimer.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -425,6 +431,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				25F2BD642BEAD768002E6253 /* PreviewProvider.swift in Sources */,
+				25B5E9112C00089500D9C628 /* CountdownTimer.swift in Sources */,
 				257C9B832BE41D3800FA9768 /* ProfileView.swift in Sources */,
 				257C9B992BEABC5100FA9768 /* RegistrationViewModel.swift in Sources */,
 				257BC3342BEACDA400C22F61 /* UserService.swift in Sources */,
@@ -444,6 +451,7 @@
 				25F2BD622BEAD63C002E6253 /* ExploreViewModel.swift in Sources */,
 				253182A72BEBBECF00553D99 /* ChallengeService.swift in Sources */,
 				2576870A2BF4EF6F00CE1A9E /* UserHistoryViewModel.swift in Sources */,
+				25B5E9132C0009CC00D9C628 /* TimeInterval.swift in Sources */,
 				257C9BA32BEAC53E00FA9768 /* LoginViewModel.swift in Sources */,
 				257C9B802BE41D1600FA9768 /* CreateChallengeView.swift in Sources */,
 				258F72202BF798480094D3DA /* ChallengeStore.swift in Sources */,

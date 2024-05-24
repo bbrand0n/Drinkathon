@@ -21,7 +21,6 @@ struct NotificationCell: View {
                 VStack(alignment: .trailing) {
                     HStack(alignment: .top) {
                         
-                        
                         Text(notification.sender)
                             .fontWeight(.bold)
                             .foregroundStyle(.white)
@@ -40,10 +39,8 @@ struct NotificationCell: View {
         }
         .padding()
         .background(.lighterBlue)
-        
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .padding()
-        
     }
 }
 

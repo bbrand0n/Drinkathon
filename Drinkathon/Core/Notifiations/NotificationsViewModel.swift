@@ -27,6 +27,9 @@ class NotificationsViewModel: ObservableObject {
         guard let uid = AuthService.shared.userSession?.uid else { return }
         print("Listener added: notifications")
         
+        
+        notificationListener?.remove()
+        
         notificationListener = Firestore.firestore()
             .collection("users")
             .document(uid)

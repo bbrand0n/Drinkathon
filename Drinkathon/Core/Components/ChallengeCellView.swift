@@ -161,7 +161,6 @@ struct ChallengeCellView: View {
                                     // Details
                                     Image(systemName: "greaterthan.circle")
                                         .clipShape(Circle())
-                                    
                                 }
                             }
                             .onDisappear {
